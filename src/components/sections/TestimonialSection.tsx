@@ -124,9 +124,7 @@ const TestimonialSection = ({
 
       <div className="container mx-auto">
         <div className="text-center mb-16">
-          <div className="inline-flex items-center rounded-none px-3 py-1 text-xs font-medium bg-[#0F0F0F] text-white mb-6 border border-gray-800">
-            <span className="mr-2 text-xs">TESTIMONIALS</span>
-          </div>
+
 
           <motion.h2
             className="text-3xl md:text-4xl font-bold text-white tracking-tight mb-6"

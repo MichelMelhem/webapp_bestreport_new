@@ -4,7 +4,7 @@ import { Menu, X, Search, Bell, User } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import ThemeToggle from "../theme/ThemeToggle";
-
+import Logo from "../../assets/icon.svg";
 interface AppBarProps {
   className?: string;
 }
@@ -27,11 +27,9 @@ const AppBar = ({ className = "" }: AppBarProps) => {
   };
 
   const navLinks = [
-    { name: "Dashboard", href: "#dashboard" },
     { name: "Features", href: "#features" },
     { name: "Pricing", href: "#pricing" },
     { name: "Testimonials", href: "#testimonials" },
-    { name: "Download", href: "#download" },
   ];
 
   return (
@@ -49,9 +47,7 @@ const AppBar = ({ className = "" }: AppBarProps) => {
           {/* Logo */}
           <div className="flex-shrink-0 flex items-center">
             <Link to="/" className="flex items-center">
-              <span className="text-xl font-bold text-gray-900">
-                <span className="text-blue-600">Best</span>Report
-              </span>
+              <img src={Logo} alt="BestReport logo" className="h-12 mx-auto mb-6" />
             </Link>
           </div>
 
@@ -70,36 +66,12 @@ const AppBar = ({ className = "" }: AppBarProps) => {
 
           {/* Action Buttons (Desktop) */}
           <div className="hidden md:flex md:items-center space-x-4">
-            <ThemeToggle className="text-gray-600 hover:text-blue-600" />
 
-            <Button
-              variant="ghost"
-              size="icon"
-              className="text-gray-600 hover:text-blue-600"
-            >
-              <Search className="h-5 w-5" />
-            </Button>
 
-            <Button
-              variant="ghost"
-              size="icon"
-              className="text-gray-600 hover:text-blue-600"
-            >
-              <Bell className="h-5 w-5" />
-            </Button>
 
-            <div className="h-6 w-px bg-gray-300"></div>
 
-            <Button
-              variant="ghost"
-              className="flex items-center gap-2 text-gray-600 hover:text-blue-600"
-            >
-              <User className="h-5 w-5" />
-              <span>Sign in</span>
-            </Button>
-
-            <Button className="bg-blue-600 hover:bg-blue-700 text-white rounded-md">
-              Get Started
+            <Button className="bg-blue-600  hover:bg-blue-700 text-white rounded-md" >
+              Download now
             </Button>
           </div>
 
@@ -141,17 +113,7 @@ const AppBar = ({ className = "" }: AppBarProps) => {
               {link.name}
             </a>
           ))}
-          <div className="pt-4 space-y-2">
-            <Button
-              variant="outline"
-              className="w-full justify-center text-gray-600 hover:text-blue-600 border-gray-300 hover:bg-gray-100 rounded-md"
-            >
-              Sign in
-            </Button>
-            <Button className="w-full bg-blue-600 hover:bg-blue-700 text-white rounded-md">
-              Get Started
-            </Button>
-          </div>
+
         </div>
       </div>
     </nav>

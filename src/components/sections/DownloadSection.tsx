@@ -27,21 +27,19 @@ const DownloadSection = ({
   return (
     <section
       id="download"
-      className="w-full py-24 md:py-32 bg-[#0A0B0D] relative"
+      className="w-full py-24 md:py-32 bg-[#f4f1eb] relative"
     >
       {/* Background elements */}
-      <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-gray-800 to-transparent"></div>
-      <div className="absolute bottom-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-gray-800 to-transparent"></div>
+      <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-gray-200 to-transparent"></div>
+      <div className="absolute bottom-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-gray-200 to-transparent"></div>
       <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cGF0aCBkPSJNNTkuNSA2MEgwVjBoNjBWNjB6TTU5LjUgMWgtNTlWNTloNTlWMXoiIGZpbGw9IiMyMDIwMjAiIGZpbGwtcnVsZT0ibm9uemVybyIgZmlsbC1vcGFjaXR5PSIuMDUiLz48L3N2Zz4=')] opacity-10"></div>
 
       <div className="container mx-auto px-4 relative z-10">
         <div className="text-center mb-16">
-          <div className="inline-flex items-center rounded-none px-3 py-1 text-xs font-medium bg-[#0F0F0F] text-white mb-6 border border-gray-800">
-            <span className="mr-2 text-xs">MOBILE ACCESS</span>
-          </div>
+
 
           <motion.h2
-            className="text-3xl md:text-4xl font-bold text-white tracking-tight mb-6"
+            className="text-3xl md:text-4xl font-bold text-black tracking-tight mb-6"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
@@ -51,7 +49,7 @@ const DownloadSection = ({
           </motion.h2>
 
           <motion.p
-            className="text-gray-400 max-w-2xl mx-auto text-lg leading-relaxed mb-12"
+            className="text-gray-700 max-w-2xl mx-auto text-lg leading-relaxed mb-12"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.2 }}
@@ -73,8 +71,8 @@ const DownloadSection = ({
             <div className="relative h-[600px] w-full flex items-center justify-center">
               {/* Phone mockup 1 - in front */}
               <div className="absolute z-20 transform -rotate-6">
-                <div className="bg-[#0F0F0F] p-2 shadow-2xl border border-gray-800">
-                  <div className="relative overflow-hidden w-[250px] h-[500px] border-[8px] border-[#0F0F0F]">
+                <div className="bg-[#F0F0F0] p-2 shadow-2xl border border-gray-300">
+                  <div className="relative overflow-hidden w-[250px] h-[500px] border-[8px] border-[#F0F0F0]">
                     <img
                       src="https://images.unsplash.com/photo-1590725121839-892b458a74fe?w=500&q=80"
                       alt="BestReport App Dashboard"
@@ -101,16 +99,16 @@ const DownloadSection = ({
                 </div>
 
                 {/* Data visualization elements */}
-                <div className="absolute -right-16 top-1/4 bg-[#0F0F0F] border border-gray-800 p-3 shadow-lg">
-                  <div className="w-20 h-1 bg-white mb-2"></div>
+                <div className="absolute -right-16 top-1/4 bg-[#F0F0F0] border border-gray-300 p-3 shadow-lg">
+                  <div className="w-20 h-1 bg-black mb-2"></div>
                   <div className="w-14 h-1 bg-gray-700"></div>
                 </div>
               </div>
 
               {/* Phone mockup 2 - behind */}
               <div className="absolute z-10 transform translate-x-20 rotate-6">
-                <div className="bg-[#0F0F0F] p-2 shadow-2xl border border-gray-800">
-                  <div className="relative overflow-hidden w-[250px] h-[500px] border-[8px] border-[#0F0F0F]">
+                <div className="bg-[#F0F0F0] p-2 shadow-2xl border border-gray-300">
+                  <div className="relative overflow-hidden w-[250px] h-[500px] border-[8px] border-[#F0F0F0]">
                     <img
                       src="https://images.unsplash.com/photo-1586281380349-632531db7ed4?w=500&q=80"
                       alt="BestReport App Reports"
@@ -122,7 +120,7 @@ const DownloadSection = ({
               </div>
 
               {/* Floating elements */}
-              <div className="absolute -left-12 bottom-1/3 bg-[#0F0F0F] border border-gray-800 rounded-full p-2 shadow-lg">
+              <div className="absolute -left-12 bottom-1/3 bg-[#F0F0F0] border border-gray-300 rounded-full p-2 shadow-lg">
                 <div className="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center">
                   <div className="w-4 h-4 rounded-full bg-white"></div>
                 </div>
@@ -142,24 +140,24 @@ const DownloadSection = ({
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 {[
                   {
-                    icon: <Shield className="h-6 w-6 text-white" />,
+                    icon: <Shield className="h-6 w-6 text-black" />,
                     title: "Enterprise Security",
                     description:
                       "Bank-grade encryption and multi-factor authentication",
                   },
                   {
-                    icon: <BarChart className="h-6 w-6 text-white" />,
+                    icon: <BarChart className="h-6 w-6 text-black" />,
                     title: "Real-time Analytics",
                     description:
                       "Instant insights and monitoring from anywhere",
                   },
                   {
-                    icon: <Smartphone className="h-6 w-6 text-white" />,
+                    icon: <Smartphone className="h-6 w-6 text-black" />,
                     title: "Offline Capability",
                     description: "Continue working even without connectivity",
                   },
                   {
-                    icon: <Download className="h-6 w-6 text-white" />,
+                    icon: <Download className="h-6 w-6 text-black" />,
                     title: "Seamless Updates",
                     description:
                       "Always access the latest features and security patches",
@@ -167,15 +165,15 @@ const DownloadSection = ({
                 ].map((feature, index) => (
                   <div
                     key={index}
-                    className="bg-[#0F0F0F] border border-gray-800 p-5"
+                    className="bg-[#F0F0F0] border border-gray-300 p-5"
                   >
-                    <div className="p-2 bg-white/5 inline-block mb-4">
+                    <div className="p-2 bg-black/5 inline-block mb-4">
                       {feature.icon}
                     </div>
-                    <h3 className="text-white font-medium mb-2">
+                    <h3 className="text-black font-medium mb-2">
                       {feature.title}
                     </h3>
-                    <p className="text-gray-400 text-sm">
+                    <p className="text-gray-700 text-sm">
                       {feature.description}
                     </p>
                   </div>
@@ -185,7 +183,7 @@ const DownloadSection = ({
 
             <div className="flex flex-col sm:flex-row gap-4 pt-4">
               <Button
-                className="flex items-center gap-2 bg-white hover:bg-gray-100 text-black px-6 py-6 rounded-none"
+                className="flex items-center gap-2 bg-black hover:bg-gray-800 text-white px-6 py-6 rounded-none"
                 asChild
               >
                 <a
@@ -202,7 +200,7 @@ const DownloadSection = ({
               </Button>
 
               <Button
-                className="flex items-center gap-2 bg-[#0F0F0F] hover:bg-gray-800 text-white px-6 py-6 rounded-none border border-gray-700"
+                className="flex items-center gap-2 bg-black hover:bg-gray-800 text-white px-6 py-6 rounded-none border border-gray-700"
                 asChild
               >
                 <a
@@ -219,20 +217,8 @@ const DownloadSection = ({
               </Button>
             </div>
 
-            <Button
-              variant="link"
-              className="text-gray-400 hover:text-white pl-0 flex items-center gap-1 mt-4 group"
-            >
-              Learn more about our app features{" "}
-              <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-            </Button>
 
-            <div className="pt-8 mt-8 border-t border-gray-800">
-              <p className="text-gray-500 text-sm">
-                Available for iOS 14+ and Android 8+. Enterprise deployment
-                options available.
-              </p>
-            </div>
+
           </motion.div>
         </div>
       </div>
