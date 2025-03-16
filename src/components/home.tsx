@@ -21,9 +21,9 @@ const Home = () => {
           <WaveDivider color="#f4f1eb" flip={true} />
           <FeatureGrid />
           <FeatureSection />
-          <WaveDivider color="#fffff" flip={false} />
+          <WaveDivider color="#0A0B0D" flip={false} />
           <TestimonialSection />
-          <WaveDivider color="#fffff" flip={true} />
+          <WaveDivider color="#0A0B0D" flip={true} />
           <PricingSection />
         </main>
         <Footer />

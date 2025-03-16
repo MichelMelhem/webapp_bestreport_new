@@ -119,8 +119,6 @@ const TestimonialSection = ({
       id="testimonials"
     >
       {/* Background elements */}
-      <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-gray-800 to-transparent"></div>
-      <div className="absolute bottom-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-gray-800 to-transparent"></div>
 
       <div className="container mx-auto">
         <div className="text-center mb-16">
