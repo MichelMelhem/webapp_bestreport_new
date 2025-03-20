@@ -9,7 +9,12 @@ import {
   Shield,
   BarChart,
   Smartphone,
+  Star,
+  Clock,
 } from "lucide-react";
+
+import screenshot1 from "../../assets/Download-Screenshot1.png";
+import screenshot2 from "../../assets/Download-Screenshot2.png";
 
 interface DownloadSectionProps {
   title?: string;
@@ -21,8 +26,8 @@ interface DownloadSectionProps {
 const DownloadSection = ({
   title = "Download the BestReport App",
   description = "Access institutional-grade site monitoring from anywhere with our secure mobile application. Available on iOS and Android platforms.",
-  appStoreLink = "https://apps.apple.com",
-  playStoreLink = "https://play.google.com",
+  appStoreLink = "https://apps.apple.com/us/app/best-report/id1554741359",
+  playStoreLink = "https://play.google.com/store/apps/details?id=com.smartapps.bestreport",
 }: DownloadSectionProps) => {
   return (
     <section
@@ -74,35 +79,21 @@ const DownloadSection = ({
                 <div className="bg-[#F0F0F0] p-2 shadow-2xl border border-gray-300">
                   <div className="relative overflow-hidden w-[250px] h-[500px] border-[8px] border-[#F0F0F0]">
                     <img
-                      src="https://images.unsplash.com/photo-1590725121839-892b458a74fe?w=500&q=80"
+                      src={screenshot2}
                       alt="BestReport App Dashboard"
                       className="w-full h-full object-cover"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"></div>
+                    <div className="absolute inset-0"></div>
 
                     {/* UI overlay elements */}
                     <div className="absolute bottom-0 left-0 right-0 p-4">
-                      <div className="w-full h-1 bg-white/20 rounded-none mb-3">
-                        <div className="w-3/4 h-full bg-white"></div>
-                      </div>
                       <div className="flex justify-between items-center">
-                        <div className="w-10 h-10 bg-white flex items-center justify-center">
-                          <Download className="h-5 w-5 text-black" />
-                        </div>
-                        <div className="space-y-1">
-                          <div className="w-16 h-1 bg-white/30"></div>
-                          <div className="w-12 h-1 bg-white/20"></div>
-                        </div>
                       </div>
                     </div>
                   </div>
                 </div>
 
-                {/* Data visualization elements */}
-                <div className="absolute -right-16 top-1/4 bg-[#F0F0F0] border border-gray-300 p-3 shadow-lg">
-                  <div className="w-20 h-1 bg-black mb-2"></div>
-                  <div className="w-14 h-1 bg-gray-700"></div>
-                </div>
+
               </div>
 
               {/* Phone mockup 2 - behind */}
@@ -110,11 +101,11 @@ const DownloadSection = ({
                 <div className="bg-[#F0F0F0] p-2 shadow-2xl border border-gray-300">
                   <div className="relative overflow-hidden w-[250px] h-[500px] border-[8px] border-[#F0F0F0]">
                     <img
-                      src="https://images.unsplash.com/photo-1586281380349-632531db7ed4?w=500&q=80"
+                      src={screenshot1}
                       alt="BestReport App Reports"
                       className="w-full h-full object-cover"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"></div>
+                    <div className="absolute inset-0 "></div>
                   </div>
                 </div>
               </div>
@@ -140,16 +131,16 @@ const DownloadSection = ({
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 {[
                   {
-                    icon: <Shield className="h-6 w-6 text-black" />,
-                    title: "Enterprise Security",
+                    icon: <Star className="h-6 w-6 text-black" />,
+                    title: "Worksite quality",
                     description:
-                      "Bank-grade encryption and multi-factor authentication",
+                      "Companies know exactly what they have to do, and can intervene more quickly without risk of error.",
                   },
                   {
-                    icon: <BarChart className="h-6 w-6 text-black" />,
-                    title: "Real-time Analytics",
+                    icon: <Clock className="h-6 w-6 text-black" />,
+                    title: "Gain time",
                     description:
-                      "Instant insights and monitoring from anywhere",
+                      "Save up to 60 minutes per job report.",
                   },
                   {
                     icon: <Smartphone className="h-6 w-6 text-black" />,
@@ -158,9 +149,9 @@ const DownloadSection = ({
                   },
                   {
                     icon: <Download className="h-6 w-6 text-black" />,
-                    title: "Seamless Updates",
+                    title: "Meet deadlines and reassure your customers",
                     description:
-                      "Always access the latest features and security patches",
+                      "Your customers will love BestReport for its quality follow-up, controlled deadlines and costs, and high-quality, detailed reports.",
                   },
                 ].map((feature, index) => (
                   <div
@@ -183,7 +174,7 @@ const DownloadSection = ({
 
             <div className="flex flex-col sm:flex-row gap-4 pt-4">
               <Button
-                className="flex items-center gap-2 bg-black hover:bg-gray-800 text-white px-6 py-6 rounded-none"
+                className="flex items-center gap-2 bg-white hover:bg-gray-400 text-gray-900 px-6 py-6 rounded-none"
                 asChild
               >
                 <a
@@ -191,16 +182,16 @@ const DownloadSection = ({
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  <AppleIcon className="h-5 w-5" />
+                  <AppleIcon className="h-5 w-5 text-gray-900" />
                   <div className="flex flex-col items-start">
-                    <span className="text-xs">Download on the</span>
-                    <span className="text-base font-semibold">App Store</span>
+                    <span className="text-xs text-gray-900">Download on the</span>
+                    <span className="text-base font-semibold text-gray-900">App Store</span>
                   </div>
                 </a>
               </Button>
 
               <Button
-                className="flex items-center gap-2 bg-black hover:bg-gray-800 text-white px-6 py-6 rounded-none border border-gray-700"
+                className="flex items-center gap-2 bg-white hover:bg-gray-400 text-gray-900 px-6 py-6 rounded-none"
                 asChild
               >
                 <a
@@ -208,10 +199,10 @@ const DownloadSection = ({
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  <PlayIcon className="h-5 w-5" />
+                  <PlayIcon className="h-5 w-5 text-gray-900" />
                   <div className="flex flex-col items-start">
-                    <span className="text-xs">Get it on</span>
-                    <span className="text-base font-semibold">Google Play</span>
+                    <span className="text-xs text-gray-900">Get it on</span>
+                    <span className="text-base font-semibold text-gray-900">Google Play</span>
                   </div>
                 </a>
               </Button>
@@ -221,8 +212,8 @@ const DownloadSection = ({
 
           </motion.div>
         </div>
-      </div>
-    </section>
+      </div >
+    </section >
   );
 };
 

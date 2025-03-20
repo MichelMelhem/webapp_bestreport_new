@@ -15,15 +15,16 @@ const Home = () => {
     <ThemeProvider>
       <div className="bg-background min-h-screen">
         <AppBar />
-        <main className="pt-20">
+        <main>
           <HeroSection />
-          <DownloadSection />
+          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.8 }}>
+            <DownloadSection />
+          </motion.div>
           <WaveDivider color="#f4f1eb" flip={true} />
           <FeatureGrid />
           <FeatureSection />
           <WaveDivider color="#0A0B0D" flip={false} />
           <TestimonialSection />
-          <WaveDivider color="#0A0B0D" flip={true} />
           <PricingSection />
         </main>
         <Footer />

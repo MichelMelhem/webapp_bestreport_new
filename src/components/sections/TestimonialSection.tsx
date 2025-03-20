@@ -13,11 +13,11 @@ interface TestimonialProps {
 
 const defaultTestimonials: TestimonialProps[] = [
   {
-    author: "Sarah Johnson",
-    role: "Project Manager",
-    company: "BuildTech Construction",
+    author: "Axel Delmas",
+    role: "Architect",
+    company: "",
     content:
-      "BestReport has completely transformed how we manage our construction sites. The institutional-grade monitoring and automated reporting have saved us countless hours and improved our project delivery times by 30%.",
+      "Easy to use, very practical on the work site: saves me time and spares communication issues with partners. Would recommend !",
     avatar:
       "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=200&q=80",
   },
