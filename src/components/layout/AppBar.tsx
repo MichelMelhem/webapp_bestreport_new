@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-import ThemeToggle from "../theme/ThemeToggle";
 import Logo from "../../assets/icon.png";
 
 interface AppBarProps {
@@ -12,156 +11,166 @@ interface AppBarProps {
 
 const AppBar = ({ className = "" }: AppBarProps) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [currentSection, setCurrentSection] = useState<string>("");
+  const [currentSection, setCurrentSection] = useState("");
+  const [scrolled, setScrolled] = useState(false);
 
   const navLinks = [
     { name: "Features", href: "#features" },
     { name: "Testimonials", href: "#testimonials" },
     { name: "Pricing", href: "#pricing" },
-
   ];
 
   useEffect(() => {
-    const sections = navLinks.map((link) => document.querySelector(link.href));
+    const handleScroll = () => {
+      const isScrolled = window.scrollY > 10;
+      setScrolled(isScrolled);
+
+      if (!isScrolled) {
+        setCurrentSection("");
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    handleScroll();
+
+    const sectionElements = navLinks
+        .map((link) => document.getElementById(link.href.substring(1)))
+        .filter(Boolean) as HTMLElement[];
 
     const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setCurrentSection(entry.target.id); // Update the current section
-          }
-        });
-      },
-      { threshold: 0.5 } // Trigger when 50% of the section is visible
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting && entry.intersectionRatio > 0.1) {
+              setCurrentSection(entry.target.id);
+            }
+          });
+        },
+        { threshold: 0.1, rootMargin: "-30% 0px -30% 0px" }
     );
 
-    sections.forEach((section) => {
-      if (section) observer.observe(section);
-    });
+    sectionElements.forEach((section) => observer.observe(section));
 
     return () => {
-      sections.forEach((section) => {
-        if (section) observer.unobserve(section);
-      });
+      sectionElements.forEach((section) => observer.unobserve(section));
+      window.removeEventListener("scroll", handleScroll);
     };
   }, []);
 
-  const toggleMenu = () => {
-    setIsMenuOpen(!isMenuOpen);
-  };
+  const isDarkSection = currentSection === "testimonials" || currentSection === "pricing";
 
-  const getNavBarColor = () => {
-    switch (currentSection) {
-      case "features":
-        return "bg-white";
-      case "about":
-        return "bg-white";
-      case "download":
-        return "bg-white";
-      case "pricing":
-        return "bg-[#0A0B0D]";
-      case "testimonials":
-        return "bg-[#0A0B0D]";
-      default:
-        return "bg-white";
-    }
-  };
-
-  const getTextColor = () => {
-    switch (currentSection) {
-      case "features":
-        return "text-[#0A0B0D]";
-      case "about":
-        return "text-[#0A0B0D]";
-      case "download":
-        return "text-[#0A0B0D]";
-      case "pricing":
-        return "text-white";
-      case "testimonials":
-        return "text-white";
-      default:
-        return "text-white";
-    }
+  const scrollToSection = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    e.preventDefault();
+    setIsMenuOpen(false);
+    document.getElementById(href.substring(1))?.scrollIntoView({ behavior: "smooth" });
   };
 
   return (
-    <nav
-      className={cn(
-        "fixed top-0 left-0 w-full z-50 transition-all duration-300",
-        getNavBarColor(),
-
-        className
-      )}
-    >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-16 md:h-20">
-          {/* Logo */}
-          <div className="flex-shrink-0 flex items-center justify-center">
-            <Link to="/" className="flex items-center">
-              <img src={Logo} alt="BestReport logo" className=" h-12 rounded-lg mx-auto mb-6" />
+      <nav
+          className={cn(
+              "fixed top-0 left-0 w-full z-50 transition-all duration-300 h-16",
+              !scrolled && !currentSection
+                  ? "bg-transparent border-transparent"
+                  : isDarkSection
+                      ? "bg-[#0A0B0D]/80 backdrop-blur-md border-gray-800/30"
+                      : "bg-white/70 backdrop-blur-md border-gray-200/20 shadow-sm",
+              className
+          )}
+      >
+        <div className="max-w-7xl mx-auto h-full px-4 md:px-11">
+          <div className="flex justify-between items-center h-full gap-4">
+            <Link to="/" className="flex items-center gap-2">
+              <img src={Logo} alt="Logo" className="h-8 rounded-lg" />
+              <span className={cn(
+                  "text-lg font-semibold transition-colors",
+                  isDarkSection ? "text-white" : "text-gray-900"
+              )}>
+              BestReport
+            </span>
             </Link>
-          </div>
 
-          {/* Desktop Navigation */}
-          <div className="hidden md:flex md:items-center justify-start md:space-x-6">
-            {navLinks.map((link) => (
-              <a
-                key={link.name}
-                href={link.href}
-                className={cn(getTextColor(), "px-3 py-2  text-base font-medium transition-colors  hover:text-blue-600")}
-              >
-                {link.name}
-              </a>
-            ))}
-          </div>
+            {/* Desktop Navigation */}
+            <div className="hidden md:flex gap-6">
+              {navLinks.map((link) => (
+                  <a
+                      key={link.name}
+                      href={link.href}
+                      className={cn(
+                          "py-2 text-sm font-medium transition-colors",
+                          isDarkSection
+                              ? "text-white hover:text-gray-300"
+                              : "text-black hover:text-gray-900",
+                          currentSection === link.href.substring(1) && "text-blue-500"
+                      )}
+                      onClick={(e) => scrollToSection(e, link.href)}
+                  >
+                    {link.name}
+                  </a>
+              ))}
+            </div>
 
-          {/* Action Buttons (Desktop) */}
-          <div className="hidden md:flex md:items-center space-x-4">
-            <Button className="bg-blue-600 hover:bg-blue-700 text-white rounded-md">
-              Download now
-            </Button>
-          </div>
+            {/* Desktop CTA Buttons */}
+            <div className="hidden md:flex gap-4">
+              <Button variant="outline">Sign up</Button>
+              <Button className="bg-blue-600 hover:bg-blue-700 text-white">Sign in</Button>
+            </div>
 
-          {/* Mobile menu button */}
-          <div className="md:hidden flex items-center space-x-4">
-
+            {/* Mobile Menu Button */}
             <button
-              type="button"
-              className="inline-flex items-center justify-center p-2 focus:outline-none text-gray-600 hover:text-blue-600 hover:bg-gray-100"
-              aria-controls="mobile-menu"
-              aria-expanded="false"
-              onClick={toggleMenu}
+                type="button"
+                className={cn(
+                    "md:hidden p-2 rounded-md focus:outline-none transition-colors ml-auto",
+                    isDarkSection ? "text-white" : "text-gray-700"
+                )}
+                onClick={() => setIsMenuOpen(!isMenuOpen)}
+                aria-expanded={isMenuOpen}
+                aria-label="Toggle menu"
             >
-              <span className="sr-only">Open main menu</span>
-              {isMenuOpen ? (
-                <X className="block h-6 w-6" aria-hidden="true" />
-              ) : (
-                <Menu className="block h-6 w-6" aria-hidden="true" />
-              )}
+              {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
             </button>
           </div>
         </div>
-      </div>
 
-      {/* Mobile menu, show/hide based on menu state */}
-      <div
-        className={`${isMenuOpen ? "block" : "hidden"} md:hidden bg-white border-t border-gray-200`}
-        id="mobile-menu"
-      >
-        <div className="px-4 pt-2 pb-4 space-y-1">
-          {navLinks.map((link) => (
-            <a
-              key={link.name}
-              href={link.href}
-              className={cn("flex items-center justify-between px-3 py-3 text-base font-medium border-b  hover:text-blue-600 hover:bg-gray-100 border-gray-200")}
-              onClick={toggleMenu}
-            >
-              {link.name}
-            </a>
-          ))}
+        {/* Mobile Menu */}
+        <div
+            className={cn(
+                "md:hidden fixed inset-x-0 top-16 transition-all duration-300 border-t",
+                isMenuOpen
+                    ? "opacity-100 pointer-events-auto max-h-[calc(100vh-4rem)]"
+                    : "opacity-0 pointer-events-none max-h-0",
+                isDarkSection
+                    ? "bg-[#0A0B0D]/90 backdrop-blur-md border-gray-800"
+                    : "bg-white/90 backdrop-blur-md border-gray-200"
+            )}
+        >
+          <div className="flex flex-col gap-2 px-4 py-4 overflow-y-auto max-h-[calc(100vh-4rem)]">
+            {navLinks.map((link) => (
+                <a
+                    key={link.name}
+                    href={link.href}
+                    className={cn(
+                        "block py-3 text-base font-medium rounded-md transition-colors",
+                        isDarkSection
+                            ? "text-white hover:bg-gray-800/30"
+                            : "text-gray-700 hover:bg-gray-100/30",
+                        currentSection === link.href.substring(1) && "text-blue-500"
+                    )}
+                    onClick={(e) => scrollToSection(e, link.href)}
+                >
+                  {link.name}
+                </a>
+            ))}
+
+            <div className="flex flex-col gap-3 pt-4 pb-2">
+              <Button variant="outline">
+                Sign up
+              </Button>
+              <Button className="w-full bg-blue-600 hover:bg-blue-700 text-white py-5">
+                Sign in
+              </Button>
+            </div>
+          </div>
         </div>
-      </div>
-    </nav >
+      </nav>
   );
 };
 
