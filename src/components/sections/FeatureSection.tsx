@@ -41,12 +41,12 @@ const FeatureSection = ({
                                 <span className="absolute left-0 bottom-[-15px] w-full">
                                     <svg className="w-full" height="20" viewBox="0 0 300 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <path d="M0 15 C60 5, 120 20, 180 10 S240 10, 300 15"
-                                            stroke="url(#grad1)" stroke-width="5" stroke-linecap="round" />
+                                            stroke="url(#grad1)" strokeWidth="5" strokeLinecap="round" />
                                         <defs>
                                             <linearGradient id="grad1" x1="0" y1="10" x2="300" y2="10" gradientUnits="userSpaceOnUse">
-                                                <stop offset="0%" stop-color="#FF5733" />
-                                                <stop offset="50%" stop-color="#FFC300" />
-                                                <stop offset="100%" stop-color="#33FF57" />
+                                                <stop offset="0%" stopColor="#FF5733" />
+                                                <stop offset="50%" stopColor="#FFC300" />
+                                                <stop offset="100%" stopColor="#33FF57" />
                                             </linearGradient>
                                         </defs>
                                     </svg>
