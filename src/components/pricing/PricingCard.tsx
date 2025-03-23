@@ -1,30 +1,30 @@
-import React from "react";
-import { Check } from "lucide-react";
-import { Button } from "../../components/ui/button";
+import React from "react"
+import { Check } from "lucide-react"
+import { Button } from "../../components/ui/button"
 import {
   Card,
   CardContent,
   CardDescription,
   CardFooter,
   CardHeader,
-  CardTitle,
-} from "../../components/ui/card";
-import { Badge } from "../../components/ui/badge";
+  CardTitle
+} from "../../components/ui/card"
+import { Badge } from "../../components/ui/badge"
 
 interface PricingFeature {
-  name: string;
-  included: boolean;
+  name: string
+  included: boolean
 }
 
 interface PricingCardProps {
-  title: string;
-  price: string;
-  description: string;
-  features: PricingFeature[];
-  popular?: boolean;
-  buttonText?: string;
-  period?: string;
-  onSelect?: () => void;
+  title: string
+  price: string
+  description: string
+  features: PricingFeature[]
+  popular?: boolean
+  buttonText?: string
+  period?: string
+  onSelect?: () => void
 }
 
 const PricingCard = ({
@@ -38,17 +38,16 @@ const PricingCard = ({
     { name: "Up to 3 projects", included: true },
     { name: "Email support", included: true },
     { name: "Advanced analytics", included: false },
-    { name: "Team collaboration", included: false },
+    { name: "Team collaboration", included: false }
   ],
   popular = false,
   buttonText = "Get Started",
   period = "month",
-  onSelect = () => {},
+  onSelect = () => {}
 }: PricingCardProps) => {
   return (
     <Card
-      className={`w-full max-w-sm transition-all duration-300 hover:shadow-lg ${popular ? "border-primary shadow-md scale-105" : "border-border"}`}
-    >
+      className={`w-full max-w-sm transition-all duration-300 hover:shadow-lg ${popular ? "border-primary shadow-md scale-105" : "border-border"}`}>
       <CardHeader className="space-y-1 text-center">
         {popular && (
           <Badge className="absolute top-4 right-4 bg-primary text-primary-foreground">
@@ -73,11 +72,8 @@ const PricingCard = ({
               )}
               <span
                 className={
-                  feature.included
-                    ? "text-foreground"
-                    : "text-muted-foreground line-through"
-                }
-              >
+                  feature.included ? "text-foreground" : "text-muted-foreground line-through"
+                }>
                 {feature.name}
               </span>
             </li>
@@ -88,13 +84,12 @@ const PricingCard = ({
         <Button
           onClick={onSelect}
           className={`w-full ${popular ? "bg-primary hover:bg-primary/90" : ""}`}
-          variant={popular ? "default" : "outline"}
-        >
+          variant={popular ? "default" : "outline"}>
           {buttonText}
         </Button>
       </CardFooter>
     </Card>
-  );
-};
+  )
+}
 
-export default PricingCard;
+export default PricingCard

@@ -1,7 +1,7 @@
-import { Suspense } from "react";
-import { Routes, Route } from "react-router-dom";
-import Home from "./components/home";
-import { ThemeProvider } from "./components/theme/ThemeProvider";
+import { Suspense } from "react"
+import { Routes, Route } from "react-router-dom"
+import Home from "./components/home"
+import { ThemeProvider } from "./components/theme/ThemeProvider"
 
 function App() {
   return (
@@ -14,7 +14,7 @@ function App() {
         </>
       </Suspense>
     </ThemeProvider>
-  );
+  )
 }
 
-export default App;
+export default App
