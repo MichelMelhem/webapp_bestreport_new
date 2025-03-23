@@ -2,6 +2,7 @@ import React from "react"
 import { motion } from "framer-motion"
 import { ChevronLeft, ChevronRight, Quote } from "lucide-react"
 import { Button } from "../../components/ui/button"
+import idf_logo from "../../assets/testimonials-avatars/architecte-ile-de-france.bmp"
 
 interface TestimonialProps {
   author: string
@@ -13,29 +14,15 @@ interface TestimonialProps {
 
 const defaultTestimonials: TestimonialProps[] = [
   {
-    author: "Axel Delmas",
+    author: "Theophile Melhem",
     role: "Architect",
-    company: "",
+    company: "Architect ile de france",
     content:
       "Easy to use, very practical on the work site: saves me time and spares communication issues with partners. Would recommend !",
-    avatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=200&q=80"
+    avatar: idf_logo
   },
-  {
-    author: "Michael Rodriguez",
-    role: "Site Supervisor",
-    company: "Rodriguez & Sons Builders",
-    content:
-      "As a site supervisor managing multiple projects, BestReport has been a game-changer. I can now monitor all my sites from one dashboard and generate comprehensive reports with just a few clicks. The precision and reliability are unmatched.",
-    avatar: "https://images.unsplash.com/photo-1560250097-0b93528c311a?w=200&q=80"
-  },
-  {
-    author: "Jennifer Lee",
-    role: "CEO",
-    company: "Precision Construction Group",
-    content:
-      "Implementing BestReport across our organization has resulted in a 25% reduction in compliance issues and significantly improved our client satisfaction ratings. It's an essential tool for modern construction management that delivers financial-grade reliability.",
-    avatar: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=200&q=80"
-  }
+
+
 ]
 
 const TestimonialCard = ({ testimonial }: { testimonial: TestimonialProps }) => {
