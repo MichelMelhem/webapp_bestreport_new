@@ -3,6 +3,7 @@ import { motion } from "framer-motion"
 import Screenshot from "../../assets/screenshot-1.png"
 import PdfView from "../featuresection/PdfViewer"
 import rapport from "../../assets/rapport.pdf"
+import FeatureGrid from "../featuresection/FeatureGrid"
 
 interface FeatureSectionProps {
   id?: string
@@ -14,7 +15,7 @@ interface FeatureSectionProps {
 }
 
 const FeatureSection = ({
-  id = "about",
+  id = "features",
   className = "",
   description = "Generate your worksite report in pdf format in record time, which you can then send directly to your collaborators to keep your project moving forward quickly.",
   reportsrc = rapport
@@ -26,7 +27,8 @@ const FeatureSection = ({
 
   return (
     <section id={id} className={`py-16 md:py-24 bg-white ${className}`}>
-      <div className="container mx-auto max-w-7xl px-4 md:px-6 relative">
+      <FeatureGrid />
+      <div className="container mx-auto max-w-7xl px-4 md:px-6 relative pt-20">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16 items-center">
           <motion.div
             initial="hidden"

@@ -4,10 +4,7 @@ import { motion } from "framer-motion"
 import {
   AppleIcon,
   PlayIcon,
-  ArrowRight,
   Download,
-  Shield,
-  BarChart,
   Smartphone,
   Star,
   Clock
@@ -70,7 +67,7 @@ const DownloadSection = ({
                 <div className="bg-[#F0F0F0] p-2 shadow-2xl border border-gray-300">
                   <div className="relative overflow-hidden w-[250px] h-[500px] border-[8px] border-[#F0F0F0]">
                     <img
-                      src={screenshot2}
+                      src={screenshot1}
                       alt="BestReport App Dashboard"
                       className="w-full h-full object-cover"
                     />
@@ -89,7 +86,7 @@ const DownloadSection = ({
                 <div className="bg-[#F0F0F0] p-2 shadow-2xl border border-gray-300">
                   <div className="relative overflow-hidden w-[250px] h-[500px] border-[8px] border-[#F0F0F0]">
                     <img
-                      src={screenshot1}
+                      src={screenshot2}
                       alt="BestReport App Reports"
                       className="w-full h-full object-cover"
                     />
