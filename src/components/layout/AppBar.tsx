@@ -15,6 +15,7 @@ const AppBar = ({ className = "" }: AppBarProps) => {
   const [scrolled, setScrolled] = useState(false);
 
   const navLinks = [
+    { name: "Download", href: "#download" },
     { name: "Features", href: "#features" },
     { name: "Testimonials", href: "#testimonials" },
     { name: "Pricing", href: "#pricing" },

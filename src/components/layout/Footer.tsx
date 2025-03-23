@@ -35,42 +35,42 @@ const Footer = () => {
             <ul className="space-y-2">
               <li>
                 <a
-                  href="#"
-                  className="text-gray-400 hover:text-blue-400 transition-colors"
+                    href="#"
+                    className="text-gray-400 hover:text-blue-400 transition-colors"
                 >
                   Home
                 </a>
               </li>
               <li>
                 <a
-                  href="#"
-                  className="text-gray-400 hover:text-blue-400 transition-colors"
+                    href="#download"
+                    className="text-gray-400 hover:text-blue-400 transition-colors"
+                >
+                  Download App
+                </a>
+              </li>
+              <li>
+                <a
+                    href="#features"
+                    className="text-gray-400 hover:text-blue-400 transition-colors"
                 >
                   Features
                 </a>
               </li>
               <li>
                 <a
-                  href="#"
-                  className="text-gray-400 hover:text-blue-400 transition-colors"
+                    href="#pricing"
+                    className="text-gray-400 hover:text-blue-400 transition-colors"
                 >
                   Pricing
                 </a>
               </li>
               <li>
                 <a
-                  href="#"
-                  className="text-gray-400 hover:text-blue-400 transition-colors"
+                    href="#testimonials"
+                    className="text-gray-400 hover:text-blue-400 transition-colors"
                 >
                   Testimonials
-                </a>
-              </li>
-              <li>
-                <a
-                  href="#"
-                  className="text-gray-400 hover:text-blue-400 transition-colors"
-                >
-                  Download App
                 </a>
               </li>
             </ul>
@@ -81,7 +81,7 @@ const Footer = () => {
             <h3 className="text-xl font-bold mb-4">Contact Us</h3>
             <ul className="space-y-3">
               <li className="flex items-start">
-                <MapPin className="mr-2 h-5 w-5 text-blue-400 shrink-0 mt-0.5" />
+              <MapPin className="mr-2 h-5 w-5 text-blue-400 shrink-0 mt-0.5" />
                 <span className="text-gray-400">
                   7 Bis Rue Tolstoi, 92130 Issy-les-Moulineaux, France
                 </span>
