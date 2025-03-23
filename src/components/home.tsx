@@ -7,7 +7,7 @@ import DownloadSection from "./sections/DownloadSection"
 import AppBar from "./layout/AppBar"
 import Footer from "./layout/Footer"
 import { ThemeProvider } from "./theme/ThemeProvider"
-import FeatureGrid from "./sections/FeatureGrid"
+import FeatureGrid from "./featuresection/FeatureGrid"
 import FeatureSection from "./sections/FeatureSection"
 
 const Home = () => {
@@ -24,7 +24,6 @@ const Home = () => {
             <DownloadSection />
           </motion.div>
           <WaveDivider color="#f4f1eb" flip={true} />
-          <FeatureGrid />
           <FeatureSection />
           <WaveDivider color="#0A0B0D" flip={false} />
           <TestimonialSection />
