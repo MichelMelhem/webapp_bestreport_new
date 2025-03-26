@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react"
 import { Link } from "react-router-dom"
+import { HashLink } from "react-router-hash-link"
 import { Menu, X } from "lucide-react"
 import { Button } from "@components/ui/button"
 import { cn } from "@lib/utils"
@@ -59,10 +60,8 @@ const AppBar = ({ className = "" }: AppBarProps) => {
 
   const isDarkSection = currentSection === "testimonials" || currentSection === "pricing"
 
-  const scrollToSection = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
-    e.preventDefault()
+  const closeMenu = () => {
     setIsMenuOpen(false)
-    document.getElementById(href.substring(1))?.scrollIntoView({ behavior: "smooth" })
   }
 
   return (
@@ -92,9 +91,10 @@ const AppBar = ({ className = "" }: AppBarProps) => {
           {/* Desktop Navigation */}
           <div className="hidden md:flex gap-6">
             {navLinks.map((link) => (
-              <a
+              <HashLink
                 key={link.name}
-                href={link.href}
+                to={link.href}
+                smooth
                 className={cn(
                   "py-2 text-sm font-medium transition-colors",
                   isDarkSection
@@ -102,16 +102,22 @@ const AppBar = ({ className = "" }: AppBarProps) => {
                     : "text-black hover:text-gray-900",
                   currentSection === link.href.substring(1) && "text-blue-500"
                 )}
-                onClick={(e) => scrollToSection(e, link.href)}>
+                onClick={closeMenu}>
                 {link.name}
-              </a>
+              </HashLink>
             ))}
           </div>
 
           {/* Desktop CTA Buttons */}
           <div className="hidden md:flex gap-4">
-            <Button variant="outline">Sign up</Button>
-            <Button className="bg-blue-600 hover:bg-blue-700 text-white">Sign in</Button>
+            <Link to="/signup">
+              <Button variant="outline">Sign up</Button>
+            </Link>
+            <Link to="/signin">
+              <Button className="w-full bg-blue-600 hover:bg-blue-700 text-white py-5">
+                Sign in
+              </Button>
+            </Link>
           </div>
 
           {/* Mobile Menu Button */}
@@ -142,9 +148,10 @@ const AppBar = ({ className = "" }: AppBarProps) => {
         )}>
         <div className="flex flex-col gap-2 px-4 py-4 overflow-y-auto max-h-[calc(100vh-4rem)]">
           {navLinks.map((link) => (
-            <a
+            <HashLink
               key={link.name}
-              href={link.href}
+              to={link.href}
+              smooth
               className={cn(
                 "block py-3 text-base font-medium rounded-md transition-colors",
                 isDarkSection
@@ -152,16 +159,20 @@ const AppBar = ({ className = "" }: AppBarProps) => {
                   : "text-gray-700 hover:bg-gray-100/30",
                 currentSection === link.href.substring(1) && "text-blue-500"
               )}
-              onClick={(e) => scrollToSection(e, link.href)}>
+              onClick={closeMenu}>
               {link.name}
-            </a>
+            </HashLink>
           ))}
 
           <div className="flex flex-col gap-3 pt-4 pb-2">
-            <Button variant="outline">Sign up</Button>
-            <Button className="w-full bg-blue-600 hover:bg-blue-700 text-white py-5">
-              Sign in
-            </Button>
+            <Link to="/signup">
+              <Button variant="outline">Sign up</Button>
+            </Link>
+            <Link to="/signin">
+              <Button className="w-full bg-blue-600 hover:bg-blue-700 text-white py-5">
+                Sign in
+              </Button>
+            </Link>
           </div>
         </div>
       </div>
