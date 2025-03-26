@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react"
 import { Link } from "react-router-dom"
 import { Menu, X } from "lucide-react"
-import { Button } from "@/components/ui/button"
-import { cn } from "@/lib/utils"
-import Logo from "../../assets/icon.png"
+import { Button } from "@components/ui/button"
+import { cn } from "@lib/utils"
+import Logo from "@assets/icon.png"
 
 interface AppBarProps {
   className?: string

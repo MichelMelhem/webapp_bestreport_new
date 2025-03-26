@@ -18,9 +18,10 @@
     "jsx": "react-jsx",
     "strict": false,
     "paths": {
-      "@/*": [
-        "./src/*"
-      ]
+      "@assets/*": ["./src/assets/*"],
+      "@components/*": ["./src/components/*"],
+      "@lib/*": ["./src/lib/*"],
+      "@pages/*": ["./src/pages/*"]
     }
   },
   "include": [
