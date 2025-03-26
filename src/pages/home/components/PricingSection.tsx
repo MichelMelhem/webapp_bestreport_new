@@ -4,6 +4,7 @@ import { Check } from "lucide-react"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@components/ui/tabs.tsx"
 import { Button } from "@components/ui/button.tsx"
 import { Cross1Icon } from "@radix-ui/react-icons"
+import { Link } from "react-router-dom"
 
 interface PricingPlan {
   title: string
@@ -11,7 +12,10 @@ interface PricingPlan {
   description: string
   features: { name: string; included: boolean }[]
   popular?: boolean
-  buttonText?: string
+  button: {
+    label: string
+    href: string
+  }
 }
 
 const PricingSection = () => {
@@ -27,7 +31,10 @@ const PricingSection = () => {
         { name: "Unlimited plans", included: true },
         { name: "No report generation", included: false }
       ],
-      buttonText: "Try Now"
+      button: {
+        label: "Try Now",
+        href: "/signup"
+      }
     },
     {
       title: "Pro",
@@ -40,7 +47,10 @@ const PricingSection = () => {
         { name: "Unlimited plans", included: true },
         { name: "Report generation", included: true }
       ],
-      buttonText: "Subscribe Now",
+      button: {
+        label: "Subscribe Now",
+        href: "/signup"
+      },
       popular: true
     },
     {
@@ -56,7 +66,10 @@ const PricingSection = () => {
         { name: "24h Support", included: true },
         { name: "Remote installation/configuration", included: true }
       ],
-      buttonText: "Contact Sales"
+      button: {
+        label: "Contact Sales",
+        href: "/contact"
+      }
     }
   ]
 
@@ -144,11 +157,13 @@ const PricingGrid = ({ plans, yearly }: { plans: PricingPlan[]; yearly: boolean 
               </ul>
             </div>
 
-            <Button
-              className={`w-full py-4 rounded-sm text-lg font-semibold transition-all
-                ${plan.popular ? "bg-white text-black hover:bg-gray-200" : "bg-[#1A1B1D] text-white hover:bg-[#222] border border-gray-700"}`}>
-              {plan.buttonText}
-            </Button>
+            <Link to={plan.button.href}>
+              <Button
+                className={`w-full py-4 rounded-sm text-base font-semibold transition-all
+                  ${plan.popular ? "bg-white text-black hover:bg-gray-200" : "bg-[#1A1B1D] text-white hover:bg-[#222] border border-gray-700"}`}>
+                {plan.button.label}
+              </Button>
+            </Link>
           </div>
         </motion.div>
       ))}

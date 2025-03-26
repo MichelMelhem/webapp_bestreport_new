@@ -1,15 +1,14 @@
-import { Suspense } from "react"
 import { Routes, Route } from "react-router-dom"
 import Home from "./pages/home/Home.tsx"
 import Account from "./pages/account/Account.tsx"
 import Contact from "./pages/contact/Contact.tsx"
 import Error from "./pages/error/Error.tsx"
 
-import { ThemeProvider } from "./components/theme/ThemeProvider"
 import SignIn from "@pages/signin/SignIn.tsx"
 import SignUp from "@pages/signup/SignUp.tsx"
 import { store } from "./redux/store.ts"
 import { Provider } from "react-redux"
+
 
 
 function App() {
@@ -17,7 +16,9 @@ function App() {
 
 
   return (
-    <ThemeProvider>
+
+    
+      
       <Provider store={store}>
         <Suspense fallback={<p className="text-white">Loading...</p>}>
           <Routes>
@@ -30,7 +31,10 @@ function App() {
           </Routes>
         </Suspense>
       </Provider>
-    </ThemeProvider>
+
+    
+
+        
   )
 }
 

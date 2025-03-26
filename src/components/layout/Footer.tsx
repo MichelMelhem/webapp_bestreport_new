@@ -1,4 +1,5 @@
 import { Linkedin, Mail, Phone, MapPin } from "lucide-react"
+import { HashLink } from "react-router-hash-link"
 
 const Footer = () => {
   const currentYear = new Date().getFullYear()
@@ -26,33 +27,46 @@ const Footer = () => {
             <h3 className="text-xl font-bold mb-4">Quick Links</h3>
             <ul className="space-y-2">
               <li>
-                <a href="#" className="text-gray-400 hover:text-blue-400 transition-colors">
+                <HashLink
+                  to="/"
+                  smooth
+                  className="text-gray-400 hover:text-blue-400 transition-colors">
                   Home
-                </a>
+                </HashLink>
               </li>
               <li>
-                <a href="#download" className="text-gray-400 hover:text-blue-400 transition-colors">
+                <HashLink
+                  to="/#download"
+                  smooth
+                  className="text-gray-400 hover:text-blue-400 transition-colors">
                   Download App
-                </a>
+                </HashLink>
               </li>
               <li>
-                <a href="#features" className="text-gray-400 hover:text-blue-400 transition-colors">
+                <HashLink
+                  to="/#features"
+                  smooth
+                  className="text-gray-400 hover:text-blue-400 transition-colors">
                   Features
-                </a>
+                </HashLink>
               </li>
               <li>
-                <a href="#pricing" className="text-gray-400 hover:text-blue-400 transition-colors">
+                <HashLink
+                  to="/#pricing"
+                  smooth
+                  className="text-gray-400 hover:text-blue-400 transition-colors">
                   Pricing
-                </a>
+                </HashLink>
               </li>
               <li>
-                <a
-                  href="#testimonials"
+                <HashLink
+                  to="/#testimonials"
+                  smooth
                   className="text-gray-400 hover:text-blue-400 transition-colors">
                   Testimonials
-                </a>
+                </HashLink>
               </li>
-            </ul>
+            </ul>{" "}
           </div>
 
           {/* Contact Info */}
