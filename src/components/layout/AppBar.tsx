@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react"
+import { useState, useEffect } from "react"
 
 import { Link } from "react-router-dom"
 import { HashLink } from "react-router-hash-link"
@@ -12,7 +12,6 @@ interface AppBarProps {
 }
 
 const AppBar = ({ className = "" }: AppBarProps) => {
-  const navigate = useNavigate();
 
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [currentSection, setCurrentSection] = useState("")
