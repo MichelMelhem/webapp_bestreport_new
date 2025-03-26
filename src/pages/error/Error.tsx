@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom"
-import AppBar from "@components/layout/AppBar.tsx"
-import Footer from "@components/layout/Footer.tsx"
+import AppBar from "@/components/layout/AppBar.tsx"
+import Footer from "@/components/layout/Footer.tsx"
 import React from "react"
 
 const Error = () => {

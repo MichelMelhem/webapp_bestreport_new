@@ -1,19 +1,19 @@
-import { Button } from "@components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@components/ui/card";
-import { useDispatch } from "react-redux";
-import { loginUser, socialLogin } from "../../redux/auth.reducer";
-import { googleProvider, appleProvider } from "../../firebase/firebaseConfig";
-import { AppDispatch } from "../../redux/store";
-import { useState } from "react";
+import { Button } from "@/components/ui/button"
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { useDispatch } from "react-redux"
+import { loginUser, socialLogin } from "@/lib/redux/auth.reducer"
+import { googleProvider, appleProvider } from "@/lib/firebase/firebaseConfig"
+import { AppDispatch } from "@/lib/redux/store"
+import { useState } from "react"
 
 export default function SignIn() {
-  const dispatch = useDispatch<AppDispatch>();
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const dispatch = useDispatch<AppDispatch>()
+  const [email, setEmail] = useState("")
+  const [password, setPassword] = useState("")
 
   const handleLogin = () => {
-    dispatch(loginUser({ email, password }));
-  };
+    dispatch(loginUser({ email, password }))
+  }
 
   return (
     <div className="flex items-center justify-center min-h-screen bg-[#1A1B1D] text-white">
@@ -37,29 +37,24 @@ export default function SignIn() {
               onChange={(e) => setPassword(e.target.value)}
               className="w-full p-3 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-black"
             />
-            <Button
-              className="w-full bg-black text-white p-3 rounded-md"
-              onClick={handleLogin}
-            >
+            <Button className="w-full bg-black text-white p-3 rounded-md" onClick={handleLogin}>
               Login
             </Button>
           </form>
           <div className="mt-6 space-y-3">
             <Button
               className="w-full bg-white text-black border border-gray-300 p-3 rounded-md"
-              onClick={() => dispatch(socialLogin(googleProvider))}
-            >
+              onClick={() => dispatch(socialLogin(googleProvider))}>
               Login with Google
             </Button>
             <Button
               className="w-full bg-black text-white p-3 rounded-md"
-              onClick={() => dispatch(socialLogin(appleProvider))}
-            >
+              onClick={() => dispatch(socialLogin(appleProvider))}>
               Login with Apple
             </Button>
           </div>
         </CardContent>
       </Card>
     </div>
-  );
+  )
 }

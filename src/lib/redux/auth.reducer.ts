@@ -5,7 +5,7 @@ import {
   signInWithPopup,
   signOut
 } from "firebase/auth"
-import { auth } from "../firebase/firebaseConfig"
+import { auth } from "@/lib/firebase/firebaseConfig.ts"
 
 interface AuthState {
   user: string | null

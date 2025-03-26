@@ -1,8 +1,8 @@
 import React from "react"
 import { motion } from "framer-motion"
 import { ChevronLeft, ChevronRight, Quote } from "lucide-react"
-import { Button } from "@components/ui/button.tsx"
-import idf_logo from "@assets/testimonials-avatars/architecte-ile-de-france.bmp"
+import { Button } from "@/components/ui/button.tsx"
+import idf_logo from "@/assets/testimonials-avatars/architecte-ile-de-france.bmp"
 
 interface TestimonialProps {
   author: string

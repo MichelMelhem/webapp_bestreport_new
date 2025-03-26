@@ -1,6 +1,6 @@
-import AppBar from "@components/layout/AppBar.tsx"
+import AppBar from "@/components/layout/AppBar.tsx"
 import { Link } from "react-router-dom"
-import Footer from "@components/layout/Footer.tsx"
+import Footer from "@/components/layout/Footer.tsx"
 import React from "react"
 
 const Contact = () => {

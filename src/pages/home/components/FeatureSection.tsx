@@ -1,8 +1,8 @@
 import React from "react"
 import { motion } from "framer-motion"
-import PdfView from "@pages/home/components/partials/PdfViewer.tsx"
-import rapport from "@assets/rapport.pdf"
-import FeatureGrid from "@pages/home/components/partials/FeatureGrid.tsx"
+import PdfView from "@/pages/home/components/partials/PdfViewer.tsx"
+import rapport from "@/assets/rapport.pdf"
+import FeatureGrid from "@/pages/home/components/partials/FeatureGrid.tsx"
 
 interface FeatureSectionProps {
   id?: string

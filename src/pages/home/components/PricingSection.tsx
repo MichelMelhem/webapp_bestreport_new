@@ -1,8 +1,8 @@
 import React from "react"
 import { motion } from "framer-motion"
 import { Check } from "lucide-react"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@components/ui/tabs.tsx"
-import { Button } from "@components/ui/button.tsx"
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs.tsx"
+import { Button } from "@/components/ui/button.tsx"
 import { Cross1Icon } from "@radix-ui/react-icons"
 import { Link } from "react-router-dom"
 
