@@ -74,8 +74,8 @@ const FeatureGrid = ({
 
       <div className="mt-16 pt-8 border-t border-gray-300 text-center">
         <p className="text-gray-600 max-w-2xl mx-auto">
-          Our platform is designed with construction professionals in mind, providing the tools
-          you need to manage your projects efficiently and effectively.
+          Our platform is designed with construction professionals in mind, providing the tools you
+          need to manage your projects efficiently and effectively.
         </p>
       </div>
     </div>

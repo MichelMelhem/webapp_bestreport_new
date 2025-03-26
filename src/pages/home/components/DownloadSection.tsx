@@ -141,7 +141,7 @@ const DownloadSection = ({
 
             <div className="flex flex-col sm:flex-row gap-4 pt-4">
               <Button
-                className="flex items-center gap-2 bg-white hover:bg-gray-400 text-gray-900 px-6 py-6 rounded-none"
+                className="flex items-center gap-2 bg-white hover:bg-gray-400 text-gray-900 px-6 py-7"
                 asChild>
                 <a href={appStoreLink} target="_blank" rel="noopener noreferrer">
                   <AppleIcon className="h-5 w-5 text-gray-900" />
@@ -153,7 +153,7 @@ const DownloadSection = ({
               </Button>
 
               <Button
-                className="flex items-center gap-2 bg-white hover:bg-gray-400 text-gray-900 px-6 py-6 rounded-none"
+                className="flex items-center gap-2 bg-white hover:bg-gray-400 text-gray-900 px-6 py-7"
                 asChild>
                 <a href={playStoreLink} target="_blank" rel="noopener noreferrer">
                   <PlayIcon className="h-5 w-5 text-gray-900" />
