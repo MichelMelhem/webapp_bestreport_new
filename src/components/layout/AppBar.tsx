@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react"
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import { Menu, X } from "lucide-react"
 import { Button } from "@components/ui/button"
 import { cn } from "@lib/utils"
@@ -10,6 +10,8 @@ interface AppBarProps {
 }
 
 const AppBar = ({ className = "" }: AppBarProps) => {
+  const navigate = useNavigate();
+
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [currentSection, setCurrentSection] = useState("")
   const [scrolled, setScrolled] = useState(false)
@@ -110,8 +112,13 @@ const AppBar = ({ className = "" }: AppBarProps) => {
 
           {/* Desktop CTA Buttons */}
           <div className="hidden md:flex gap-4">
-            <Button variant="outline">Sign up</Button>
-            <Button className="bg-blue-600 hover:bg-blue-700 text-white">Sign in</Button>
+            <Button variant="outline" onClick={() => {
+              navigate("/signup")
+            }}>Sign up</Button>
+            <Button className="bg-blue-600 hover:bg-blue-700 text-white" onClick={() => {
+
+              navigate("/signin")
+            }}>Sign in</Button>
           </div>
 
           {/* Mobile Menu Button */}
