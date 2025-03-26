@@ -1,10 +1,11 @@
 import { useDispatch } from "react-redux";
-import { loginUser, socialLogin } from "../../redux/auth.slice";
+import { loginUser, socialLogin } from "../../redux/auth.reducer";
 import { googleProvider, appleProvider } from "../../firebase/firebaseConfig";
 import { AppDispatch } from "../../redux/store";
 
 export default function SignIn() {
   const dispatch = useDispatch<AppDispatch>();
+
   return (
     <div>
       <h2>Login</h2>

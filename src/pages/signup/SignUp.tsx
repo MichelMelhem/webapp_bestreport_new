@@ -1,5 +1,5 @@
 import { useDispatch } from "react-redux";
-import { registerUser } from "../../redux/auth.slice";
+import { registerUser } from "../../redux/auth.reducer";
 import { AppDispatch } from "../../redux/store";
 
 export default function SignUp() {
