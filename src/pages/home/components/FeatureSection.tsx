@@ -1,9 +1,9 @@
 import React from "react"
 import { motion } from "framer-motion"
-import Screenshot from "../../assets/screenshot-1.png"
-import PdfView from "../featuresection/PdfViewer"
-import rapport from "../../assets/rapport.pdf"
-import FeatureGrid from "../featuresection/FeatureGrid"
+import Screenshot from "../../../assets/screenshot-1.png"
+import PdfView from "@/pages/home/components/partials/PdfViewer.tsx"
+import rapport from "../../../assets/rapport.pdf"
+import FeatureGrid from "@/pages/home/components/partials/FeatureGrid.tsx"
 
 interface FeatureSectionProps {
   id?: string
@@ -11,14 +11,14 @@ interface FeatureSectionProps {
   title?: string
   description?: string
   checkpoints?: string[]
-  reportsrc?: string
+  report_src?: string
 }
 
 const FeatureSection = ({
   id = "features",
   className = "",
   description = "Generate your worksite report in pdf format in record time, which you can then send directly to your collaborators to keep your project moving forward quickly.",
-  reportsrc = rapport
+  report_src = rapport
 }: FeatureSectionProps) => {
   const fadeInUp = {
     hidden: { opacity: 0, y: 20 },
@@ -82,7 +82,7 @@ const FeatureSection = ({
             transition={{ delay: 0.3 }}
             viewport={{ once: true }}
             className="w-full">
-            <PdfView pdfSrc={reportsrc} />
+            <PdfView pdfSrc={report_src} />
           </motion.div>
         </div>
       </div>

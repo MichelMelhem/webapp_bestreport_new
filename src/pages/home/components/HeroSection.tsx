@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react"
 import { motion, useScroll, useTransform } from "framer-motion"
-import { Button } from "../../components/ui/button"
+import { Button } from "../../../components/ui/button.tsx"
 import { ArrowRight } from "lucide-react"
 
 interface HeroSectionProps {
