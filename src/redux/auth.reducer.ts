@@ -5,17 +5,20 @@ import {
   signInWithPopup,
   signOut
 } from "firebase/auth"
-import { auth } from "../firebase/firebaseConfig"
+import { auth, db } from "../firebase/firebaseConfig"
+import { getDoc } from "firebase/firestore"
 
 interface AuthState {
   user: string | null
   loading: boolean
+  stripeCustomerId: string | null
   error: string | null
 }
 
 const initialState: AuthState = {
   user: null,
   loading: false,
+  stripeCustomerId: null,
   error: null
 }
 
@@ -37,6 +40,9 @@ export const registerUser = createAsyncThunk(
 
 export const socialLogin = createAsyncThunk("auth/socialLogin", async (provider: any) => {
   const userCredential = await signInWithPopup(auth, provider)
+  let userdoc = await getDoc("users/userCredential.user.uid")
+  let customerid: string = userdoc.data()["stripeCustomerId"]
+
   return userCredential.user.email
 })
 
