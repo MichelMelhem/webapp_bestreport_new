@@ -5,10 +5,12 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs.t
 import { Button } from "@/components/ui/button.tsx"
 import { X } from "lucide-react"
 import { Link } from "react-router-dom"
+import { useSelector } from "react-redux"
+import { RootState } from "@/lib/redux/store"
 
 interface PricingPlan {
   title: string
-  price: string
+  price: string,
   description: string
   features: { name: string; included: boolean }[]
   popular?: boolean
@@ -19,6 +21,9 @@ interface PricingPlan {
 }
 
 const PricingSection = () => {
+  const rank = useSelector((state: RootState) => state.auth.rank);
+  const user = useSelector((state: RootState) => state.auth.user);
+
   const monthlyPlans: PricingPlan[] = [
     {
       title: "Trial",
@@ -33,12 +38,13 @@ const PricingSection = () => {
       ],
       button: {
         label: "Try Now",
-        href: "/signup"
+        href: user == null ? "/signup" : "/#download"
       }
     },
     {
       title: "Pro",
       price: "15 €",
+
       description: "Full-featured plan for professionals handling multiple projects.",
       features: [
         { name: "Unlimited worksites", included: true },
@@ -48,8 +54,8 @@ const PricingSection = () => {
         { name: "Report generation", included: true }
       ],
       button: {
-        label: "Subscribe Now",
-        href: "/signup"
+        label: rank == 0 ? "Subscribe Now" : "You are allready subscribed",
+        href: user == null ? "/signup" : "/"
       },
       popular: true
     },

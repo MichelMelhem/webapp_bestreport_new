@@ -1,5 +1,8 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit"
 import { loadStripe } from "@stripe/stripe-js"
+import { RootState } from "./store"
+import { functions } from "../firebase/firebaseConfig"
+import { httpsCallable } from "firebase/functions"
 
 interface StripeState {
   clientSecret: string | null
@@ -15,24 +18,33 @@ const initialState: StripeState = {
   error: null
 }
 
-const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY)
+const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLIC_KEY)
 
 export const createCheckoutSession = createAsyncThunk(
   "stripe/createCheckoutSession",
-  async (priceId: string, { rejectWithValue }) => {
+  async (priceId: string, { getState, rejectWithValue }) => {
     try {
       const stripe = await stripePromise
       if (!stripe) throw new Error("Stripe failed to initialize")
+      const state = getState() as RootState
+      if (state.auth.user == null || state.auth.stripeCustomerId == null)
+        throw new Error("User is not properly authenticated for checkout")
+      const stripeCustomerId = state.auth.stripeCustomerId
 
-      const session = await stripe.redirectToCheckout({
-        lineItems: [{ price: priceId, quantity: 1 }],
-        mode: "subscription",
-        successUrl: `${window.location.origin}/success`,
-        cancelUrl: `${window.location.origin}/cancel`
-      })
+      if (!stripeCustomerId) throw new Error("Stripe customer ID not found")
 
-      if (session.error) throw session.error
-      return session
+      const createSession = httpsCallable(functions, "createCheckoutSession")
+
+      const response = await createSession({ customerId: stripeCustomerId, priceId })
+
+      // Get the session URL from the response
+      const sessionUrl: string = response.data as string
+      if (!sessionUrl) throw new Error("Failed to retrieve session ID")
+
+      // Redirect the user to the Stripe Checkout page
+      window.location.assign(sessionUrl)
+
+      return null
     } catch (error: any) {
       return rejectWithValue(error.message || "Failed to create checkout session")
     }
@@ -46,11 +58,7 @@ export const getUserSubscriptions = createAsyncThunk(
       const stripe = await stripePromise
       if (!stripe) throw new Error("Stripe failed to initialize")
 
-      const subscriptions = await stripe.retrievePaymentIntent({
-        customer: "cus_123456789" // Replace with actual customer ID
-      })
-
-      return subscriptions
+      return []
     } catch (error: any) {
       return rejectWithValue(error.message || "Failed to fetch subscriptions")
     }
