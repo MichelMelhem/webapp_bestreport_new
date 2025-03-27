@@ -97,8 +97,6 @@ const HeroSection: React.FC<HeroSectionProps> = ({
         </div>
       </div>
 
-      {/* Image Overlay */}
-
       {/* Gradient Overlay */}
       <div className="absolute inset-0 bg-gradient-to-r from-white/80 via-white/70 to-white/60 z-20" />
 
