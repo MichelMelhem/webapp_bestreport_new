@@ -1,60 +1,31 @@
-import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { useDispatch } from "react-redux"
-import { loginUser, socialLogin } from "@/lib/redux/auth.reducer"
-import { googleProvider, appleProvider } from "@/lib/firebase/firebaseConfig"
-import { AppDispatch } from "@/lib/redux/store"
-import { useState } from "react"
+import type React from "react"
+import { cn } from "@/lib/utils"
+import { Card, CardContent } from "@/components/ui/card"
+import SignInForm from "./components/SignInForm.tsx"
 
-export default function SignIn() {
-  const dispatch = useDispatch<AppDispatch>()
-  const [email, setEmail] = useState("")
-  const [password, setPassword] = useState("")
-
-  const handleLogin = () => {
-    dispatch(loginUser({ email, password }))
-  }
-
+export default function SignIn({ className, ...props }: React.ComponentProps<"div">) {
   return (
-    <div className="flex items-center justify-center min-h-screen bg-[#1A1B1D] text-white">
-      <Card className="w-full max-w-sm bg-[#f4f1eb] text-black shadow-lg rounded-2xl">
-        <CardHeader>
-          <CardTitle className="text-center text-2xl font-semibold">Login</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <form className="space-y-4" onSubmit={(e) => e.preventDefault()}>
-            <input
-              type="email"
-              placeholder="Email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              className="w-full p-3 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-black"
-            />
-            <input
-              type="password"
-              placeholder="Password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              className="w-full p-3 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-black"
-            />
-            <Button className="w-full bg-black text-white p-3 rounded-md" onClick={handleLogin}>
-              Login
-            </Button>
-          </form>
-          <div className="mt-6 space-y-3">
-            <Button
-              className="w-full bg-white text-black border border-gray-300 p-3 rounded-md"
-              onClick={() => dispatch(socialLogin(googleProvider))}>
-              Login with Google
-            </Button>
-            <Button
-              className="w-full bg-black text-white p-3 rounded-md"
-              onClick={() => dispatch(socialLogin(appleProvider))}>
-              Login with Apple
-            </Button>
+    <div className="flex min-h-svh flex-col items-center justify-center bg-muted p-6 md:p-10">
+      <div className="w-full max-w-sm md:max-w-3xl">
+        <div className={cn("flex flex-col gap-6", className)} {...props}>
+          <Card className="overflow-hidden">
+            <CardContent className="grid p-0 md:grid-cols-2">
+              <SignInForm />
+              <div className="relative hidden bg-muted md:block">
+                <img
+                  src="/placeholder.svg"
+                  alt="Image"
+                  className="absolute inset-0 h-full w-full object-cover dark:brightness-[0.2] dark:grayscale"
+                />
+              </div>
+            </CardContent>
+          </Card>
+          <div className="text-balance text-center text-xs text-muted-foreground [&_a]:underline [&_a]:underline-offset-4 hover:[&_a]:text-primary">
+            By clicking continue, you agree to our <a href="#">Terms of Service</a> and{" "}
+            <a href="#">Privacy Policy</a>.
           </div>
-        </CardContent>
-      </Card>
+        </div>
+      </div>
     </div>
   )
 }

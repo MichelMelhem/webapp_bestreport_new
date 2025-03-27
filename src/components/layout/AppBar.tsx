@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react"
-
 import { Link } from "react-router-dom"
 import { HashLink } from "react-router-hash-link"
 import { Menu, X } from "lucide-react"
@@ -115,7 +114,7 @@ const AppBar = ({ className = "" }: AppBarProps) => {
               <Button variant="outline">Sign up</Button>
             </Link>
             <Link to="/signin">
-              <Button className="bg-blue-600 hover:bg-blue-700 text-white">Sign in</Button>
+              <Button>Sign in</Button>
             </Link>
           </div>
 
