@@ -10,7 +10,7 @@ import { RootState } from "@/lib/redux/store"
 
 interface PricingPlan {
   title: string
-  price: string
+  price: string,
   description: string
   features: { name: string; included: boolean }[]
   popular?: boolean
@@ -44,6 +44,7 @@ const PricingSection = () => {
     {
       title: "Pro",
       price: "15 €",
+
       description: "Full-featured plan for professionals handling multiple projects.",
       features: [
         { name: "Unlimited worksites", included: true },
