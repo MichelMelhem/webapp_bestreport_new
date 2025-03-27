@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react"
 import { motion, useScroll, useTransform } from "framer-motion"
-import { Button } from "@components/ui/button.tsx"
+import { Button } from "@/components/ui/button.tsx"
 import { ArrowRight } from "lucide-react"
 import { Link } from "react-router-dom"
 
@@ -96,8 +96,6 @@ const HeroSection: React.FC<HeroSectionProps> = ({
           ))}
         </div>
       </div>
-
-      {/* Image Overlay */}
 
       {/* Gradient Overlay */}
       <div className="absolute inset-0 bg-gradient-to-r from-white/80 via-white/70 to-white/60 z-20" />

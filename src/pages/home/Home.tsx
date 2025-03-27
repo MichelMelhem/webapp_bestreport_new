@@ -5,8 +5,8 @@ import PricingSection from "./components/PricingSection.tsx"
 import TestimonialSection from "./components/TestimonialSection.tsx"
 import DownloadSection from "./components/DownloadSection.tsx"
 import FeatureSection from "./components/FeatureSection.tsx"
-import AppBar from "@components/layout/AppBar.tsx"
-import Footer from "@components/layout/Footer.tsx"
+import AppBar from "@/components/layout/AppBar.tsx"
+import Footer from "@/components/layout/Footer.tsx"
 
 const Home = () => {
   return (

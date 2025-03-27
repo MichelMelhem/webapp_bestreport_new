@@ -1,9 +1,9 @@
 import React from "react"
 import { motion } from "framer-motion"
 import { Check } from "lucide-react"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@components/ui/tabs.tsx"
-import { Button } from "@components/ui/button.tsx"
-import { Cross1Icon } from "@radix-ui/react-icons"
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs.tsx"
+import { Button } from "@/components/ui/button.tsx"
+import { X } from "lucide-react"
 import { Link } from "react-router-dom"
 
 interface PricingPlan {
@@ -149,7 +149,7 @@ const PricingGrid = ({ plans, yearly }: { plans: PricingPlan[]; yearly: boolean 
                     {feature.included ? (
                       <Check className="h-5 w-5 text-green-400 mr-3 flex-shrink-0" />
                     ) : (
-                      <Cross1Icon className="h-5 w-5 text-gray-500 mr-3 flex-shrink-0" />
+                      <X className="h-5 w-5 text-gray-500 mr-3 flex-shrink-0" />
                     )}
                     {feature.name}
                   </li>

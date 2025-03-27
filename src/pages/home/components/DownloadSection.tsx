@@ -1,10 +1,10 @@
 import React from "react"
-import { Button } from "@components/ui/button.tsx"
+import { Button } from "@/components/ui/button.tsx"
 import { motion } from "framer-motion"
 import { AppleIcon, PlayIcon, Download, Smartphone, Star, Clock } from "lucide-react"
 
-import screenshot1 from "@assets/Download-Screenshot1.png"
-import screenshot2 from "@assets/Download-Screenshot2.png"
+import screenshot1 from "@/assets/Download-Screenshot1.png"
+import screenshot2 from "@/assets/Download-Screenshot2.png"
 
 interface DownloadSectionProps {
   title?: string

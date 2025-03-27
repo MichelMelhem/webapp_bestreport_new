@@ -1,18 +1,16 @@
 import { useState, useEffect } from "react"
-
 import { Link } from "react-router-dom"
 import { HashLink } from "react-router-hash-link"
 import { Menu, X } from "lucide-react"
-import { Button } from "@components/ui/button"
-import { cn } from "@lib/utils"
-import Logo from "@assets/icon.png"
+import { Button } from "@/components/ui/button"
+import { cn } from "@/lib/utils"
+import Logo from "@/assets/icon.png"
 
 interface AppBarProps {
   className?: string
 }
 
 const AppBar = ({ className = "" }: AppBarProps) => {
-
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [currentSection, setCurrentSection] = useState("")
   const [scrolled, setScrolled] = useState(false)
@@ -112,14 +110,11 @@ const AppBar = ({ className = "" }: AppBarProps) => {
 
           {/* Desktop CTA Buttons */}
           <div className="hidden md:flex gap-4">
-
             <Link to="/signup">
               <Button variant="outline">Sign up</Button>
             </Link>
             <Link to="/signin">
-              <Button className="w-full bg-blue-600 hover:bg-blue-700 text-white py-5">
-                Sign in
-              </Button>
+              <Button>Sign in</Button>
             </Link>
           </div>
 
