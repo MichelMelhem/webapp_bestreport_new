@@ -2,22 +2,30 @@ import { Label } from "@/components/ui/label.tsx"
 import { Input } from "@/components/ui/input.tsx"
 import { reporter, ValidationMessage } from "@felte/reporter-react"
 import { Button } from "@/components/ui/button.tsx"
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import type React from "react"
 import { useForm } from "@felte/react"
 import { validator } from "@felte/validator-zod"
 import { signUpFormValues, signUpSchema } from "@/pages/signup/lib/schema.ts"
 import { LoaderCircle } from "lucide-react"
+import { useSelector } from "react-redux"
+import { RootState, useAppDispatch } from "@/lib/redux/store"
+import { loginUser, registerUser } from "@/lib/redux/auth.reducer"
 
 export default function SignInForm() {
   const { form, isValid, isSubmitting } = useForm({
     extend: [validator({ schema: signUpSchema }), reporter],
     onSubmit: handleSubmit
   })
+  const navigate = useNavigate()
+  const dispatch = useAppDispatch();
+  const isLoading = useSelector((state: RootState) => state.auth.loading);
 
   async function handleSubmit(values: signUpFormValues) {
-    await new Promise((resolve) => setTimeout(resolve, 2000))
-    console.log(values)
+    let action = await dispatch(registerUser({ email: values.email, password: values.password, firstName: values.firstname, lastName: values.lastname }));
+    if (registerUser.fulfilled.match(action)) {
+      navigate("/")
+    }
   }
 
   return (
@@ -55,8 +63,8 @@ export default function SignInForm() {
             {(messages) => <span className="text-xs text-red-600">{messages?.[0]}</span>}
           </ValidationMessage>
         </div>
-        <Button type="submit" disabled={!isValid() || isSubmitting()}>
-          {isSubmitting() ? <LoaderCircle className="animate-spin" /> : "Create"}
+        <Button type="submit" disabled={!isValid() || isSubmitting() || isLoading} >
+          {isSubmitting() || isLoading ? <LoaderCircle className="animate-spin" /> : "Create"}
         </Button>
 
         <div className="text-center text-sm">
@@ -67,6 +75,6 @@ export default function SignInForm() {
           </Link>
         </div>
       </div>
-    </form>
+    </form >
   )
 }
