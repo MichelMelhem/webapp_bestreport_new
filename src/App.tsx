@@ -19,11 +19,11 @@ function App() {
         <Toaster richColors />
         <Suspense fallback={<p className="text-white">Loading...</p>}>
           <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/settings" element={<Settings />} />
-            <Route path="/contact" element={<Contact />} />
-            <Route path="/signin" element={<SignIn />} />
-            <Route path="/signup" element={<SignUp />} />
+            <Route index element={<Home />} />
+            <Route path="settings" element={<Settings />} />
+            <Route path="contact" element={<Contact />} />
+            <Route path="signin" element={<SignIn />} />
+            <Route path="signup" element={<SignUp />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </Suspense>
