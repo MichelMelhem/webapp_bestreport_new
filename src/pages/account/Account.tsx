@@ -1,10 +1,10 @@
-const Account = () => {
+import { Background } from "@/components/layout/Background.tsx"
+import { SettingsDialog } from "@/pages/account/settings-dialog.tsx"
+
+export default function Account() {
   return (
-    <div>
-      <h1>Account</h1>
-      <p>En cours de dev.</p>
-    </div>
+    <Background>
+      <SettingsDialog />
+    </Background>
   )
 }
-
-export default Account

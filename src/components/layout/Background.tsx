@@ -64,7 +64,7 @@ export function Background({ children, className = "" }: BackgroundProps) {
       <div className="absolute inset-0 bg-gradient-to-r from-white/80 via-white/70 to-white/60 z-20" />
 
       {/* Content */}
-      <div className="relative z-30 mx-auto max-w-xl space-y-6">{children}</div>
+      <div className="relative z-30 mx-auto space-y-6">{children}</div>
     </div>
   )
 }
