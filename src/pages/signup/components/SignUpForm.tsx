@@ -3,14 +3,13 @@ import { Input } from "@/components/ui/input.tsx"
 import { reporter, ValidationMessage } from "@felte/reporter-react"
 import { Button } from "@/components/ui/button.tsx"
 import { Link, useNavigate } from "react-router-dom"
-import type React from "react"
 import { useForm } from "@felte/react"
 import { validator } from "@felte/validator-zod"
 import { signUpFormValues, signUpSchema } from "@/pages/signup/lib/schema.ts"
 import { LoaderCircle } from "lucide-react"
 import { useSelector } from "react-redux"
 import { RootState, useAppDispatch } from "@/lib/redux/store"
-import { loginUser, registerUser } from "@/lib/redux/auth.reducer"
+import { registerUser } from "@/lib/redux/auth.reducer"
 
 export default function SignUpForm() {
   const { form, isValid, isSubmitting } = useForm({

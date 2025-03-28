@@ -57,7 +57,7 @@ const PricingSection = () => {
       button: {
         label: rank == 0 ? "Subscribe Now" : "You are already subscribed",
         href: user == null ? "/signup" : "/",
-        onClick: rank == 0 ? () => {
+        onClick: rank == 0 && user != null ? () => {
           console.log("Creating checkout session");
           dispatch(createCheckoutSession(import.meta.env.VITE_MONTHLY_PLAN_ID as string));
         } : undefined,
@@ -90,7 +90,7 @@ const PricingSection = () => {
     description: plan.description + " Save 20% with annual billing.",
     button: {
       ...plan.button,
-      onClick: plan.title === "Pro" ? () => dispatch(createCheckoutSession(import.meta.env.VITE_YEARLY_PLAN_ID as string))
+      onClick: plan.title === "Pro" ? () => { if (rank == 0 && user != null) { dispatch(createCheckoutSession(import.meta.env.VITE_YEARLY_PLAN_ID as string)) } }
         : plan.button.onClick,
     },
   }));
