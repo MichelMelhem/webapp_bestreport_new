@@ -9,7 +9,7 @@ import SignUp from "@/pages/signup/SignUp.tsx"
 import { persistor, store } from "@/lib/redux/store.ts"
 import { Provider } from "react-redux"
 import { Suspense } from "react"
-import { Toaster } from "react-hot-toast"
+import { Toaster } from "@/components/ui/sonner"
 import { PersistGate } from "redux-persist/integration/react"
 
 function App() {

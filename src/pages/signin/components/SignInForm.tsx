@@ -12,39 +12,45 @@ import { loginUser, socialLogin } from "@/lib/redux/auth.reducer"
 import { GoogleAuthProvider, OAuthProvider, sendPasswordResetEmail } from "firebase/auth"
 import { useSelector } from "react-redux"
 import { auth } from "@/lib/firebase/firebaseConfig"
-import { toast } from "react-hot-toast"
+import { toast } from "sonner"
 import { useState } from "react"
+import { z } from "zod"
+
 export default function SignInForm() {
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
   const [resetError, setResetError] = useState("")
   const isLoading = useSelector((state: RootState) => state.auth.loading)
 
-  const { form, isValid, isSubmitting } = useForm({
+  const { form, isValid, isSubmitting, reset } = useForm({
     extend: [validator({ schema: signInSchema }), reporter],
     onSubmit: handleSubmit
   })
 
   async function handleForgotPassword(email: string | undefined) {
-    if (!email) {
-      setResetError("Please enter a valid email.")
-      return
-    }
+    const emailSchema = z.string().email()
     try {
-      await sendPasswordResetEmail(auth, email)
-      setResetError("")
-      toast.success("Password reset email sent.")
+      emailSchema.parse(email)
+      try {
+        await sendPasswordResetEmail(auth, email)
+        toast.success("Password reset email sent.")
+      } catch (error) {
+        toast.error("Error sending reset email. Try again.")
+      }
     } catch (error) {
-      setResetError("Error sending reset email. Try again.")
-      console.error(error)
+      toast.error("Please enter a valid email.")
+      reset()
     }
   }
+
   async function handleSubmit(values: signInFormValues) {
     const action = await dispatch(loginUser({ email: values.email, password: values.password }))
     if (loginUser.fulfilled.match(action)) {
       navigate("/")
+    } else {
+      toast.error("Error : email or password")
+      reset()
     }
-    console.log(values)
   }
 
   return (

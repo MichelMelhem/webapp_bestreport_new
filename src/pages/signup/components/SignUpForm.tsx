@@ -12,7 +12,7 @@ import { useSelector } from "react-redux"
 import { RootState, useAppDispatch } from "@/lib/redux/store"
 import { loginUser, registerUser } from "@/lib/redux/auth.reducer"
 
-export default function SignInForm() {
+export default function SignUpForm() {
   const { form, isValid, isSubmitting } = useForm({
     extend: [validator({ schema: signUpSchema }), reporter],
     onSubmit: handleSubmit
