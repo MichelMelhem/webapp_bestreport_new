@@ -18,11 +18,18 @@ export default function SignInForm() {
     onSubmit: handleSubmit
   })
   const navigate = useNavigate()
-  const dispatch = useAppDispatch();
-  const isLoading = useSelector((state: RootState) => state.auth.loading);
+  const dispatch = useAppDispatch()
+  const isLoading = useSelector((state: RootState) => state.auth.loading)
 
   async function handleSubmit(values: signUpFormValues) {
-    let action = await dispatch(registerUser({ email: values.email, password: values.password, firstName: values.firstname, lastName: values.lastname }));
+    let action = await dispatch(
+      registerUser({
+        email: values.email,
+        password: values.password,
+        firstName: values.firstname,
+        lastName: values.lastname
+      })
+    )
     if (registerUser.fulfilled.match(action)) {
       navigate("/")
     }
@@ -30,7 +37,7 @@ export default function SignInForm() {
 
   return (
     <form ref={form} className="p-6 md:p-8">
-      <div className="flex flex-col gap-6">
+      <div className="flex flex-col gap-6 text-left">
         <div className="flex flex-col items-center text-center">
           <h1 className="text-2xl font-bold">Welcome</h1>
           <p className="text-balance text-muted-foreground">Create your BestReport account</p>
@@ -63,7 +70,7 @@ export default function SignInForm() {
             {(messages) => <span className="text-xs text-red-600">{messages?.[0]}</span>}
           </ValidationMessage>
         </div>
-        <Button type="submit" disabled={!isValid() || isSubmitting() || isLoading} >
+        <Button type="submit" disabled={!isValid() || isSubmitting() || isLoading}>
           {isSubmitting() || isLoading ? <LoaderCircle className="animate-spin" /> : "Create"}
         </Button>
 
@@ -75,6 +82,6 @@ export default function SignInForm() {
           </Link>
         </div>
       </div>
-    </form >
+    </form>
   )
 }
