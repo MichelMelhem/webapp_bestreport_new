@@ -34,7 +34,7 @@ export const loginUser = createAsyncThunk(
       const userRef = doc(collection(db, "users"), userCredential.user.uid)
       const userdoc = await getDoc(userRef)
 
-      let customerid: string = userdoc.data()["customer_id "]
+      let customerid: string = userdoc.data()["customer_id"]
       let rank: number = userdoc.data()["rank"]
 
       return { email: userCredential.user.email, stripeCustomerId: customerid, rank: rank }
@@ -63,7 +63,11 @@ export const registerUser = createAsyncThunk(
     try {
       const userCredential = await createUserWithEmailAndPassword(auth, email, password)
       await updateProfile(userCredential.user, { displayName: `${firstName} ${lastName}` })
-      return userCredential.user.email
+      const userRef = doc(collection(db, "users"), userCredential.user.uid)
+      const userdoc = await getDoc(userRef)
+
+      let customerid: string = userdoc.data["customer_id"]
+      return { user: userCredential.user.email, customer_id: customerid }
     } catch (error) {
       return rejectWithValue(error.message)
     }
@@ -78,7 +82,7 @@ export const socialLogin = createAsyncThunk(
       const userRef = doc(collection(db, "users"), userCredential.user.uid)
       const userdoc = await getDoc(userRef)
 
-      let customerid: string = userdoc.data()["customer_id "]
+      let customerid: string = userdoc.data()["customer_id"]
       let rank: number = userdoc.data()["rank"]
 
       return { email: userCredential.user.email, stripeCustomerId: customerid, rank: rank }
@@ -94,8 +98,8 @@ export const logoutUser = createAsyncThunk("auth/logoutUser", async () => {
 })
 
 const handleRejected = (state, action) => {
-  console.log("AUTH ERROR : ", action.error.message)
-  state.error = action.error.message
+  console.log("AUTH ERROR : ", action.payload)
+  state.error = action.payload
   state.loading = false
 }
 
@@ -128,7 +132,8 @@ const authSlice = createSlice({
         state.rank = action.payload.rank
       })
       .addCase(registerUser.fulfilled, (state, action) => {
-        state.user = action.payload
+        state.user = action.payload.user
+        state.stripeCustomerId = action.payload.customer_id
         state.loading = false
       })
       .addCase(socialLogin.fulfilled, (state, action) => {
