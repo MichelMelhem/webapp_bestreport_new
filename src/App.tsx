@@ -16,7 +16,7 @@ function App() {
   return (
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
-        <Toaster />
+        <Toaster richColors />
         <Suspense fallback={<p className="text-white">Loading...</p>}>
           <Routes>
             <Route path="/" element={<Home />} />
