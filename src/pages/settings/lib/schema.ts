@@ -1,12 +1,12 @@
 import { z } from "zod"
 
-const SignUpSchema = z.object({
+const AccountSchema = z.object({
   lastname: z.string().nonempty(),
   firstname: z.string().nonempty(),
   email: z.string().email().nonempty(),
   password: z.string().nonempty()
 })
 
-type SignUpFormValues = z.infer<typeof SignUpSchema>
+type AccountFormValues = z.infer<typeof AccountSchema>
 
-export { SignUpSchema, type SignUpFormValues }
+export { AccountSchema, type AccountFormValues }

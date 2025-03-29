@@ -3,10 +3,9 @@ import { cn } from "@/lib/utils"
 import { Card, CardContent } from "@/components/ui/card"
 import SignInForm from "./components/SignInForm.tsx"
 import { Background } from "@/components/layout/Background.tsx"
-import { useNavigate } from "react-router-dom"
+import { Link } from "react-router-dom"
 
 export default function SignIn({ className, ...props }: React.ComponentProps<"div">) {
-  const navigate = useNavigate();
   return (
     <Background>
       <div className={cn("flex flex-col gap-6", className)} {...props}>
@@ -15,14 +14,15 @@ export default function SignIn({ className, ...props }: React.ComponentProps<"di
             <SignInForm />
           </CardContent>
         </Card>
-        <div className="text-balance text-center text-xs text-muted-foreground [&_a]:underline [&_a]:underline-offset-4 hover:[&_a]:text-primary">
-          By clicking continue, you agree to our <a onClick={() => {
-            navigate("/cgu");
-          }}>Terms of Service</a> and{" "}
-          <a onClick={() => {
-            navigate("/cgv");
-          }}>Privacy Policy</a>.
-        </div>
+        <div className="flex flex-col gap-4">
+          <div className="text-balance text-center text-xs text-muted-foreground [&_a]:underline [&_a]:underline-offset-4 hover:[&_a]:text-primary">
+            By clicking continue, you agree to our <Link to="/cgu">Terms of Service</Link> and <Link to"/cgv">Privacy Policy</Link>.
+          </div>
+          <Link
+            to="/"
+            className="text-balance text-center text-xs text-muted-foreground [&_a]:underline [&_a]:underline-offset-4 hover:[&_a]:text-primary">
+            Return to Home
+          </Link>
       </div>
     </Background>
   )

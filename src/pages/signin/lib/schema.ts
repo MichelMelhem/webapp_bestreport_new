@@ -1,10 +1,10 @@
 import { z } from "zod"
 
-const signInSchema = z.object({
+const SignInSchema = z.object({
   email: z.string().email().nonempty(),
   password: z.string().nonempty()
 })
 
-type signInFormValues = z.infer<typeof signInSchema>
+type SignInFormValues = z.infer<typeof SignInSchema>
 
-export { signInSchema, type signInFormValues }
+export { SignInSchema, type SignInFormValues }

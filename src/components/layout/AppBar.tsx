@@ -17,16 +17,15 @@ const AppBar = ({ className = "" }: AppBarProps) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [currentSection, setCurrentSection] = useState("")
   const [scrolled, setScrolled] = useState(false)
-  const userEmail = useSelector((state: RootState) => state.auth.user);
+  const userEmail = useSelector((state: RootState) => state.auth.user)
 
-
-  const dispatch = useAppDispatch();
+  const dispatch = useAppDispatch()
 
   const navLinks = [
-    { name: "Download", href: "#download" },
-    { name: "Features", href: "#features" },
-    { name: "Testimonials", href: "#testimonials" },
-    { name: "Pricing", href: "#pricing" }
+    { name: "Download", href: "/#download" },
+    { name: "Features", href: "/#features" },
+    { name: "Testimonials", href: "/#testimonials" },
+    { name: "Pricing", href: "/#pricing" }
   ]
 
   useEffect(() => {
@@ -43,7 +42,7 @@ const AppBar = ({ className = "" }: AppBarProps) => {
     handleScroll()
 
     const sectionElements = navLinks
-      .map((link) => document.getElementById(link.href.substring(1)))
+      .map((link) => document.getElementById(link.href.substring(2)))
       .filter(Boolean) as HTMLElement[]
 
     const observer = new IntersectionObserver(
@@ -116,7 +115,7 @@ const AppBar = ({ className = "" }: AppBarProps) => {
           </div>
 
           {/* Desktop CTA Buttons */}
-          {userEmail == null ?
+          {userEmail == null ? (
             <div className="hidden md:flex gap-4">
               <Link to="/signup">
                 <Button variant="outline">Sign up</Button>
@@ -124,11 +123,18 @@ const AppBar = ({ className = "" }: AppBarProps) => {
               <Link to="/signin">
                 <Button>Sign in</Button>
               </Link>
-            </div> :
-            <div className="hidden md:flex gap-4">
-              <Button variant="outline" onClick={() => { dispatch(logoutUser()) }}>Sign out</Button>
             </div>
-          }
+          ) : (
+            <div className="hidden md:flex gap-4">
+              <Button
+                variant="outline"
+                onClick={() => {
+                  dispatch(logoutUser())
+                }}>
+                Sign out
+              </Button>
+            </div>
+          )}
           {/* Mobile Menu Button */}
           <button
             type="button"
@@ -173,9 +179,8 @@ const AppBar = ({ className = "" }: AppBarProps) => {
             </HashLink>
           ))}
 
-          {userEmail == null ?
+          {userEmail == null ? (
             <div className="flex flex-col gap-3 pt-4 pb-2">
-
               <Link to="/signup">
                 <Button variant="outline">Sign up</Button>
               </Link>
@@ -183,15 +188,22 @@ const AppBar = ({ className = "" }: AppBarProps) => {
                 <Button className="w-full bg-blue-600 hover:bg-blue-700 text-white py-5">
                   Sign in
                 </Button>
-              </Link>  </div> :
-            <div className="flex flex-col gap-3 pt-4 pb-2">
-              <Button className="w-full bg-blue-600 hover:bg-blue-700 text-white py-5" onClick={() => { dispatch(logoutUser()) }}>Sign out</Button>
+              </Link>{" "}
             </div>
-          }
-
+          ) : (
+            <div className="flex flex-col gap-3 pt-4 pb-2">
+              <Button
+                className="w-full bg-blue-600 hover:bg-blue-700 text-white py-5"
+                onClick={() => {
+                  dispatch(logoutUser())
+                }}>
+                Sign out
+              </Button>
+            </div>
+          )}
         </div>
       </div>
-    </nav >
+    </nav>
   )
 }
 
