@@ -6,7 +6,7 @@ import { Link, useNavigate } from "react-router-dom"
 import type React from "react"
 import { useForm } from "@felte/react"
 import { validator } from "@felte/validator-zod"
-import { signUpFormValues, signUpSchema } from "@/pages/signup/lib/schema.ts"
+import { SignUpFormValues, SignUpSchema } from "@/pages/signup/lib/schema.ts"
 import { LoaderCircle } from "lucide-react"
 import { useSelector } from "react-redux"
 import { RootState, useAppDispatch } from "@/lib/redux/store"
@@ -14,14 +14,14 @@ import { loginUser, registerUser } from "@/lib/redux/auth.reducer"
 
 export default function SignUpForm() {
   const { form, isValid, isSubmitting } = useForm({
-    extend: [validator({ schema: signUpSchema }), reporter],
+    extend: [validator({ schema: SignUpSchema }), reporter],
     onSubmit: handleSubmit
   })
   const navigate = useNavigate()
   const dispatch = useAppDispatch()
   const isLoading = useSelector((state: RootState) => state.auth.loading)
 
-  async function handleSubmit(values: signUpFormValues) {
+  async function handleSubmit(values: SignUpFormValues) {
     let action = await dispatch(
       registerUser({
         email: values.email,

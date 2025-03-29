@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button.tsx"
 import { Link, useNavigate } from "react-router-dom"
 import { useForm } from "@felte/react"
 import { validator } from "@felte/validator-zod"
-import { signInFormValues, signInSchema } from "@/pages/signin/lib/schema.ts"
+import { SignInFormValues, SignInSchema } from "@/pages/signin/lib/schema.ts"
 import { LoaderCircle } from "lucide-react"
 import { RootState, useAppDispatch } from "@/lib/redux/store"
 import { loginUser, socialLogin } from "@/lib/redux/auth.reducer"
@@ -23,7 +23,7 @@ export default function SignInForm() {
   const isLoading = useSelector((state: RootState) => state.auth.loading)
 
   const { form, isValid, isSubmitting, reset } = useForm({
-    extend: [validator({ schema: signInSchema }), reporter],
+    extend: [validator({ schema: SignInSchema }), reporter],
     onSubmit: handleSubmit
   })
 
@@ -43,7 +43,7 @@ export default function SignInForm() {
     }
   }
 
-  async function handleSubmit(values: signInFormValues) {
+  async function handleSubmit(values: SignInFormValues) {
     const action = await dispatch(loginUser({ email: values.email, password: values.password }))
     if (loginUser.fulfilled.match(action)) {
       navigate("/")
