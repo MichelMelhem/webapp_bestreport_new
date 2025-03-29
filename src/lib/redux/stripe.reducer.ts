@@ -6,14 +6,14 @@ import { httpsCallable } from "firebase/functions"
 
 interface StripeState {
   clientSecret: string | null
-  subscriptions: any[]
+  subscription: Subscription | null
   loading: boolean
   error: string | null
 }
 
 const initialState: StripeState = {
   clientSecret: null,
-  subscriptions: [],
+  subscription: null,
   loading: false,
   error: null
 }
@@ -25,6 +25,7 @@ export const createCheckoutSession = createAsyncThunk(
   async (priceId: string, { getState, rejectWithValue }) => {
     try {
       const stripe = await stripePromise
+
       if (!stripe) throw new Error("Stripe failed to initialize")
       const state = getState() as RootState
       if (state.auth.user == null || state.auth.stripeCustomerId == null)
@@ -55,10 +56,25 @@ export const getUserSubscriptions = createAsyncThunk(
   "stripe/getUserSubscriptions",
   async (_, { rejectWithValue }) => {
     try {
-      const stripe = await stripePromise
-      if (!stripe) throw new Error("Stripe failed to initialize")
+      const request = httpsCallable(functions, "getUserSubscriptionDetails")
+      const subscriptionDetails = await (await request()).data
 
-      return []
+      const subscriptionPayload: Subscription = {
+        periodEnd: subscriptionDetails["subscriptionPeriodEnd"],
+        periodStart: subscriptionDetails["subscriptionPeriodStart"],
+        price: subscriptionDetails["price"],
+        name: subscriptionDetails["planNickName"],
+        billingInterval: subscriptionDetails["billingInterval"],
+        id: subscriptionDetails["id"],
+        credidCard: {
+          cardLastDigits: subscriptionDetails["paymentMethodLastDigits"],
+          cardBrand: subscriptionDetails["cardBrand"],
+          cardExpiration: subscriptionDetails["cardExpiration"],
+          name: subscriptionDetails["creditCardName"]
+        }
+      }
+
+      return subscriptionPayload
     } catch (error: any) {
       return rejectWithValue(error.message || "Failed to fetch subscriptions")
     }
@@ -86,6 +102,11 @@ export const cancelSubscription = createAsyncThunk(
     }
   }
 )
+const handleRejected = (state, action) => {
+  console.log("STRIPE REDUCER ERROR : ", action.payload)
+  state.error = action.payload
+  state.loading = false
+}
 
 const stripeSlice = createSlice({
   name: "stripe",
@@ -99,16 +120,11 @@ const stripeSlice = createSlice({
       .addCase(createCheckoutSession.fulfilled, (state) => {
         state.loading = false
       })
-      .addCase(createCheckoutSession.rejected, (state, action) => {
-        state.error = action.payload as string
-        state.loading = false
-      })
+      .addCase(createCheckoutSession.rejected, handleRejected)
+      .addCase(getUserSubscriptions.rejected, handleRejected)
       .addCase(getUserSubscriptions.fulfilled, (state, action) => {
-        state.subscriptions = action.payload
+        state.subscription = action.payload
         state.loading = false
-      })
-      .addCase(cancelSubscription.fulfilled, (state, action) => {
-        state.subscriptions = state.subscriptions.filter((sub) => sub.id !== action.payload)
       })
   }
 })
