@@ -1,30 +1,30 @@
-import React from "react";
-import { motion } from "framer-motion";
-import { Check, X } from "lucide-react";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Button } from "@/components/ui/button";
-import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
-import { RootState, useAppDispatch } from "@/lib/redux/store";
-import { createCheckoutSession } from "@/lib/redux/stripe.reducer";
+import React from "react"
+import { motion } from "framer-motion"
+import { Check, X } from "lucide-react"
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
+import { Button } from "@/components/ui/button"
+import { Link } from "react-router-dom"
+import { useSelector } from "react-redux"
+import { RootState, useAppDispatch } from "@/lib/redux/store"
+import { createCheckoutSession } from "@/lib/redux/stripe.reducer"
 
 interface PricingPlan {
-  title: string;
-  price: string;
-  description: string;
-  features: { name: string; included: boolean }[];
-  popular?: boolean;
+  title: string
+  price: string
+  description: string
+  features: { name: string; included: boolean }[]
+  popular?: boolean
   button: {
-    label: string;
-    href: string;
-    onClick?: () => void;
-  };
+    label: string
+    href: string
+    onClick?: () => void
+  }
 }
 
 const PricingSection = () => {
-  const rank = useSelector((state: RootState) => state.auth.rank);
-  const user = useSelector((state: RootState) => state.auth.user);
-  const dispatch = useAppDispatch();
+  const rank = useSelector((state: RootState) => state.auth.rank)
+  const user = useSelector((state: RootState) => state.auth.user)
+  const dispatch = useAppDispatch()
 
   const monthlyPlans: PricingPlan[] = [
     {
@@ -36,12 +36,12 @@ const PricingSection = () => {
         { name: "30 days trial", included: true },
         { name: "Unlimited building trades", included: true },
         { name: "Unlimited plans", included: true },
-        { name: "No report generation", included: false },
+        { name: "No report generation", included: false }
       ],
       button: {
         label: "Try Now",
-        href: user == null ? "/signup" : "/#download",
-      },
+        href: user == null ? "/signup" : "/#download"
+      }
     },
     {
       title: "Pro",
@@ -52,17 +52,20 @@ const PricingSection = () => {
         { name: "Unlimited stakeholders", included: true },
         { name: "Unlimited building trades", included: true },
         { name: "Unlimited plans", included: true },
-        { name: "Report generation", included: true },
+        { name: "Report generation", included: true }
       ],
       button: {
         label: rank == 0 ? "Subscribe Now" : "You are already subscribed",
         href: user == null ? "/signup" : "/",
-        onClick: rank == 0 && user != null ? () => {
-          console.log("Creating checkout session");
-          dispatch(createCheckoutSession(import.meta.env.VITE_MONTHLY_PLAN_ID as string));
-        } : undefined,
+        onClick:
+          rank == 0 && user != null
+            ? () => {
+                console.log("Creating checkout session")
+                dispatch(createCheckoutSession(import.meta.env.VITE_MONTHLY_PLAN_ID as string))
+              }
+            : undefined
       },
-      popular: true,
+      popular: true
     },
     {
       title: "Custom",
@@ -75,14 +78,14 @@ const PricingSection = () => {
         { name: "Unlimited plans", included: true },
         { name: "Custom report", included: true },
         { name: "24h Support", included: true },
-        { name: "Remote installation/configuration", included: true },
+        { name: "Remote installation/configuration", included: true }
       ],
       button: {
         label: "Contact Sales",
-        href: "/contact",
-      },
-    },
-  ];
+        href: "/contact"
+      }
+    }
+  ]
 
   const yearlyPlans: PricingPlan[] = monthlyPlans.map((plan) => ({
     ...plan,
@@ -90,10 +93,16 @@ const PricingSection = () => {
     description: plan.description + " Save 20% with annual billing.",
     button: {
       ...plan.button,
-      onClick: plan.title === "Pro" ? () => { if (rank == 0 && user != null) { dispatch(createCheckoutSession(import.meta.env.VITE_YEARLY_PLAN_ID as string)) } }
-        : plan.button.onClick,
-    },
-  }));
+      onClick:
+        plan.title === "Pro"
+          ? () => {
+              if (rank == 0 && user != null) {
+                dispatch(createCheckoutSession(import.meta.env.VITE_YEARLY_PLAN_ID as string))
+              }
+            }
+          : plan.button.onClick
+    }
+  }))
 
   return (
     <section id="pricing" className="relative py-24 md:py-32 px-4 md:px-8 bg-[#0A0B0D]">
@@ -126,8 +135,8 @@ const PricingSection = () => {
         </Tabs>
       </div>
     </section>
-  );
-};
+  )
+}
 
 const PricingGrid = ({ plans, yearly }: { plans: PricingPlan[]; yearly: boolean }) => {
   return (
@@ -138,8 +147,7 @@ const PricingGrid = ({ plans, yearly }: { plans: PricingPlan[]; yearly: boolean 
           whileHover={{ y: -5 }}
           transition={{ type: "spring", stiffness: 300 }}
           className={`relative w-full max-w-[340px] rounded-lg mx-auto bg-[#0F0F0F] border border-gray-800 p-8 
-            ${plan.popular ? "border-2 border-white shadow-xl" : "shadow-md"}`}
-        >
+            ${plan.popular ? "border-2 border-white shadow-xl" : "shadow-md"}`}>
           <div className="flex flex-col justify-between h-full">
             <div>
               <div className="mb-8">
@@ -155,23 +163,27 @@ const PricingGrid = ({ plans, yearly }: { plans: PricingPlan[]; yearly: boolean 
               <ul className="space-y-4 mb-8 text-left">
                 {plan.features.map((feature, idx) => (
                   <li key={idx} className="flex items-center text-gray-300 text-sm">
-                    {feature.included ? <Check className="h-5 w-5 text-green-400 mr-3" /> : <X className="h-5 w-5 text-gray-500 mr-3" />}
+                    {feature.included ? (
+                      <Check className="h-5 w-5 text-green-400 mr-3" />
+                    ) : (
+                      <X className="h-5 w-5 text-gray-500 mr-3" />
+                    )}
                     {feature.name}
                   </li>
                 ))}
               </ul>
             </div>
-            <Button className={`w-full py-4 rounded-sm text-base font-semibold transition-all
-    ${plan.popular ? "bg-white text-black hover:bg-gray-200" : "bg-[#1A1B1D] text-white hover:bg-[#222] border border-gray-700"}`} onClick={plan.button.onClick ?? (() => window.location.href = plan.button.href)}>
+            <Button
+              className={`w-full py-4 rounded-sm text-base font-semibold transition-all
+    ${plan.popular ? "bg-white text-black hover:bg-gray-200" : "bg-[#1A1B1D] text-white hover:bg-[#222] border border-gray-700"}`}
+              onClick={plan.button.onClick ?? (() => (window.location.href = plan.button.href))}>
               {plan.button.label}
             </Button>
           </div>
         </motion.div>
       ))}
     </motion.div>
-  );
-};
+  )
+}
 
-export default PricingSection;
-
-
+export default PricingSection
