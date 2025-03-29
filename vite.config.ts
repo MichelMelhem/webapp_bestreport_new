@@ -13,6 +13,9 @@ export default defineConfig({
   optimizeDeps: {
     entries: ["src/main.tsx"],
   },
+  build: {
+    sourcemap: true, 
+  },
   plugins: [
     react({
       plugins: conditionalPlugins,
@@ -26,6 +29,7 @@ export default defineConfig({
   },
   server: {
     // @ts-ignore
+    sourcemap: true, 
     allowedHosts: true,
   },
 });

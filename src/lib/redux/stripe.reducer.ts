@@ -35,7 +35,7 @@ export const createCheckoutSession = createAsyncThunk(
 
       const createSession = httpsCallable(functions, "createCheckoutSession")
 
-      const response = await createSession({ customerId: stripeCustomerId, priceId })
+      const response = await createSession({ domain: "https://bestreport.fr", plan: priceId })
 
       // Get the session URL from the response
       const sessionUrl: string = response.data as string

@@ -1,8 +1,10 @@
 import { Linkedin, Mail, Phone, MapPin } from "lucide-react"
+import { useNavigate } from "react-router-dom";
 import { HashLink } from "react-router-hash-link"
 
 const Footer = () => {
   const currentYear = new Date().getFullYear()
+  const navigate = useNavigate();
 
   return (
     <footer className="bg-[#0A0B0D] text-white py-12 px-4 md:px-8 lg:px-12">
@@ -96,10 +98,14 @@ const Footer = () => {
             © {currentYear} Best Report. All rights reserved.
           </p>
           <div className="flex space-x-6">
-            <a href="#" className="text-gray-500 hover:text-blue-400 text-sm transition-colors">
+            <a onClick={() => {
+              navigate("/cgu")
+            }} className="text-gray-500 hover:text-blue-400 text-sm transition-colors">
               Privacy Policy
             </a>
-            <a href="#" className="text-gray-500 hover:text-blue-400 text-sm transition-colors">
+            <a onClick={() => {
+              navigate("/cgv")
+            }} className="text-gray-500 hover:text-blue-400 text-sm transition-colors">
               Terms of Service
             </a>
             <a href="#" className="text-gray-500 hover:text-blue-400 text-sm transition-colors">
