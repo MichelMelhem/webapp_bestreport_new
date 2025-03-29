@@ -1,6 +1,6 @@
 import React from "react"
 import { motion } from "framer-motion"
-import { Check, X } from "lucide-react"
+import { Check, Loader2, X } from "lucide-react"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Button } from "@/components/ui/button"
 import { Link } from "react-router-dom"
@@ -60,9 +60,9 @@ const PricingSection = () => {
         onClick:
           rank == 0 && user != null
             ? () => {
-                console.log("Creating checkout session")
-                dispatch(createCheckoutSession(import.meta.env.VITE_MONTHLY_PLAN_ID as string))
-              }
+              console.log("Creating checkout session")
+              dispatch(createCheckoutSession(import.meta.env.VITE_MONTHLY_PLAN_ID as string))
+            }
             : undefined
       },
       popular: true
@@ -82,7 +82,7 @@ const PricingSection = () => {
       ],
       button: {
         label: "Contact Sales",
-        href: "/contact"
+        href: "mailto:contact@bestreport.fr"
       }
     }
   ]
@@ -96,10 +96,10 @@ const PricingSection = () => {
       onClick:
         plan.title === "Pro"
           ? () => {
-              if (rank == 0 && user != null) {
-                dispatch(createCheckoutSession(import.meta.env.VITE_YEARLY_PLAN_ID as string))
-              }
+            if (rank == 0 && user != null) {
+              dispatch(createCheckoutSession(import.meta.env.VITE_YEARLY_PLAN_ID as string))
             }
+          }
           : plan.button.onClick
     }
   }))
@@ -139,6 +139,8 @@ const PricingSection = () => {
 }
 
 const PricingGrid = ({ plans, yearly }: { plans: PricingPlan[]; yearly: boolean }) => {
+  const purchaseLoading = useSelector((state: RootState) => state.stripe.loading)
+
   return (
     <motion.div className="grid grid-cols-1 md:grid-cols-3 gap-6 justify-center mt-12">
       {plans.map((plan, index) => (
@@ -174,10 +176,13 @@ const PricingGrid = ({ plans, yearly }: { plans: PricingPlan[]; yearly: boolean 
               </ul>
             </div>
             <Button
+
               className={`w-full py-4 rounded-sm text-base font-semibold transition-all
     ${plan.popular ? "bg-white text-black hover:bg-gray-200" : "bg-[#1A1B1D] text-white hover:bg-[#222] border border-gray-700"}`}
+              disabled={purchaseLoading}
               onClick={plan.button.onClick ?? (() => (window.location.href = plan.button.href))}>
-              {plan.button.label}
+              {purchaseLoading && plan.button.onClick != undefined ? <Loader2 className="animate-spin h-8 w-8 text-gray-500" />
+                : <a>{plan.button.label} </a>}
             </Button>
           </div>
         </motion.div>

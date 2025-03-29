@@ -7,15 +7,25 @@ import { AccountSchema, type AccountFormValues } from "../lib/schema.ts"
 import { reporter } from "@felte/reporter-react"
 import { LoaderCircle } from "lucide-react"
 import { toast } from "sonner"
+import { auth } from "@/lib/firebase/firebaseConfig.ts"
 
-const initialValues = {
-  firstname: "Firas",
-  lastname: "Maamoun",
-  email: "firas.maamoun@gmail.com",
-  password: "azerty123!"
-}
+import { useAppDispatch } from "@/lib/redux/store.ts"
+import { updateAccount } from "@/lib/redux/auth.reducer.ts"
+
+
 
 export default function AccountSettings() {
+  const user = auth.currentUser
+
+  const dispatch = useAppDispatch();
+  const names = user.displayName?.split(" ") || ["", ""]
+
+  const initialValues = {
+    firstname: names[0],
+    lastname: names[1],
+    email: user.email || "",
+    password: "randompassword",
+  }
   const { form, isValid, isSubmitting, reset, isDirty } = useForm({
     initialValues: initialValues,
     extend: [validator({ schema: AccountSchema }), reporter],
@@ -23,19 +33,16 @@ export default function AccountSettings() {
   })
 
   async function handleSubmit(values: AccountFormValues) {
-    await new Promise((resolve) => setTimeout(resolve, 5000)) // only for tests
-    let success = true // only for tests
-    if (success) {
-      toast.success("Changement réussi")
-    } else {
-      toast.error("Erreur lors du changement")
-      reset()
+    const action = await dispatch(updateAccount(values))
+    if (updateAccount.fulfilled.match(action)) {
+      await auth.currentUser.reload()
+      toast.success("Update successful")
+    } else if (updateAccount.rejected.match(action)) {
+      toast.error(`Update failed: ${action.payload}`)
     }
   }
 
-  function handleLogout() {
-    alert("Logout : en cours de dev")
-  }
+
 
   return (
     <form ref={form} className="space-y-6 p-1">
@@ -77,9 +84,6 @@ export default function AccountSettings() {
           type="submit"
           disabled={!isValid() || isSubmitting() || !isDirty()}>
           {isSubmitting() ? <LoaderCircle className="animate-spin" /> : "Save changes"}
-        </Button>
-        <Button type="button" variant="destructive" onClick={handleLogout}>
-          Logout
         </Button>
       </div>
     </form>

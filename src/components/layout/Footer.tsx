@@ -83,11 +83,13 @@ const Footer = () => {
               </li>
               <li className="flex items-center">
                 <Phone className="mr-2 h-5 w-5 text-blue-400" />
-                <span className="text-gray-400">0629981378</span>
+                <span className="text-gray-400">+33 7 44 94 32 98</span>
               </li>
               <li className="flex items-center">
                 <Mail className="mr-2 h-5 w-5 text-blue-400" />
-                <span className="text-gray-400">contact@bestreport.fr</span>
+                <a href="mailto:contact@bestreport.fr">
+                  <span className="text-gray-400">contact@bestreport.fr</span>
+                </a>
               </li>
             </ul>
           </div>
@@ -112,9 +114,8 @@ const Footer = () => {
               className="text-gray-500 hover:text-blue-400 text-sm transition-colors">
               Terms of Service
             </a>
-            <a href="#" className="text-gray-500 hover:text-blue-400 text-sm transition-colors">
-              Cookie Policy
-            </a>
+
+
           </div>
         </div>
       </div>

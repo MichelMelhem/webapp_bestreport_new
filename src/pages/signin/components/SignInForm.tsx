@@ -13,13 +13,14 @@ import { GoogleAuthProvider, OAuthProvider, sendPasswordResetEmail } from "fireb
 import { useSelector } from "react-redux"
 import { auth } from "@/lib/firebase/firebaseConfig"
 import { toast } from "sonner"
-import { useState } from "react"
 import { z } from "zod"
+import { useState } from "react"
 
 export default function SignInForm() {
   const dispatch = useAppDispatch()
-  const navigate = useNavigate()
+  const error = useSelector((state: RootState) => state.auth.error);
   const [resetError, setResetError] = useState("")
+  const navigate = useNavigate()
   const isLoading = useSelector((state: RootState) => state.auth.loading)
 
   const { form, isValid, isSubmitting, reset } = useForm({
@@ -48,7 +49,7 @@ export default function SignInForm() {
     if (loginUser.fulfilled.match(action)) {
       navigate("/")
     } else {
-      toast.error("Error : email or password")
+      toast.error(error != null ? error : "An error occurred. Please try again.")
       reset()
     }
   }

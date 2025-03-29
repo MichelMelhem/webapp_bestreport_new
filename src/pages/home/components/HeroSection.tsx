@@ -42,12 +42,20 @@ const HeroSection: React.FC<HeroSectionProps> = ({
         setWordIndex((prevIndex) => (prevIndex + 1) % words.length)
       }, 500)
     }
-  }, [text, isDeleting, wordIndex])
+  }, [text, isDeleting, wordIndex, words])
 
   return (
     <motion.section
-      className="relative w-full h-screen flex flex-col lg:flex-row items-center justify-between px-6 md:px-12 bg-white overflow-hidden"
-      style={{ opacity, scale, y: translateY }}>
+      className="
+        relative w-full min-h-screen
+        flex flex-col lg:flex-row
+        items-center
+        justify-center lg:justify-between
+        px-6 md:px-12 bg-white overflow-hidden
+        pt-20 lg:pt-0
+      "
+      style={{ opacity, scale, y: translateY }}
+    >
       {/* Background Elements Layer */}
       <div className="absolute inset-0 z-0">
         {/* Animated Grid */}
@@ -105,10 +113,13 @@ const HeroSection: React.FC<HeroSectionProps> = ({
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
-        className="relative z-30 text-center lg:text-left max-w-2xl">
+        className="relative z-30 text-center lg:text-left max-w-2xl"
+      >
         <h1 className="text-5xl md:text-6xl font-bold text-black tracking-tight">
           Enterprise-Grade Site{" "}
-          <span className="text-black inline-block min-w-[200px]">{text}</span>
+          <span className="text-black inline-block min-w-[200px]">
+            {text}
+          </span>
         </h1>
         <p className="text-lg md:text-xl text-gray-800 mt-4">{subtitle}</p>
         <div className="mt-6 flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
@@ -116,7 +127,8 @@ const HeroSection: React.FC<HeroSectionProps> = ({
             <Button
               size="lg"
               onClick={onCtaClick}
-              className="bg-black hover:bg-gray-800 text-white px-8 py-4">
+              className="bg-black hover:bg-gray-800 text-white px-8 py-4"
+            >
               {ctaText}
             </Button>
           </Link>
@@ -124,7 +136,8 @@ const HeroSection: React.FC<HeroSectionProps> = ({
             <Button
               size="lg"
               variant="outline"
-              className="border-gray-700 text-black hover:bg-gray-200 px-8 py-4">
+              className="border-gray-700 text-black hover:bg-gray-200 px-8 py-4"
+            >
               Request a demo
               <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
             </Button>
@@ -137,13 +150,22 @@ const HeroSection: React.FC<HeroSectionProps> = ({
         initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, delay: 0.3 }}
-        className="relative z-30 w-full max-w-max  lg:max-w-lg overflow-hidden rounded-2xl shadow-lg aspect-video mt-10 lg:mt-0">
+
+        className="
+          relative z-30
+          w-full lg:w-auto
+          lg:max-w-3xl
+          overflow-hidden rounded-2xl shadow-lg aspect-video
+          mt-auto mb-auto lg:mt-0
+        "
+      >
         <iframe
           src="https://www.youtube.com/embed/p5G2-sN1MN4?autoplay=1&mute=1&loop=1&playlist=p5G2-sN1MN4"
           title="Best Report - Suivi de chantier [FR]"
           allow="autoplay; encrypted-media; picture-in-picture"
           allowFullScreen
-          className="absolute top-0 left-0   w-full h-full rounded-2xl"></iframe>
+          className="absolute top-0 left-0 w-full h-full rounded-2xl"
+        ></iframe>
       </motion.div>
     </motion.section>
   )

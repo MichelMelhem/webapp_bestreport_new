@@ -38,11 +38,9 @@ export const createCheckoutSession = createAsyncThunk(
 
       const response = await createSession({ domain: "https://bestreport.fr", plan: priceId })
 
-      // Get the session URL from the response
       const sessionUrl: string = response.data as string
       if (!sessionUrl) throw new Error("Failed to retrieve session ID")
 
-      // Redirect the user to the Stripe Checkout page
       window.location.assign(sessionUrl)
 
       return null
@@ -81,27 +79,6 @@ export const getUserSubscriptions = createAsyncThunk(
   }
 )
 
-export const cancelSubscription = createAsyncThunk(
-  "stripe/cancelSubscription",
-  async (subscriptionId: string, { rejectWithValue }) => {
-    try {
-      const stripe = await stripePromise
-      if (!stripe) throw new Error("Stripe failed to initialize")
-
-      const result = await stripe.paymentRequest({
-        country: "FR",
-        currency: "eur",
-        total: { label: "Cancel Subscription", amount: 0 },
-        requestPayerName: true,
-        requestPayerEmail: true
-      })
-
-      return result
-    } catch (error: any) {
-      return rejectWithValue(error.message || "Failed to cancel subscription")
-    }
-  }
-)
 const handleRejected = (state, action) => {
   console.log("STRIPE REDUCER ERROR : ", action.payload)
   state.error = action.payload
@@ -115,6 +92,9 @@ const stripeSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(createCheckoutSession.pending, (state) => {
+        state.loading = true
+      })
+      .addCase(getUserSubscriptions.pending, (state) => {
         state.loading = true
       })
       .addCase(createCheckoutSession.fulfilled, (state) => {

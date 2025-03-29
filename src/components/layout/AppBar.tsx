@@ -8,6 +8,7 @@ import Logo from "@/assets/icon.png"
 import { RootState, useAppDispatch } from "@/lib/redux/store"
 import { useSelector } from "react-redux"
 import { logoutUser } from "@/lib/redux/auth.reducer"
+import { signOut } from "firebase/auth"
 
 interface AppBarProps {
   className?: string
@@ -64,11 +65,16 @@ const AppBar = ({ className = "" }: AppBarProps) => {
     }
   }, [])
 
-  const isDarkSection = currentSection === "testimonials" || currentSection === "pricing"
+  const isDarkSection =
+    currentSection === "testimonials" || currentSection === "pricing"
 
   const closeMenu = () => {
     setIsMenuOpen(false)
   }
+
+
+
+
 
   return (
     <nav
@@ -80,16 +86,19 @@ const AppBar = ({ className = "" }: AppBarProps) => {
             ? "bg-[#0A0B0D]/80 backdrop-blur-md border-gray-800/30"
             : "bg-white/70 backdrop-blur-md border-gray-200/20 shadow-sm",
         className
-      )}>
+      )}
+    >
       <div className="max-w-7xl mx-auto h-full px-4 md:px-11">
         <div className="flex justify-between items-center h-full gap-4">
+          {/* Logo */}
           <Link to="/" className="flex items-center gap-2">
             <img src={Logo} alt="Logo" className="h-8 rounded-lg" />
             <span
               className={cn(
                 "text-lg font-semibold transition-colors",
                 isDarkSection ? "text-white" : "text-gray-900"
-              )}>
+              )}
+            >
               BestReport
             </span>
           </Link>
@@ -108,33 +117,38 @@ const AppBar = ({ className = "" }: AppBarProps) => {
                     : "text-black hover:text-gray-900",
                   currentSection === link.href.substring(1) && "text-blue-500"
                 )}
-                onClick={closeMenu}>
+                onClick={closeMenu}
+              >
                 {link.name}
               </HashLink>
             ))}
           </div>
 
-          {/* Desktop CTA Buttons */}
-          {userEmail == null ? (
-            <div className="hidden md:flex gap-4">
-              <Link to="/signup">
-                <Button variant="outline">Sign up</Button>
-              </Link>
-              <Link to="/signin">
-                <Button>Sign in</Button>
-              </Link>
-            </div>
-          ) : (
-            <div className="hidden md:flex gap-4">
-              <Button
-                variant="outline"
-                onClick={() => {
-                  dispatch(logoutUser())
-                }}>
-                Sign out
-              </Button>
-            </div>
-          )}
+          {/* Desktop CTA Buttons + French Flag */}
+          <div className="hidden md:flex items-center gap-4">
+            {userEmail == null ? (
+              <>
+                <Link to="/signup">
+                  <Button variant="outline">Sign up</Button>
+                </Link>
+                <Link to="/signin">
+                  <Button>Sign in</Button>
+                </Link>
+              </>
+            ) : (
+              <>
+                <Link to="/settings">
+                  <Button>My account</Button>
+                </Link>
+                <Button variant="outline" onClick={() => { dispatch(logoutUser()) }}>
+                  Sign out
+                </Button>
+              </>
+            )}
+
+
+          </div>
+
           {/* Mobile Menu Button */}
           <button
             type="button"
@@ -144,7 +158,8 @@ const AppBar = ({ className = "" }: AppBarProps) => {
             )}
             onClick={() => setIsMenuOpen(!isMenuOpen)}
             aria-expanded={isMenuOpen}
-            aria-label="Toggle menu">
+            aria-label="Toggle menu"
+          >
             {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
           </button>
         </div>
@@ -160,7 +175,8 @@ const AppBar = ({ className = "" }: AppBarProps) => {
           isDarkSection
             ? "bg-[#0A0B0D]/90 backdrop-blur-md border-gray-800"
             : "bg-white/90 backdrop-blur-md border-gray-200"
-        )}>
+        )}
+      >
         <div className="flex flex-col gap-2 px-4 py-4 overflow-y-auto max-h-[calc(100vh-4rem)]">
           {navLinks.map((link) => (
             <HashLink
@@ -174,7 +190,8 @@ const AppBar = ({ className = "" }: AppBarProps) => {
                   : "text-gray-700 hover:bg-gray-100/30",
                 currentSection === link.href.substring(1) && "text-blue-500"
               )}
-              onClick={closeMenu}>
+              onClick={closeMenu}
+            >
               {link.name}
             </HashLink>
           ))}
@@ -182,25 +199,36 @@ const AppBar = ({ className = "" }: AppBarProps) => {
           {userEmail == null ? (
             <div className="flex flex-col gap-3 pt-4 pb-2">
               <Link to="/signup">
-                <Button variant="outline">Sign up</Button>
+                <Button className="w-full" variant="outline">
+                  Sign up
+                </Button>
               </Link>
               <Link to="/signin">
                 <Button className="w-full bg-blue-600 hover:bg-blue-700 text-white py-5">
                   Sign in
                 </Button>
-              </Link>{" "}
+              </Link>
             </div>
           ) : (
             <div className="flex flex-col gap-3 pt-4 pb-2">
+              <Link to="/settings">
+                <Button className="w-full bg-blue-600 hover:bg-blue-700 text-white py-5">
+                  My account
+                </Button>
+              </Link>
               <Button
-                className="w-full bg-blue-600 hover:bg-blue-700 text-white py-5"
+                className="w-full bg-white hover:bg-blue-700 text-black py-5"
                 onClick={() => {
                   dispatch(logoutUser())
-                }}>
+                }}
+              >
                 Sign out
               </Button>
             </div>
           )}
+
+
+
         </div>
       </div>
     </nav>

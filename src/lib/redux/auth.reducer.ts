@@ -5,10 +5,13 @@ import {
   signInWithPopup,
   signOut,
   updateProfile,
-  AuthProvider
+  AuthProvider,
+  updateEmail,
+  updatePassword
 } from "firebase/auth"
 import { auth, db } from "@/lib/firebase/firebaseConfig.ts"
 import { collection, doc, getDoc } from "firebase/firestore"
+import { AccountFormValues, AccountSchema } from "@/pages/settings/lib/schema"
 
 interface AuthState {
   user: string | null
@@ -38,6 +41,29 @@ export const loginUser = createAsyncThunk(
       let rank: number = userdoc.data()["rank"]
 
       return { email: userCredential.user.email, stripeCustomerId: customerid, rank: rank }
+    } catch (error) {
+      return rejectWithValue(error.message)
+    }
+  }
+)
+export const updateAccount = createAsyncThunk(
+  "account/updateAccount",
+  async (accountData: AccountFormValues, { rejectWithValue }) => {
+    try {
+      const user = auth.currentUser
+      if (!user) {
+        throw new Error("User not authenticated")
+      }
+
+      await updateProfile(user, { displayName: `${accountData.firstname} ${accountData.lastname}` })
+
+      if (accountData.email !== user.email) {
+        await updateEmail(user, accountData.email)
+      }
+      if (accountData.password != "randompassword") {
+        await updatePassword(user, accountData.password)
+      }
+      return accountData
     } catch (error) {
       return rejectWithValue(error.message)
     }
@@ -86,15 +112,18 @@ export const socialLogin = createAsyncThunk(
       let rank: number = userdoc.data()["rank"]
 
       return { email: userCredential.user.email, stripeCustomerId: customerid, rank: rank }
-    } catch (error) {
-      return rejectWithValue(error.message)
-    }
+    } catch (error) {}
   }
 )
 
-export const logoutUser = createAsyncThunk("auth/logoutUser", async () => {
-  await signOut(auth)
-  return null
+export const logoutUser = createAsyncThunk("auth/logoutUser", async (_, { rejectWithValue }) => {
+  try {
+    await signOut(auth)
+    return null
+  } catch (error) {
+    console.error("Error signing out: ", error)
+    return rejectWithValue(error.message)
+  }
 })
 
 const handleRejected = (state, action) => {
@@ -121,6 +150,16 @@ const authSlice = createSlice({
         state.loading = true
         state.error = null
       })
+      .addCase(updateAccount.pending, (state) => {
+        state.loading = true
+        state.error = null
+      })
+      .addCase(updateAccount.fulfilled, (state, action) => {
+        state.user = action.payload.email
+        state.loading = false
+        state.error = null
+      })
+      .addCase(updateAccount.rejected, handleRejected)
       .addCase(logoutUser.pending, (state) => {
         state.loading = true
         state.error = null
@@ -148,6 +187,7 @@ const authSlice = createSlice({
         state.stripeCustomerId = null
         state.loading = false
       })
+      .addCase(logoutUser.rejected, handleRejected)
       .addCase(loginUser.rejected, handleRejected)
       .addCase(registerUser.rejected, handleRejected)
       .addCase(socialLogin.rejected, handleRejected)
