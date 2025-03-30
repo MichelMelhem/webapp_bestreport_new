@@ -114,8 +114,6 @@ const Footer = () => {
               className="text-gray-500 hover:text-blue-400 text-sm transition-colors">
               Terms of Service
             </a>
-
-
           </div>
         </div>
       </div>

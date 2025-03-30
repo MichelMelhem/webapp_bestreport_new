@@ -1,9 +1,8 @@
 import React from "react"
 import { motion } from "framer-motion"
-import { Check, Loader2, X } from "lucide-react"
+import { Check, LoaderCircle, X } from "lucide-react"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Button } from "@/components/ui/button"
-import { Link } from "react-router-dom"
 import { useSelector } from "react-redux"
 import { RootState, useAppDispatch } from "@/lib/redux/store"
 import { createCheckoutSession } from "@/lib/redux/stripe.reducer"
@@ -60,9 +59,9 @@ const PricingSection = () => {
         onClick:
           rank == 0 && user != null
             ? () => {
-              console.log("Creating checkout session")
-              dispatch(createCheckoutSession(import.meta.env.VITE_MONTHLY_PLAN_ID as string))
-            }
+                console.log("Creating checkout session")
+                dispatch(createCheckoutSession(import.meta.env.VITE_MONTHLY_PLAN_ID as string))
+              }
             : undefined
       },
       popular: true
@@ -89,17 +88,17 @@ const PricingSection = () => {
 
   const yearlyPlans: PricingPlan[] = monthlyPlans.map((plan) => ({
     ...plan,
-    price: `${parseInt(plan.price) * 10 * 0.8} €`,
+    price: `${parseInt(plan.price) * 12 * 0.8} €`,
     description: plan.description + " Save 20% with annual billing.",
     button: {
       ...plan.button,
       onClick:
         plan.title === "Pro"
           ? () => {
-            if (rank == 0 && user != null) {
-              dispatch(createCheckoutSession(import.meta.env.VITE_YEARLY_PLAN_ID as string))
+              if (rank == 0 && user != null) {
+                dispatch(createCheckoutSession(import.meta.env.VITE_YEARLY_PLAN_ID as string))
+              }
             }
-          }
           : plan.button.onClick
     }
   }))
@@ -176,13 +175,15 @@ const PricingGrid = ({ plans, yearly }: { plans: PricingPlan[]; yearly: boolean 
               </ul>
             </div>
             <Button
-
               className={`w-full py-4 rounded-sm text-base font-semibold transition-all
     ${plan.popular ? "bg-white text-black hover:bg-gray-200" : "bg-[#1A1B1D] text-white hover:bg-[#222] border border-gray-700"}`}
               disabled={purchaseLoading}
               onClick={plan.button.onClick ?? (() => (window.location.href = plan.button.href))}>
-              {purchaseLoading && plan.button.onClick != undefined ? <Loader2 className="animate-spin h-8 w-8 text-gray-500" />
-                : <a>{plan.button.label} </a>}
+              {purchaseLoading && plan.button.onClick != undefined ? (
+                <LoaderCircle className="animate-spin h-8 w-8 text-gray-500" />
+              ) : (
+                <a>{plan.button.label} </a>
+              )}
             </Button>
           </div>
         </motion.div>

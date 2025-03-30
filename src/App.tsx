@@ -14,7 +14,7 @@ import { PersistGate } from "redux-persist/integration/react"
 import CGU from "./pages/cgu/cgu.tsx"
 import CGV from "./pages/cgv/cgv.tsx"
 import ProtectedRoute from "./ProtectedRoute.tsx"
-import SubscriptionSuccess from "./pages/subsucess/SubSucess.tsx"
+import SubscriptionSuccess from "./pages/subsuccess/SubSucess.tsx"
 
 function App() {
   return (
@@ -30,7 +30,7 @@ function App() {
             <Route path="signup" element={<SignUp />} />
             <Route path="cgu" element={<CGU />} />
             <Route path="cgv" element={<CGV />} />
-            <Route path="subscription/sucess" element={<SubscriptionSuccess />} />
+            <Route path="subscription/success" element={<SubscriptionSuccess />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </Suspense>

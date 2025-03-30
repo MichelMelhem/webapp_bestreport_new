@@ -18,7 +18,7 @@ import { useState } from "react"
 
 export default function SignInForm() {
   const dispatch = useAppDispatch()
-  const error = useSelector((state: RootState) => state.auth.error);
+  const error = useSelector((state: RootState) => state.auth.error)
   const [resetError, setResetError] = useState("")
   const navigate = useNavigate()
   const isLoading = useSelector((state: RootState) => state.auth.loading)

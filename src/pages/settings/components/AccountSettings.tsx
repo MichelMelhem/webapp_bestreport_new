@@ -12,19 +12,17 @@ import { auth } from "@/lib/firebase/firebaseConfig.ts"
 import { useAppDispatch } from "@/lib/redux/store.ts"
 import { updateAccount } from "@/lib/redux/auth.reducer.ts"
 
-
-
 export default function AccountSettings() {
   const user = auth.currentUser
 
-  const dispatch = useAppDispatch();
+  const dispatch = useAppDispatch()
   const names = user.displayName?.split(" ") || ["", ""]
 
   const initialValues = {
     firstname: names[0],
     lastname: names[1],
     email: user.email || "",
-    password: "randompassword",
+    password: "randompassword"
   }
   const { form, isValid, isSubmitting, reset, isDirty } = useForm({
     initialValues: initialValues,
@@ -39,10 +37,9 @@ export default function AccountSettings() {
       toast.success("Update successful")
     } else if (updateAccount.rejected.match(action)) {
       toast.error(`Update failed: ${action.payload}`)
+      reset()
     }
   }
-
-
 
   return (
     <form ref={form} className="space-y-6 p-1">

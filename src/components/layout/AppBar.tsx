@@ -65,16 +65,11 @@ const AppBar = ({ className = "" }: AppBarProps) => {
     }
   }, [])
 
-  const isDarkSection =
-    currentSection === "testimonials" || currentSection === "pricing"
+  const isDarkSection = currentSection === "testimonials" || currentSection === "pricing"
 
   const closeMenu = () => {
     setIsMenuOpen(false)
   }
-
-
-
-
 
   return (
     <nav
@@ -86,8 +81,7 @@ const AppBar = ({ className = "" }: AppBarProps) => {
             ? "bg-[#0A0B0D]/80 backdrop-blur-md border-gray-800/30"
             : "bg-white/70 backdrop-blur-md border-gray-200/20 shadow-sm",
         className
-      )}
-    >
+      )}>
       <div className="max-w-7xl mx-auto h-full px-4 md:px-11">
         <div className="flex justify-between items-center h-full gap-4">
           {/* Logo */}
@@ -97,8 +91,7 @@ const AppBar = ({ className = "" }: AppBarProps) => {
               className={cn(
                 "text-lg font-semibold transition-colors",
                 isDarkSection ? "text-white" : "text-gray-900"
-              )}
-            >
+              )}>
               BestReport
             </span>
           </Link>
@@ -117,8 +110,7 @@ const AppBar = ({ className = "" }: AppBarProps) => {
                     : "text-black hover:text-gray-900",
                   currentSection === link.href.substring(1) && "text-blue-500"
                 )}
-                onClick={closeMenu}
-              >
+                onClick={closeMenu}>
                 {link.name}
               </HashLink>
             ))}
@@ -140,13 +132,15 @@ const AppBar = ({ className = "" }: AppBarProps) => {
                 <Link to="/settings">
                   <Button>My account</Button>
                 </Link>
-                <Button variant="outline" onClick={() => { dispatch(logoutUser()) }}>
+                <Button
+                  variant="outline"
+                  onClick={() => {
+                    dispatch(logoutUser())
+                  }}>
                   Sign out
                 </Button>
               </>
             )}
-
-
           </div>
 
           {/* Mobile Menu Button */}
@@ -158,8 +152,7 @@ const AppBar = ({ className = "" }: AppBarProps) => {
             )}
             onClick={() => setIsMenuOpen(!isMenuOpen)}
             aria-expanded={isMenuOpen}
-            aria-label="Toggle menu"
-          >
+            aria-label="Toggle menu">
             {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
           </button>
         </div>
@@ -175,8 +168,7 @@ const AppBar = ({ className = "" }: AppBarProps) => {
           isDarkSection
             ? "bg-[#0A0B0D]/90 backdrop-blur-md border-gray-800"
             : "bg-white/90 backdrop-blur-md border-gray-200"
-        )}
-      >
+        )}>
         <div className="flex flex-col gap-2 px-4 py-4 overflow-y-auto max-h-[calc(100vh-4rem)]">
           {navLinks.map((link) => (
             <HashLink
@@ -190,8 +182,7 @@ const AppBar = ({ className = "" }: AppBarProps) => {
                   : "text-gray-700 hover:bg-gray-100/30",
                 currentSection === link.href.substring(1) && "text-blue-500"
               )}
-              onClick={closeMenu}
-            >
+              onClick={closeMenu}>
               {link.name}
             </HashLink>
           ))}
@@ -220,15 +211,11 @@ const AppBar = ({ className = "" }: AppBarProps) => {
                 className="w-full bg-white hover:bg-blue-700 text-black py-5"
                 onClick={() => {
                   dispatch(logoutUser())
-                }}
-              >
+                }}>
                 Sign out
               </Button>
             </div>
           )}
-
-
-
         </div>
       </div>
     </nav>
