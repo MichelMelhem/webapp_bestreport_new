@@ -3,7 +3,7 @@ import { motion } from "framer-motion"
 import { Check, Loader2, X } from "lucide-react"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Button } from "@/components/ui/button"
-import { Link } from "react-router-dom"
+
 import { useSelector } from "react-redux"
 import { RootState, useAppDispatch } from "@/lib/redux/store"
 import { createCheckoutSession } from "@/lib/redux/stripe.reducer"

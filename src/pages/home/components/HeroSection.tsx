@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react"
 import { motion, useScroll, useTransform } from "framer-motion"
 import { Button } from "@/components/ui/button.tsx"
 import { ArrowRight } from "lucide-react"
-import { Link } from "react-router-dom"
+
 
 interface HeroSectionProps {
   words?: string[]
@@ -123,7 +123,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({
         </h1>
         <p className="text-lg md:text-xl text-gray-800 mt-4">{subtitle}</p>
         <div className="mt-6 flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
-          <Link to="/signup">
+          <a href="/signup">
             <Button
               size="lg"
               onClick={onCtaClick}
@@ -131,8 +131,8 @@ const HeroSection: React.FC<HeroSectionProps> = ({
             >
               {ctaText}
             </Button>
-          </Link>
-          <Link to="/contact">
+          </a>
+          <a href="/contact">
             <Button
               size="lg"
               variant="outline"
@@ -141,7 +141,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({
               Request a demo
               <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
             </Button>
-          </Link>
+          </a>
         </div>
       </motion.div>
 

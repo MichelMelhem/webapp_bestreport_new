@@ -1,12 +1,13 @@
+// lib/redux/store.ts
 import { configureStore } from "@reduxjs/toolkit"
+import { useDispatch } from "react-redux"
+import { persistReducer } from "redux-persist"
+import storage from "./storage"
 import authReducer from "./auth.reducer"
 import stripeReducer from "./stripe.reducer"
-import { useDispatch } from "react-redux"
-import { persistReducer, persistStore } from "redux-persist"
-import storage from "redux-persist/lib/storage" // Uses localStorage
 
 const persistConfig = (key: string) => ({
-  key: key,
+  key,
   storage
 })
 
@@ -15,16 +16,11 @@ const persistedStripeReducer = persistReducer(persistConfig("stripe"), stripeRed
 
 export const store = configureStore({
   reducer: {
-    stripe: persistedStripeReducer,
-    auth: persistedAuthReducer
+    auth: persistedAuthReducer,
+    stripe: persistedStripeReducer
   },
-  middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware({
-      serializableCheck: false
-    })
+  middleware: (getDefaultMiddleware) => getDefaultMiddleware({ serializableCheck: false })
 })
-
-export const persistor = persistStore(store)
 
 export type RootState = ReturnType<typeof store.getState>
 export type AppDispatch = typeof store.dispatch

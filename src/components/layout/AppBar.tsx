@@ -1,6 +1,4 @@
 import { useState, useEffect } from "react"
-import { Link } from "react-router-dom"
-import { HashLink } from "react-router-hash-link"
 import { Menu, X } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
@@ -22,7 +20,7 @@ const AppBar = ({ className = "" }: AppBarProps) => {
 
   const dispatch = useAppDispatch()
 
-  const navLinks = [
+  const navas = [
     { name: "Download", href: "/#download" },
     { name: "Features", href: "/#features" },
     { name: "Testimonials", href: "/#testimonials" },
@@ -42,8 +40,8 @@ const AppBar = ({ className = "" }: AppBarProps) => {
     window.addEventListener("scroll", handleScroll)
     handleScroll()
 
-    const sectionElements = navLinks
-      .map((link) => document.getElementById(link.href.substring(2)))
+    const sectionElements = navas
+      .map((a) => document.getElementById(a.href.substring(2)))
       .filter(Boolean) as HTMLElement[]
 
     const observer = new IntersectionObserver(
@@ -91,7 +89,7 @@ const AppBar = ({ className = "" }: AppBarProps) => {
       <div className="max-w-7xl mx-auto h-full px-4 md:px-11">
         <div className="flex justify-between items-center h-full gap-4">
           {/* Logo */}
-          <Link to="/" className="flex items-center gap-2">
+          <a href="/" className="flex items-center gap-2">
             <img src={Logo} alt="Logo" className="h-8 rounded-lg" />
             <span
               className={cn(
@@ -101,26 +99,29 @@ const AppBar = ({ className = "" }: AppBarProps) => {
             >
               BestReport
             </span>
-          </Link>
+          </a>
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex gap-6">
-            {navLinks.map((link) => (
-              <HashLink
-                key={link.name}
-                to={link.href}
-                smooth
+            {navas.map((a) => (
+              <a
+                key={a.name}
+                href={a.href}
                 className={cn(
                   "py-2 text-sm font-medium transition-colors",
                   isDarkSection
                     ? "text-white hover:text-gray-300"
                     : "text-black hover:text-gray-900",
-                  currentSection === link.href.substring(1) && "text-blue-500"
+                  currentSection === a.href.substring(1) && "text-blue-500"
                 )}
-                onClick={closeMenu}
+                onClick={(e) => {
+                  e.preventDefault()
+                  document.querySelector(a.href)?.scrollIntoView({ behavior: 'smooth' })
+                  closeMenu()
+                }}
               >
-                {link.name}
-              </HashLink>
+                {a.name}
+              </a>
             ))}
           </div>
 
@@ -128,18 +129,18 @@ const AppBar = ({ className = "" }: AppBarProps) => {
           <div className="hidden md:flex items-center gap-4">
             {userEmail == null ? (
               <>
-                <Link to="/signup">
+                <a href="/signup">
                   <Button variant="outline">Sign up</Button>
-                </Link>
-                <Link to="/signin">
+                </a>
+                <a href="/signin">
                   <Button>Sign in</Button>
-                </Link>
+                </a>
               </>
             ) : (
               <>
-                <Link to="/settings">
+                <a href="/settings">
                   <Button>My account</Button>
-                </Link>
+                </a>
                 <Button variant="outline" onClick={() => { dispatch(logoutUser()) }}>
                   Sign out
                 </Button>
@@ -178,44 +179,43 @@ const AppBar = ({ className = "" }: AppBarProps) => {
         )}
       >
         <div className="flex flex-col gap-2 px-4 py-4 overflow-y-auto max-h-[calc(100vh-4rem)]">
-          {navLinks.map((link) => (
-            <HashLink
-              key={link.name}
-              to={link.href}
-              smooth
+          {navas.map((a) => (
+            <a
+              key={a.name}
+              href={a.href}
               className={cn(
                 "block py-3 text-base font-medium rounded-md transition-colors",
                 isDarkSection
                   ? "text-white hover:bg-gray-800/30"
                   : "text-gray-700 hover:bg-gray-100/30",
-                currentSection === link.href.substring(1) && "text-blue-500"
+                currentSection === a.href.substring(1) && "text-blue-500"
               )}
               onClick={closeMenu}
             >
-              {link.name}
-            </HashLink>
+              {a.name}
+            </a>
           ))}
 
           {userEmail == null ? (
             <div className="flex flex-col gap-3 pt-4 pb-2">
-              <Link to="/signup">
+              <a href="/signup">
                 <Button className="w-full" variant="outline">
                   Sign up
                 </Button>
-              </Link>
-              <Link to="/signin">
+              </a>
+              <a href="/signin">
                 <Button className="w-full bg-blue-600 hover:bg-blue-700 text-white py-5">
                   Sign in
                 </Button>
-              </Link>
+              </a>
             </div>
           ) : (
             <div className="flex flex-col gap-3 pt-4 pb-2">
-              <Link to="/settings">
+              <a href="/settings">
                 <Button className="w-full bg-blue-600 hover:bg-blue-700 text-white py-5">
                   My account
                 </Button>
-              </Link>
+              </a>
               <Button
                 className="w-full bg-white hover:bg-blue-700 text-black py-5"
                 onClick={() => {

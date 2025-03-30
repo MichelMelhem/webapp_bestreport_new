@@ -9,15 +9,15 @@ import screenshot2 from "@/assets/Download-Screenshot2.png"
 interface DownloadSectionProps {
   title?: string
   description?: string
-  appStoreLink?: string
-  playStoreLink?: string
+  appStorea?: string
+  playStorea?: string
 }
 
 const DownloadSection = ({
   title = "Download the BestReport App",
   description = "Access institutional-grade site monitoring from anywhere with our secure mobile application. Available on iOS and Android platforms.",
-  appStoreLink = "https://apps.apple.com/us/app/best-report/id1554741359",
-  playStoreLink = "https://play.google.com/store/apps/details?id=com.smartapps.bestreport"
+  appStorea = "https://apps.apple.com/us/app/best-report/id1554741359",
+  playStorea = "https://play.google.com/store/apps/details?id=com.smartapps.bestreport"
 }: DownloadSectionProps) => {
   return (
     <section id="download" className="w-full py-24 md:py-32 bg-[#f4f1eb] relative">
@@ -143,7 +143,7 @@ const DownloadSection = ({
               <Button
                 className="flex items-center gap-2 bg-white hover:bg-gray-400 text-gray-900 px-6 py-7"
                 asChild>
-                <a href={appStoreLink} target="_blank" rel="noopener noreferrer">
+                <a href={appStorea} target="_blank" rel="noopener noreferrer">
                   <AppleIcon className="h-5 w-5 text-gray-900" />
                   <div className="flex flex-col items-start">
                     <span className="text-xs text-gray-900">Download on the</span>
@@ -155,7 +155,7 @@ const DownloadSection = ({
               <Button
                 className="flex items-center gap-2 bg-white hover:bg-gray-400 text-gray-900 px-6 py-7"
                 asChild>
-                <a href={playStoreLink} target="_blank" rel="noopener noreferrer">
+                <a href={playStorea} target="_blank" rel="noopener noreferrer">
                   <PlayIcon className="h-5 w-5 text-gray-900" />
                   <div className="flex flex-col items-start">
                     <span className="text-xs text-gray-900">Get it on</span>

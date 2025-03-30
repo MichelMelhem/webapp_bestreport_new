@@ -8,7 +8,8 @@ import FeatureSection from "./components/FeatureSection.tsx"
 import AppBar from "@/components/layout/AppBar.tsx"
 import Footer from "@/components/layout/Footer.tsx"
 
-const Home = () => {
+export default function Page() {
+
   return (
     <div className="bg-background h-screen">
       <AppBar />
@@ -46,4 +47,3 @@ const WaveDivider = ({ color = "currentColor", flip = false }) => {
   )
 }
 
-export default Home

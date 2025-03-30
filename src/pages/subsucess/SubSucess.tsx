@@ -1,11 +1,8 @@
-import { Link } from "react-router-dom"
+
 import { Button } from "@/components/ui/button"
-import { useNavigate } from "react-router-dom"
 import { Background } from "@/components/layout/Background.tsx"
-import { HashLink } from 'react-router-hash-link'
 
 export default function SubscriptionSuccess() {
-    const navigate = useNavigate()
 
 
 
@@ -22,12 +19,12 @@ export default function SubscriptionSuccess() {
 
             <div className="flex flex-wrap justify-center gap-4 pt-2">
                 <Button asChild>
-                    <HashLink smooth to="/#download">
+                    <a href="/#download">
                         Download the app
-                    </HashLink>
+                    </a>
                 </Button>
                 <Button variant="outline">
-                    <Link to="/">Return Home</Link>
+                    <a href="/">Return Home</a>
                 </Button>
             </div>
         </Background>

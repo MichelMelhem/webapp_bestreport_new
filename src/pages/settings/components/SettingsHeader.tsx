@@ -1,10 +1,9 @@
 import { ArrowLeft } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip"
-import { useNavigate } from "react-router"
+import { navigate } from "vike/client/router"
 
 export default function SettingsHeader() {
-  const navigate = useNavigate()
 
   return (
     <div className="space-y-0.5 mb-6">

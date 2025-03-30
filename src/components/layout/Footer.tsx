@@ -1,10 +1,9 @@
-import { Linkedin, Mail, Phone, MapPin } from "lucide-react"
-import { useNavigate } from "react-router-dom"
-import { HashLink } from "react-router-hash-link"
+import { Mail, Phone, MapPin, Linkedin } from "lucide-react"
+import { navigate } from "vike/client/router"
+
 
 const Footer = () => {
   const currentYear = new Date().getFullYear()
-  const navigate = useNavigate()
 
   return (
     <footer className="bg-[#0A0B0D] text-white py-12 px-4 md:px-8 lg:px-12">
@@ -24,49 +23,49 @@ const Footer = () => {
             </div>
           </div>
 
-          {/* Quick Links */}
+          {/* Quick as */}
           <div>
-            <h3 className="text-xl font-bold mb-4">Quick Links</h3>
+            <h3 className="text-xl font-bold mb-4">Quick as</h3>
             <ul className="space-y-2">
               <li>
-                <HashLink
-                  to="/"
-                  smooth
+                <a
+                  href="/"
+
                   className="text-gray-400 hover:text-blue-400 transition-colors">
                   Home
-                </HashLink>
+                </a>
               </li>
               <li>
-                <HashLink
-                  to="/#download"
-                  smooth
+                <a
+                  href="/#download"
+
                   className="text-gray-400 hover:text-blue-400 transition-colors">
                   Download App
-                </HashLink>
+                </a>
               </li>
               <li>
-                <HashLink
-                  to="/#features"
-                  smooth
+                <a
+                  href="/#features"
+
                   className="text-gray-400 hover:text-blue-400 transition-colors">
                   Features
-                </HashLink>
+                </a>
               </li>
               <li>
-                <HashLink
-                  to="/#pricing"
-                  smooth
+                <a
+                  href="/#pricing"
+
                   className="text-gray-400 hover:text-blue-400 transition-colors">
                   Pricing
-                </HashLink>
+                </a>
               </li>
               <li>
-                <HashLink
-                  to="/#testimonials"
-                  smooth
+                <a
+                  href="/#testimonials"
+
                   className="text-gray-400 hover:text-blue-400 transition-colors">
                   Testimonials
-                </HashLink>
+                </a>
               </li>
             </ul>{" "}
           </div>

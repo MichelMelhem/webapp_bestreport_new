@@ -2,7 +2,7 @@ import { Label } from "@/components/ui/label.tsx"
 import { Input } from "@/components/ui/input.tsx"
 import { reporter, ValidationMessage } from "@felte/reporter-react"
 import { Button } from "@/components/ui/button.tsx"
-import { Link, useNavigate } from "react-router-dom"
+import { navigate } from 'vike/client/router'
 import { useForm } from "@felte/react"
 import { validator } from "@felte/validator-zod"
 import { SignInFormValues, SignInSchema } from "@/pages/signin/lib/schema.ts"
@@ -20,7 +20,6 @@ export default function SignInForm() {
   const dispatch = useAppDispatch()
   const error = useSelector((state: RootState) => state.auth.error);
   const [resetError, setResetError] = useState("")
-  const navigate = useNavigate()
   const isLoading = useSelector((state: RootState) => state.auth.loading)
 
   const { form, isValid, isSubmitting, reset } = useForm({
@@ -140,10 +139,10 @@ export default function SignInForm() {
         </div>
         <div className="text-center text-sm">
           Don&apos;t have an account?{" "}
-          <Link to="/signup" className="underline underline-offset-4">
+          <a href="/signup" className="underline underline-offset-4">
             {" "}
             Sign up
-          </Link>
+          </a>
         </div>
       </div>
     </form>
