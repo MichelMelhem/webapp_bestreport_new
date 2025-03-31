@@ -18,15 +18,10 @@ const initialState: StripeState = {
   error: null
 }
 
-const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLIC_KEY)
-
 export const createCheckoutSession = createAsyncThunk(
   "stripe/createCheckoutSession",
   async (priceId: string, { getState, rejectWithValue }) => {
     try {
-      const stripe = await stripePromise
-
-      if (!stripe) throw new Error("Stripe failed to initialize")
       const state = getState() as RootState
       if (state.auth.user == null || state.auth.stripeCustomerId == null)
         throw new Error("User is not properly authenticated for checkout")
@@ -110,4 +105,3 @@ const stripeSlice = createSlice({
 })
 
 export default stripeSlice.reducer
-export { stripePromise }
