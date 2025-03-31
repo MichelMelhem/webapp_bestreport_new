@@ -23,7 +23,9 @@ export default function SubscriptionSettings() {
   const [billingInterval, setBillingInterval] = useState<"monthly" | "annual">("monthly")
 
   useEffect(() => {
-    if (rank === 1) {
+    console.log(rank);
+
+    if (rank == 1) {
       dispatch(getUserSubscriptions())
     }
   }, [dispatch, rank])
@@ -47,7 +49,7 @@ export default function SubscriptionSettings() {
         <div className="flex justify-center items-center h-24">
           <LoaderCircle className="animate-spin" />
         </div>
-      ) : rank === 1 && subscription != null ? (
+      ) : rank == 1 && subscription != null ? (
         <Card className="border border-gray-200">
           <CardHeader className="pb-2">
             <div className="flex items-center justify-between">

@@ -1,7 +1,14 @@
 import React from "react"
 import { Button } from "@/components/ui/button.tsx"
 import { motion } from "framer-motion"
-import { AppleIcon, PlayIcon, Download, Smartphone, Star, Clock } from "lucide-react"
+import {
+  AppleIcon,
+  PlayIcon,
+  Download,
+  Smartphone,
+  Star,
+  Clock
+} from "lucide-react"
 
 import screenshot1 from "@/assets/Download-Screenshot1.png"
 import screenshot2 from "@/assets/Download-Screenshot2.png"
@@ -20,9 +27,11 @@ const DownloadSection = ({
   playStoreLink = "https://play.google.com/store/apps/details?id=com.smartapps.bestreport"
 }: DownloadSectionProps) => {
   return (
-    <section id="download" className="w-full py-24 md:py-32 bg-[#f4f1eb] relative">
+    <section
+      id="download"
+      className="w-full py-24 md:py-32 bg-[#f4f1eb] relative overflow-x-hidden"
+    >
       {/* Background elements */}
-
       <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cGF0aCBkPSJNNTkuNSA2MEgwVjBoNjBWNjB6TTU5LjUgMWgtNTlWNTloNTlWMXoiIGZpbGw9IiMyMDIwMjAiIGZpbGwtcnVsZT0ibm9uemVybyIgZmlsbC1vcGFjaXR5PSIuMDUiLz48L3N2Zz4=')] opacity-10"></div>
 
       <div className="container mx-auto px-4 relative z-10">
@@ -32,7 +41,8 @@ const DownloadSection = ({
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
-            viewport={{ once: true }}>
+            viewport={{ once: true }}
+          >
             {title}
           </motion.h2>
 
@@ -41,69 +51,60 @@ const DownloadSection = ({
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.2 }}
-            viewport={{ once: true }}>
+            viewport={{ once: true }}
+          >
             {description}
           </motion.p>
         </div>
 
         <div className="flex flex-col lg:flex-row items-center justify-between gap-16">
-          {/* Left side - App mockups */}
           <motion.div
             className="lg:w-1/2 relative order-2 lg:order-1"
             initial={{ opacity: 0, y: 50 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
-            viewport={{ once: true }}>
+            viewport={{ once: true }}
+          >
             <div className="relative h-[600px] w-full flex items-center justify-center">
-              {/* Phone mockup 1 - in front */}
-              <div className="absolute z-20 transform -rotate-6">
-                <div className="bg-[#F0F0F0] p-2 shadow-2xl border border-gray-300">
-                  <div className="relative overflow-hidden w-[250px] h-[500px] border-[8px] border-[#F0F0F0]">
-                    <img
-                      src={screenshot1}
-                      alt="BestReport App Dashboard"
-                      className="w-full h-full object-cover"
-                    />
-                    <div className="absolute inset-0"></div>
+              {/* Overflow-visible wrapper */}
+              <div className="relative w-[300px] h-full overflow-visible">
+                {/* Phone mockup 1 - front */}
+                <div className="absolute z-20 transform -rotate-6 left-0 top-0">
+                  <div className="bg-[#F0F0F0] p-2 shadow-2xl border border-gray-300">
+                    <div className="relative overflow-hidden w-[250px] h-[500px] border-[8px] border-[#F0F0F0]">
+                      <img
+                        src={screenshot1}
+                        alt="BestReport App Dashboard"
+                        className="w-full h-full object-cover"
+                      />
+                    </div>
+                  </div>
+                </div>
 
-                    {/* UI overlay elements */}
-                    <div className="absolute bottom-0 left-0 right-0 p-4">
-                      <div className="flex justify-between items-center"></div>
+                {/* Phone mockup 2 - behind */}
+                <div className="absolute z-10 transform translate-x-20 rotate-6 left-0 top-0">
+                  <div className="bg-[#F0F0F0] p-2 shadow-2xl border border-gray-300">
+                    <div className="relative overflow-hidden w-[250px] h-[500px] border-[8px] border-[#F0F0F0]">
+                      <img
+                        src={screenshot2}
+                        alt="BestReport App Reports"
+                        className="w-full h-full object-cover"
+                      />
                     </div>
                   </div>
                 </div>
               </div>
 
-              {/* Phone mockup 2 - behind */}
-              <div className="absolute z-10 transform translate-x-20 rotate-6">
-                <div className="bg-[#F0F0F0] p-2 shadow-2xl border border-gray-300">
-                  <div className="relative overflow-hidden w-[250px] h-[500px] border-[8px] border-[#F0F0F0]">
-                    <img
-                      src={screenshot2}
-                      alt="BestReport App Reports"
-                      className="w-full h-full object-cover"
-                    />
-                    <div className="absolute inset-0 "></div>
-                  </div>
-                </div>
-              </div>
-
-              {/* Floating elements */}
-              <div className="absolute -left-12 bottom-1/3 bg-[#F0F0F0] border border-gray-300 rounded-full p-2 shadow-lg">
-                <div className="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center">
-                  <div className="w-4 h-4 rounded-full bg-white"></div>
-                </div>
-              </div>
             </div>
           </motion.div>
 
-          {/* Right side - Text and download buttons */}
           <motion.div
             className="lg:w-1/2 space-y-8 order-1 lg:order-2"
             initial={{ opacity: 0, x: 50 }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.5 }}
-            viewport={{ once: true }}>
+            viewport={{ once: true }}
+          >
             <div className="space-y-6">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 {[
@@ -142,7 +143,8 @@ const DownloadSection = ({
             <div className="flex flex-col sm:flex-row gap-4 pt-4">
               <Button
                 className="flex items-center gap-2 bg-white hover:bg-gray-400 text-gray-900 px-6 py-7"
-                asChild>
+                asChild
+              >
                 <a href={appStoreLink} target="_blank" rel="noopener noreferrer">
                   <AppleIcon className="h-5 w-5 text-gray-900" />
                   <div className="flex flex-col items-start">
@@ -154,7 +156,8 @@ const DownloadSection = ({
 
               <Button
                 className="flex items-center gap-2 bg-white hover:bg-gray-400 text-gray-900 px-6 py-7"
-                asChild>
+                asChild
+              >
                 <a href={playStoreLink} target="_blank" rel="noopener noreferrer">
                   <PlayIcon className="h-5 w-5 text-gray-900" />
                   <div className="flex flex-col items-start">
