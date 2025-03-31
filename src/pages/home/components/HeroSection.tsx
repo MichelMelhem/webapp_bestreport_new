@@ -21,7 +21,6 @@ const HeroSection: React.FC<HeroSectionProps> = ({
   const [text, setText] = useState("")
   const [isDeleting, setIsDeleting] = useState(false)
 
-  // Scroll-based animations
   const { scrollYProgress } = useScroll()
   const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0])
   const scale = useTransform(scrollYProgress, [0, 0.5], [1, 0.9])
@@ -48,16 +47,14 @@ const HeroSection: React.FC<HeroSectionProps> = ({
     <motion.section
       className="
         relative w-full min-h-screen
-        flex flex-col lg:flex-row
-        items-center
-        justify-center lg:justify-between
+        flex items-center justify-center
         px-6 md:px-12 bg-white overflow-hidden
         pt-20 lg:pt-0
       "
-      style={{ opacity, scale, y: translateY }}>
+      style={{ opacity, scale, y: translateY }}
+    >
       {/* Background Elements Layer */}
       <div className="absolute inset-0 z-0">
-        {/* Animated Grid */}
         <motion.div
           className="absolute inset-0 bg-[length:50px_50px] opacity-15"
           style={{
@@ -67,8 +64,6 @@ const HeroSection: React.FC<HeroSectionProps> = ({
           animate={{ y: [0, -25] }}
           transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
         />
-
-        {/* Floating Gradient Circles */}
         <motion.div
           className="absolute w-[600px] h-[600px] -top-48 -left-48 rounded-full bg-gradient-to-r from-blue-200 to-cyan-200 opacity-40 blur-[80px]"
           animate={{ rotate: 360, scale: [1, 1.1] }}
@@ -79,8 +74,6 @@ const HeroSection: React.FC<HeroSectionProps> = ({
           animate={{ rotate: -360, scale: [1, 1.1] }}
           transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
         />
-
-        {/* Animated Diagonal Lines */}
         <div className="absolute inset-0 overflow-hidden">
           {[...Array(20)].map((_, i) => (
             <motion.div
@@ -107,57 +100,59 @@ const HeroSection: React.FC<HeroSectionProps> = ({
       {/* Gradient Overlay */}
       <div className="absolute inset-0 bg-gradient-to-r from-white/80 via-white/70 to-white/60 z-20" />
 
-      {/* Content Layer */}
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6 }}
-        className="relative z-30 text-center lg:text-left max-w-2xl">
-        <h1 className="text-5xl md:text-6xl font-bold text-black tracking-tight">
-          Enterprise-Grade Site{" "}
-          <span className="text-black inline-block min-w-[200px]">{text}</span>
-        </h1>
-        <p className="text-lg md:text-xl text-gray-800 mt-4">{subtitle}</p>
-        <div className="mt-6 flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
-          <Link to="/signup">
-            <Button
-              size="lg"
-              onClick={onCtaClick}
-              className="bg-black hover:bg-gray-800 text-white px-8 py-4">
-              {ctaText}
-            </Button>
-          </Link>
-          <Link to="/contact">
-            <Button
-              size="lg"
-              variant="outline"
-              className="border-gray-700 text-black hover:bg-gray-200 px-8 py-4">
-              Request a demo
-              <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
-            </Button>
-          </Link>
-        </div>
-      </motion.div>
+      {/* Foreground Layer */}
+      <div className="relative z-30 flex flex-col lg:flex-row items-center justify-between gap-12 w-full max-w-7xl">
+        {/* Text Content */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          className="text-center lg:text-left max-w-2xl flex-shrink-0"
+        >
+          <h1 className="text-5xl md:text-6xl font-bold text-black tracking-tight">
+            Enterprise-Grade Site{" "}
+            <span className="text-black inline-block min-w-[200px]">{text}</span>
+          </h1>
+          <p className="text-lg md:text-xl text-gray-800 mt-4">{subtitle}</p>
+          <div className="mt-6 flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+            <Link to="/signup">
+              <Button
+                size="lg"
+                onClick={onCtaClick}
+                className="bg-black hover:bg-gray-800 text-white px-8 py-4"
+              >
+                {ctaText}
+              </Button>
+            </Link>
+            <a href="mailto:contact@bestreport.fr">
+              <Button
+                size="lg"
+                variant="outline"
+                className="border-gray-700 text-black hover:bg-gray-200 px-8 py-4 group"
+              >
+                Request a demo
+                <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
+              </Button>
+            </a>
+          </div>
+        </motion.div>
 
-      {/* Video Layer */}
-      <motion.div
-        initial={{ opacity: 0, y: 30 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8, delay: 0.3 }}
-        className="
-          relative z-30
-          w-full lg:w-auto
-          lg:max-w-3xl
-          overflow-hidden rounded-2xl shadow-lg aspect-video
-          mt-auto mb-auto lg:mt-0
-        ">
-        <iframe
-          src="https://www.youtube.com/embed/p5G2-sN1MN4?autoplay=1&mute=1&loop=1&playlist=p5G2-sN1MN4"
-          title="Best Report - Suivi de chantier [FR]"
-          allow="autoplay; encrypted-media; picture-in-picture"
-          allowFullScreen
-          className="absolute top-0 left-0 w-full h-full rounded-2xl"></iframe>
-      </motion.div>
+        {/* Video */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.3 }}
+          className="w-full lg:w-[640px] aspect-video overflow-hidden rounded-2xl shadow-lg"
+        >
+          <iframe
+            src="https://www.youtube.com/embed/p5G2-sN1MN4?autoplay=1&mute=1&loop=1&playlist=p5G2-sN1MN4"
+            title="Best Report - Suivi de chantier [FR]"
+            allow="autoplay; encrypted-media; picture-in-picture"
+            allowFullScreen
+            className="w-full h-full rounded-2xl"
+          ></iframe>
+        </motion.div>
+      </div>
     </motion.section>
   )
 }
