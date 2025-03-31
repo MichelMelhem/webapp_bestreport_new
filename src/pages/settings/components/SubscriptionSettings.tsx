@@ -256,7 +256,7 @@ export default function SubscriptionSettings() {
                       <Button
                         onClick={() =>
                           dispatch(
-                            createCheckoutSession(import.meta.env.VITE_ANNUAL_PLAN_ID as string)
+                            createCheckoutSession(import.meta.env.VITE_YEARLY_PLAN_ID as string)
                           )
                         }
                         variant="outline"
