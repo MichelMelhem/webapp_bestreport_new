@@ -18,9 +18,11 @@ const Footer = () => {
               monitoring capabilities.
             </p>
             <div className="flex space-x-4">
-              <a href="#" className="text-gray-400 hover:text-blue-400 transition-colors">
+
+              {/*<a href="#" className="text-gray-400 hover:text-blue-400 transition-colors">
                 <Linkedin size={20} />
               </a>
+              */}
             </div>
           </div>
 
@@ -102,14 +104,16 @@ const Footer = () => {
           <div className="flex space-x-6">
             <a
               onClick={() => {
-                navigate("/cgu")
+                navigate("/cgu");
+                window.scrollTo(0, 0);
               }}
               className="text-gray-500 hover:text-blue-400 text-sm transition-colors">
               Privacy Policy
             </a>
             <a
               onClick={() => {
-                navigate("/cgv")
+                navigate("/cgv");
+                window.scrollTo(0, 0);
               }}
               className="text-gray-500 hover:text-blue-400 text-sm transition-colors">
               Terms of Service

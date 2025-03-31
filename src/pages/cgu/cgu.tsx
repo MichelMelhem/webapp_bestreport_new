@@ -15,7 +15,7 @@ export default function CGU() {
 
         <div className="prose prose-sm sm:prose lg:prose-lg max-w-none print:prose-sm">
           <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-6 print:text-xl print:mb-4">
-            CGU de Michel Melhem – Licence Best Report
+            CGU de Best Report
           </h2>
 
           <section className="mb-8 print:mb-4" id="objet">
