@@ -1,7 +1,7 @@
 import AppBar from "@/components/layout/AppBar"
 import Footer from "@/components/layout/Footer"
 
-export default function CGU() {
+export default function TermsOfService() {
   return (
     <div>
       <AppBar />
