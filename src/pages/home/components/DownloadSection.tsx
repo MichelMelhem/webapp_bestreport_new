@@ -105,6 +105,33 @@ const DownloadSection = ({
             transition={{ duration: 0.5 }}
             viewport={{ once: true }}
           >
+            <div className="flex flex-col sm:flex-row gap-4 pt-4">
+              <Button
+                className="flex items-center gap-2 bg-white hover:bg-gray-400 text-gray-900 px-6 py-7"
+                asChild
+              >
+                <a href={appStoreLink} target="_blank" rel="noopener noreferrer">
+                  <AppleIcon className="h-5 w-5 text-gray-900" />
+                  <div className="flex flex-col items-start">
+                    <span className="text-xs text-gray-900">Download on the</span>
+                    <span className="text-base font-semibold text-gray-900">App Store</span>
+                  </div>
+                </a>
+              </Button>
+
+              <Button
+                className="flex items-center gap-2 bg-white hover:bg-gray-400 text-gray-900 px-6 py-7"
+                asChild
+              >
+                <a href={playStoreLink} target="_blank" rel="noopener noreferrer">
+                  <PlayIcon className="h-5 w-5 text-gray-900" />
+                  <div className="flex flex-col items-start">
+                    <span className="text-xs text-gray-900">Get it on</span>
+                    <span className="text-base font-semibold text-gray-900">Google Play</span>
+                  </div>
+                </a>
+              </Button>
+            </div>
             <div className="space-y-6">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 {[
@@ -140,33 +167,7 @@ const DownloadSection = ({
               </div>
             </div>
 
-            <div className="flex flex-col sm:flex-row gap-4 pt-4">
-              <Button
-                className="flex items-center gap-2 bg-white hover:bg-gray-400 text-gray-900 px-6 py-7"
-                asChild
-              >
-                <a href={appStoreLink} target="_blank" rel="noopener noreferrer">
-                  <AppleIcon className="h-5 w-5 text-gray-900" />
-                  <div className="flex flex-col items-start">
-                    <span className="text-xs text-gray-900">Download on the</span>
-                    <span className="text-base font-semibold text-gray-900">App Store</span>
-                  </div>
-                </a>
-              </Button>
 
-              <Button
-                className="flex items-center gap-2 bg-white hover:bg-gray-400 text-gray-900 px-6 py-7"
-                asChild
-              >
-                <a href={playStoreLink} target="_blank" rel="noopener noreferrer">
-                  <PlayIcon className="h-5 w-5 text-gray-900" />
-                  <div className="flex flex-col items-start">
-                    <span className="text-xs text-gray-900">Get it on</span>
-                    <span className="text-base font-semibold text-gray-900">Google Play</span>
-                  </div>
-                </a>
-              </Button>
-            </div>
           </motion.div>
         </div>
       </div>
