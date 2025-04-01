@@ -1,128 +1,215 @@
-import { Linkedin, Mail, Phone, MapPin } from "lucide-react"
-import { useNavigate } from "react-router-dom"
+import { Link } from "react-router-dom"
 import { HashLink } from "react-router-hash-link"
+import { Linkedin, Mail, Phone, MapPin } from "lucide-react"
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger
+} from "@/components/ui/accordion"
+import { Button } from "@/components/ui/button"
 
-const Footer = () => {
+export default function Footer() {
   const currentYear = new Date().getFullYear()
-  const navigate = useNavigate()
 
   return (
     <footer className="bg-[#0A0B0D] text-white py-12 px-4 md:px-8 lg:px-12">
       <div className="container mx-auto">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        {/* Desktop version */}
+        <div className="hidden lg:grid lg:grid-cols-4 gap-8 mb-10">
           {/* Company Info */}
-          <div>
-            <h3 className="text-xl font-bold mb-4">Best Report</h3>
-            <p className="text-gray-400 mb-4">
+          <div className="space-y-4">
+            <h3 className="text-xl font-bold">Best Report</h3>
+            <p className="text-gray-400">
               Revolutionizing construction site management with automated reporting and real-time
               monitoring capabilities.
             </p>
             <div className="flex space-x-4">
-
-              {/*<a href="#" className="text-gray-400 hover:text-blue-400 transition-colors">
-                <Linkedin size={20} />
-              </a>
-              */}
+              <Button
+                variant="ghost"
+                size="icon"
+                className="text-gray-400 hover:text-blue-400 p-0"
+                asChild>
+                <Link to="#" aria-label="LinkedIn">
+                  <Linkedin className="h-5 w-5" />
+                </Link>
+              </Button>
             </div>
           </div>
 
           {/* Quick Links */}
-          <div>
-            <h3 className="text-xl font-bold mb-4">Quick Links</h3>
-            <ul className="space-y-2">
-              <li>
-                <HashLink
-                  to="/"
-                  smooth
-                  className="text-gray-400 hover:text-blue-400 transition-colors">
-                  Home
-                </HashLink>
-              </li>
-              <li>
-                <HashLink
-                  to="/#download"
-                  smooth
-                  className="text-gray-400 hover:text-blue-400 transition-colors">
-                  Download App
-                </HashLink>
-              </li>
-              <li>
-                <HashLink
-                  to="/#features"
-                  smooth
-                  className="text-gray-400 hover:text-blue-400 transition-colors">
-                  Features
-                </HashLink>
-              </li>
-              <li>
-                <HashLink
-                  to="/#pricing"
-                  smooth
-                  className="text-gray-400 hover:text-blue-400 transition-colors">
-                  Pricing
-                </HashLink>
-              </li>
-              <li>
-                <HashLink
-                  to="/#testimonials"
-                  smooth
-                  className="text-gray-400 hover:text-blue-400 transition-colors">
-                  Testimonials
-                </HashLink>
-              </li>
-            </ul>{" "}
+          <div className="space-y-4">
+            <h3 className="text-xl font-bold">Quick Links</h3>
+            <nav className="flex flex-col space-y-2">
+              <Link to="/" className="text-gray-400 hover:text-blue-400 transition-colors">
+                Home
+              </Link>
+              <HashLink
+                to="/#download"
+                smooth
+                className="text-gray-400 hover:text-blue-400 transition-colors">
+                Download App
+              </HashLink>
+              <HashLink
+                to="/#features"
+                smooth
+                className="text-gray-400 hover:text-blue-400 transition-colors">
+                Features
+              </HashLink>
+              <HashLink
+                to="/#pricing"
+                smooth
+                className="text-gray-400 hover:text-blue-400 transition-colors">
+                Pricing
+              </HashLink>
+              <HashLink
+                to="/#testimonials"
+                smooth
+                className="text-gray-400 hover:text-blue-400 transition-colors">
+                Testimonials
+              </HashLink>
+            </nav>
           </div>
 
           {/* Contact Info */}
-          <div>
-            <h3 className="text-xl font-bold mb-4">Contact Us</h3>
-            <ul className="space-y-3">
+          <div className="space-y-4 col-span-2">
+            <h3 className="text-xl font-bold">Contact Us</h3>
+            <ul className="space-y-4">
               <li className="flex items-start">
-                <MapPin className="mr-2 h-5 w-5 text-blue-400 shrink-0 mt-0.5" />
+                <MapPin className="mr-3 h-5 w-5 text-blue-400 shrink-0 mt-0.5" />
                 <span className="text-gray-400">
                   7 Bis Rue Tolstoi, 92130 Issy-les-Moulineaux, France
                 </span>
               </li>
               <li className="flex items-center">
-                <Phone className="mr-2 h-5 w-5 text-blue-400" />
+                <Phone className="mr-3 h-5 w-5 text-blue-400" />
                 <span className="text-gray-400">+33 7 44 94 32 98</span>
               </li>
               <li className="flex items-center">
-                <Mail className="mr-2 h-5 w-5 text-blue-400" />
-                <a href="mailto:contact@bestreport.fr">
-                  <span className="text-gray-400">contact@bestreport.fr</span>
-                </a>
+                <Mail className="mr-3 h-5 w-5 text-blue-400" />
+                <Link
+                  to="mailto:contact@bestreport.fr"
+                  className="text-gray-400 hover:text-blue-400 transition-colors">
+                  contact@bestreport.fr
+                </Link>
               </li>
             </ul>
           </div>
         </div>
 
-        <div className="border-t border-gray-700 mt-10 pt-6 flex flex-col md:flex-row justify-between items-center">
-          <p className="text-gray-500 text-sm mb-4 md:mb-0">
+        {/* Mobile and Tablet version with accordion */}
+        <div className="lg:hidden space-y-4">
+          <Accordion type="single" collapsible className="w-full">
+            <AccordionItem value="company-info" className="border-gray-700">
+              <AccordionTrigger className="text-lg font-medium py-4 text-white">
+                Best Report
+              </AccordionTrigger>
+              <AccordionContent>
+                <div className="space-y-4 py-2">
+                  <p className="text-gray-400">
+                    Revolutionizing construction site management with automated reporting and
+                    real-time monitoring capabilities.
+                  </p>
+                  <div className="flex space-x-4">
+                    <Button
+                      variant="ghost"
+                      size="icon"
+                      className="text-gray-400 hover:text-blue-400 p-0"
+                      asChild>
+                      <Link to="#" aria-label="LinkedIn">
+                        <Linkedin className="h-5 w-5" />
+                      </Link>
+                    </Button>
+                  </div>
+                </div>
+              </AccordionContent>
+            </AccordionItem>
+
+            <AccordionItem value="quick-links" className="border-gray-700">
+              <AccordionTrigger className="text-lg font-medium py-4 text-white">
+                Quick Links
+              </AccordionTrigger>
+              <AccordionContent>
+                <nav className="flex flex-col space-y-3 py-2">
+                  <Link to="/" className="text-gray-400 hover:text-blue-400 transition-colors">
+                    Home
+                  </Link>
+                  <HashLink
+                    to="/#download"
+                    smooth
+                    className="text-gray-400 hover:text-blue-400 transition-colors">
+                    Download App
+                  </HashLink>
+                  <HashLink
+                    to="/#features"
+                    smooth
+                    className="text-gray-400 hover:text-blue-400 transition-colors">
+                    Features
+                  </HashLink>
+                  <HashLink
+                    to="/#pricing"
+                    smooth
+                    className="text-gray-400 hover:text-blue-400 transition-colors">
+                    Pricing
+                  </HashLink>
+                  <HashLink
+                    to="/#testimonials"
+                    smooth
+                    className="text-gray-400 hover:text-blue-400 transition-colors">
+                    Testimonials
+                  </HashLink>
+                </nav>
+              </AccordionContent>
+            </AccordionItem>
+
+            <AccordionItem value="contact" className="border-gray-700">
+              <AccordionTrigger className="text-lg font-medium py-4 text-white">
+                Contact Us
+              </AccordionTrigger>
+              <AccordionContent>
+                <ul className="space-y-4 py-2">
+                  <li className="flex items-start">
+                    <MapPin className="mr-3 h-5 w-5 text-blue-400 shrink-0 mt-0.5" />
+                    <span className="text-gray-400">
+                      7 Bis Rue Tolstoi, 92130 Issy-les-Moulineaux, France
+                    </span>
+                  </li>
+                  <li className="flex items-center">
+                    <Phone className="mr-3 h-5 w-5 text-blue-400" />
+                    <span className="text-gray-400">+33 7 44 94 32 98</span>
+                  </li>
+                  <li className="flex items-center">
+                    <Mail className="mr-3 h-5 w-5 text-blue-400" />
+                    <Link
+                      to="mailto:contact@bestreport.fr"
+                      className="text-gray-400 hover:text-blue-400 transition-colors">
+                      contact@bestreport.fr
+                    </Link>
+                  </li>
+                </ul>
+              </AccordionContent>
+            </AccordionItem>
+          </Accordion>
+        </div>
+
+        <div className="mt-16 flex flex-col md:flex-row justify-between items-center gap-4">
+          <p className="text-gray-500 text-sm">
             © {currentYear} Best Report. All rights reserved.
           </p>
           <div className="flex space-x-6">
-            <a
-              onClick={() => {
-                navigate("/cgu");
-                window.scrollTo(0, 0);
-              }}
+            <Link
+              to="/terms-of-sale"
               className="text-gray-500 hover:text-blue-400 text-sm transition-colors">
-              Privacy Policy
-            </a>
-            <a
-              onClick={() => {
-                navigate("/cgv");
-                window.scrollTo(0, 0);
-              }}
+              Terms of Sale
+            </Link>
+            <Link
+              to="/terms-of-service"
               className="text-gray-500 hover:text-blue-400 text-sm transition-colors">
               Terms of Service
-            </a>
+            </Link>
           </div>
         </div>
       </div>
     </footer>
   )
 }
-
-export default Footer
