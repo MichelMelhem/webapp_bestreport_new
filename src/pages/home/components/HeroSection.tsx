@@ -145,8 +145,8 @@ const HeroSection: React.FC<HeroSectionProps> = ({
           className="w-full lg:w-[640px] aspect-video overflow-hidden rounded-2xl shadow-lg"
         >
           <iframe
-            src="https://www.youtube.com/embed/p5G2-sN1MN4?autoplay=1&mute=1&loop=1&playlist=p5G2-sN1MN4"
-            title="Best Report - Suivi de chantier [FR]"
+            src="https://www.youtube.com/embed/_bICVBjG9K4?controls=0&autoplay=1&mute=1&loop=1&playlist=_bICVBjG9K4"
+            title="Best Report - Site Reporting Software"
             allow="autoplay; encrypted-media; picture-in-picture"
             allowFullScreen
             className="w-full h-full rounded-2xl"
