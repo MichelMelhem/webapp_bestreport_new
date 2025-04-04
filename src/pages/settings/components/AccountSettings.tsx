@@ -43,7 +43,7 @@ export default function AccountSettings() {
 
   return (
     <form ref={form} className="space-y-6 p-1">
-      <div>
+      <div className="hidden md:block">
         <h3 className="text-lg font-medium">Account</h3>
         <p className="text-gray-500 text-sm">
           Manage your personal information and account security.

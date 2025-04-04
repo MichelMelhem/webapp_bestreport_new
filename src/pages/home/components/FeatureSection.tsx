@@ -27,7 +27,7 @@ const FeatureSection = ({
   return (
     <section id={id} className={`py-16 md:py-24 bg-white ${className}`}>
       <FeatureGrid />
-      <div className="container mx-auto max-w-7xl px-4 md:px-6 relative pt-20">
+      <div className="container mx-auto max-w-7xl px-4 md:px-6 relative pt-20 overflow-hidden">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16 items-center">
           <motion.div
             initial="hidden"
