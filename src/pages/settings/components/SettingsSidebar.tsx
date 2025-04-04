@@ -11,19 +11,19 @@ export default function SettingsSidebar({ activeTab, setActiveTab }: SettingsSid
   const tabs: SettingsTab[] = ["Account", "Subscription"]
 
   return (
-    <div className="md:w-64 shrink-0">
-      <nav className="w-full">
+    <div className="w-full md:w-64 shrink-0">
+      {/* Utilisation de Flexbox pour la navigation */}
+      <nav className="flex flex-row md:flex-col w-full gap-1">
         {tabs.map((tab) => (
-          <div key={tab} className="mb-1">
-            <button
-              onClick={() => setActiveTab(tab)}
-              className={cn(
-                activeTab === tab ? "bg-gray-100" : "hover:bg-gray-50",
-                "w-full text-left px-4 py-2 font-medium text-sm rounded-md"
-              )}>
-              {tab}
-            </button>
-          </div>
+          <button
+            key={tab}
+            onClick={() => setActiveTab(tab)}
+            className={cn(
+              activeTab === tab ? "bg-gray-100" : "hover:bg-gray-50",
+              "flex-1 md:flex-none text-left px-4 py-2 font-medium text-sm rounded-md"
+            )}>
+            {tab}
+          </button>
         ))}
       </nav>
     </div>

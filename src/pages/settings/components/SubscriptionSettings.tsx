@@ -23,7 +23,7 @@ export default function SubscriptionSettings() {
   const [billingInterval, setBillingInterval] = useState<"monthly" | "annual">("monthly")
 
   useEffect(() => {
-    console.log(rank);
+    console.log(rank)
 
     if (rank == 1) {
       dispatch(getUserSubscriptions())
@@ -38,7 +38,7 @@ export default function SubscriptionSettings() {
 
   return (
     <div className="space-y-6">
-      <div>
+      <div className="hidden md:block">
         <h3 className="text-lg font-medium">Subscription</h3>
         <p className="text-gray-500 text-sm">
           Manage your subscription plan and billing information.
