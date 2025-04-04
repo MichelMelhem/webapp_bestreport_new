@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import { HashLink } from "react-router-hash-link"
 import { Linkedin, Mail, Phone, MapPin } from "lucide-react"
 import {
@@ -10,6 +10,7 @@ import {
 import { Button } from "@/components/ui/button"
 
 export default function Footer() {
+  const navigate = useNavigate()
   const currentYear = new Date().getFullYear()
 
   return (
@@ -197,19 +198,26 @@ export default function Footer() {
             © {currentYear} Best Report. All rights reserved.
           </p>
           <div className="flex space-x-6">
-            <Link
-              to="/terms-of-sale"
+            <a
+              onClick={() => {
+                navigate("/terms-of-sale");
+                window.scrollTo({ top: 0, behavior: "smooth" })
+
+              }}
               className="text-gray-500 hover:text-blue-400 text-sm transition-colors">
               Terms of Sale
-            </Link>
-            <Link
-              to="/terms-of-service"
+            </a>
+            <a
+              onClick={() => {
+                navigate("/terms-of-service");
+                window.scrollTo({ top: 0, behavior: "smooth" })
+              }}
               className="text-gray-500 hover:text-blue-400 text-sm transition-colors">
               Terms of Service
-            </Link>
+            </a>
           </div>
         </div>
       </div>
-    </footer>
+    </footer >
   )
 }

@@ -194,7 +194,7 @@ const AppBar = ({ className = "" }: AppBarProps) => {
                       </Link>
                     </SheetClose>
                     <Button
-                      className="w-full"
+                      className="w-full bg-transparent"
                       variant="outline"
                       onClick={() => {
                         dispatch(logoutUser())
