@@ -2,7 +2,6 @@ import { Label } from "@/components/ui/label.tsx"
 import { Input } from "@/components/ui/input.tsx"
 import { reporter, ValidationMessage } from "@felte/reporter-react"
 import { Button } from "@/components/ui/button.tsx"
-import { Link, useNavigate } from "react-router-dom"
 import { useForm } from "@felte/react"
 import { validator } from "@felte/validator-zod"
 import { SignUpFormValues, SignUpSchema } from "@/pages/signup/lib/schema.ts"
@@ -10,13 +9,15 @@ import { LoaderCircle } from "lucide-react"
 import { useSelector } from "react-redux"
 import { RootState, useAppDispatch } from "@/lib/redux/store"
 import { registerUser } from "@/lib/redux/auth.reducer"
+import { useRouter } from "next/dist/client/router"
+import Link from "next/link"
 
 export default function SignUpForm() {
   const { form, isValid, isSubmitting } = useForm({
     extend: [validator({ schema: SignUpSchema }), reporter],
     onSubmit: handleSubmit
   })
-  const navigate = useNavigate()
+  const router = useRouter()
   const dispatch = useAppDispatch()
   const isLoading = useSelector((state: RootState) => state.auth.loading)
 
@@ -30,7 +31,7 @@ export default function SignUpForm() {
       })
     )
     if (registerUser.fulfilled.match(action)) {
-      navigate("/")
+      router.push("/")
     }
   }
 
@@ -75,7 +76,7 @@ export default function SignUpForm() {
 
         <div className="text-center text-sm">
           You have an account?{" "}
-          <Link to="/signin" className="underline underline-offset-4">
+          <Link href="/signin" className="underline underline-offset-4">
             {" "}
             Sign in
           </Link>

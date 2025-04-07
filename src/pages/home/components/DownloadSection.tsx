@@ -10,8 +10,6 @@ import {
   Clock
 } from "lucide-react"
 
-import screenshot1 from "@/assets/Download-Screenshot1.png"
-import screenshot2 from "@/assets/Download-Screenshot2.png"
 
 interface DownloadSectionProps {
   title?: string
@@ -73,7 +71,7 @@ const DownloadSection = ({
                   <div className="bg-[#F0F0F0] p-2 shadow-2xl border border-gray-300">
                     <div className="relative overflow-hidden w-[250px] h-[500px] border-[8px] border-[#F0F0F0]">
                       <img
-                        src={screenshot1}
+                        src="/assets/Download-Screenshot1.png"
                         alt="BestReport App Dashboard"
                         className="w-full h-full object-cover"
                       />
@@ -86,7 +84,7 @@ const DownloadSection = ({
                   <div className="bg-[#F0F0F0] p-2 shadow-2xl border border-gray-300">
                     <div className="relative overflow-hidden w-[250px] h-[500px] border-[8px] border-[#F0F0F0]">
                       <img
-                        src={screenshot2}
+                        src="/assets/Download-Screenshot2.png"
                         alt="BestReport App Reports"
                         className="w-full h-full object-cover"
                       />

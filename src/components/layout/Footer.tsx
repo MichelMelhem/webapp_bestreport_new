@@ -1,5 +1,4 @@
-import { Link, useNavigate } from "react-router-dom"
-import { HashLink } from "react-router-hash-link"
+
 import { Linkedin, Mail, Phone, MapPin } from "lucide-react"
 import {
   Accordion,
@@ -8,9 +7,11 @@ import {
   AccordionTrigger
 } from "@/components/ui/accordion"
 import { Button } from "@/components/ui/button"
+import { useRouter } from "next/dist/client/router"
+import Link from "next/link"
 
 export default function Footer() {
-  const navigate = useNavigate()
+  const router = useRouter()
   const currentYear = new Date().getFullYear()
 
   return (
@@ -31,7 +32,7 @@ export default function Footer() {
                 size="icon"
                 className="text-gray-400 hover:text-blue-400 p-0"
                 asChild>
-                <Link to="#" aria-label="LinkedIn">
+                <Link href="#" aria-label="LinkedIn">
                   <Linkedin className="h-5 w-5" />
                 </Link>
               </Button>
@@ -42,33 +43,33 @@ export default function Footer() {
           <div className="space-y-4">
             <h3 className="text-xl font-bold">Quick Links</h3>
             <nav className="flex flex-col space-y-2">
-              <Link to="/" className="text-gray-400 hover:text-blue-400 transition-colors">
+              <Link href="/" className="text-gray-400 hover:text-blue-400 transition-colors">
                 Home
               </Link>
-              <HashLink
-                to="/#download"
-                smooth
+              <Link
+                href="/#download"
+                scroll={true}
                 className="text-gray-400 hover:text-blue-400 transition-colors">
                 Download App
-              </HashLink>
-              <HashLink
-                to="/#features"
-                smooth
+              </Link>
+              <Link
+                href="/#features"
+                scroll={true}
                 className="text-gray-400 hover:text-blue-400 transition-colors">
                 Features
-              </HashLink>
-              <HashLink
-                to="/#pricing"
-                smooth
+              </Link>
+              <Link
+                href="/#pricing"
+                scroll={true}
                 className="text-gray-400 hover:text-blue-400 transition-colors">
                 Pricing
-              </HashLink>
-              <HashLink
-                to="/#testimonials"
-                smooth
+              </Link>
+              <Link
+                href="/#testimonials"
+                scroll={true}
                 className="text-gray-400 hover:text-blue-400 transition-colors">
                 Testimonials
-              </HashLink>
+              </Link>
             </nav>
           </div>
 
@@ -89,7 +90,7 @@ export default function Footer() {
               <li className="flex items-center">
                 <Mail className="mr-3 h-5 w-5 text-blue-400" />
                 <Link
-                  to="mailto:contact@bestreport.fr"
+                  href="mailto:contact@bestreport.fr"
                   className="text-gray-400 hover:text-blue-400 transition-colors">
                   contact@bestreport.fr
                 </Link>
@@ -117,7 +118,7 @@ export default function Footer() {
                       size="icon"
                       className="text-gray-400 hover:text-blue-400 p-0"
                       asChild>
-                      <Link to="#" aria-label="LinkedIn">
+                      <Link href="#" aria-label="LinkedIn">
                         <Linkedin className="h-5 w-5" />
                       </Link>
                     </Button>
@@ -132,33 +133,33 @@ export default function Footer() {
               </AccordionTrigger>
               <AccordionContent>
                 <nav className="flex flex-col space-y-3 py-2">
-                  <Link to="/" className="text-gray-400 hover:text-blue-400 transition-colors">
+                  <Link href="/" className="text-gray-400 hover:text-blue-400 transition-colors">
                     Home
                   </Link>
-                  <HashLink
-                    to="/#download"
-                    smooth
+                  <Link
+                    href="/#download"
+                    scroll={true}
                     className="text-gray-400 hover:text-blue-400 transition-colors">
                     Download App
-                  </HashLink>
-                  <HashLink
-                    to="/#features"
-                    smooth
+                  </Link>
+                  <Link
+                    href="/#features"
+                    scroll={true}
                     className="text-gray-400 hover:text-blue-400 transition-colors">
                     Features
-                  </HashLink>
-                  <HashLink
-                    to="/#pricing"
-                    smooth
+                  </Link>
+                  <Link
+                    href="/#pricing"
+                    scroll={true}
                     className="text-gray-400 hover:text-blue-400 transition-colors">
                     Pricing
-                  </HashLink>
-                  <HashLink
-                    to="/#testimonials"
-                    smooth
+                  </Link>
+                  <Link
+                    href="/#testimonials"
+                    scroll={true}
                     className="text-gray-400 hover:text-blue-400 transition-colors">
                     Testimonials
-                  </HashLink>
+                  </Link>
                 </nav>
               </AccordionContent>
             </AccordionItem>
@@ -182,7 +183,7 @@ export default function Footer() {
                   <li className="flex items-center">
                     <Mail className="mr-3 h-5 w-5 text-blue-400" />
                     <Link
-                      to="mailto:contact@bestreport.fr"
+                      href="mailto:contact@bestreport.fr"
                       className="text-gray-400 hover:text-blue-400 transition-colors">
                       contact@bestreport.fr
                     </Link>
@@ -200,8 +201,8 @@ export default function Footer() {
           <div className="flex space-x-6">
             <a
               onClick={() => {
-                navigate("/terms-of-sale");
-                window.scrollTo({ top: 0, behavior: "smooth" })
+                router.push("/terms-of-sale");
+                window.scrollTo({ top: 0, behavior: 'smooth' })
 
               }}
               className="text-gray-500 hover:text-blue-400 text-sm transition-colors">
@@ -209,8 +210,8 @@ export default function Footer() {
             </a>
             <a
               onClick={() => {
-                navigate("/terms-of-service");
-                window.scrollTo({ top: 0, behavior: "smooth" })
+                router.push("/terms-of-service");
+                window.scrollTo({ top: 0, behavior: 'smooth' })
               }}
               className="text-gray-500 hover:text-blue-400 text-sm transition-colors">
               Terms of Service

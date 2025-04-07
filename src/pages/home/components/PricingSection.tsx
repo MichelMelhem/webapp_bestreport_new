@@ -59,9 +59,9 @@ const PricingSection = () => {
         onClick:
           rank == 0 && user != null
             ? () => {
-                console.log("Creating checkout session")
-                dispatch(createCheckoutSession(import.meta.env.VITE_MONTHLY_PLAN_ID as string))
-              }
+              console.log("Creating checkout session")
+              dispatch(createCheckoutSession(process.env.NEXT_PUBLIC_MONTHLY_PLAN_ID as string))
+            }
             : undefined
       },
       popular: true
@@ -95,10 +95,10 @@ const PricingSection = () => {
       onClick:
         plan.title === "Pro"
           ? () => {
-              if (rank == 0 && user != null) {
-                dispatch(createCheckoutSession(import.meta.env.VITE_YEARLY_PLAN_ID as string))
-              }
+            if (rank == 0 && user != null) {
+              dispatch(createCheckoutSession(process.env.NEXT_PUBLIC_YEARLY_PLAN_ID as string))
             }
+          }
           : plan.button.onClick
     }
   }))

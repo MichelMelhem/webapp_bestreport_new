@@ -1,13 +1,13 @@
-import { Link } from "react-router-dom"
 import { Button } from "@/components/ui/button"
-import { useNavigate } from "react-router-dom"
 import { Background } from "@/components/layout/Background.tsx"
+import { useRouter } from "next/dist/client/router"
+import Link from "next/link"
 
 export default function NotFound() {
-  const navigate = useNavigate()
+  const router = useRouter()
 
   function handleGoBack() {
-    navigate(-1)
+    router.back()
   }
 
   return (
@@ -26,7 +26,7 @@ export default function NotFound() {
           Go Back
         </Button>
         <Button asChild>
-          <Link to="/">Return Home</Link>
+          <Link href="/">Return Home</Link>
         </Button>
       </div>
     </Background>

@@ -1,7 +1,6 @@
 import React from "react"
 import { motion } from "framer-motion"
 import PdfView from "@/pages/home/components/partials/PdfViewer.tsx"
-import rapport from "@/assets/rapport.pdf"
 import FeatureGrid from "@/pages/home/components/partials/FeatureGrid.tsx"
 
 interface FeatureSectionProps {
@@ -17,7 +16,7 @@ const FeatureSection = ({
   id = "features",
   className = "",
   description = "Generate your worksite report in pdf format in record time, which you can then send directly to your collaborators to keep your project moving forward quickly.",
-  report_src = rapport
+  report_src = "/assets/rapport.pdf"
 }: FeatureSectionProps) => {
   const fadeInUp = {
     hidden: { opacity: 0, y: 20 },

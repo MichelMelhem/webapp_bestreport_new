@@ -1,10 +1,9 @@
 import { ArrowLeft } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip"
-import { useNavigate } from "react-router"
-
+import { useRouter } from "next/router"
 export default function SettingsHeader() {
-  const navigate = useNavigate()
+  const router = useRouter()
 
   return (
     <div className="space-y-0.5 mb-6">
@@ -16,7 +15,7 @@ export default function SettingsHeader() {
                 variant="ghost"
                 size="icon"
                 className="rounded-full h-8 w-8"
-                onClick={() => navigate("/")}>
+                onClick={() => router.push("/")}>
                 <ArrowLeft className="h-5 w-5" />
               </Button>
             </TooltipTrigger>

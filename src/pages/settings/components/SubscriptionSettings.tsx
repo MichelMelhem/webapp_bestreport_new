@@ -154,7 +154,7 @@ export default function SubscriptionSettings() {
                       <Button
                         onClick={() =>
                           dispatch(
-                            createCheckoutSession(import.meta.env.VITE_MONTHLY_PLAN_ID as string)
+                            createCheckoutSession(process.env.NEXT_PUBLIC_MONTHLY_PLAN_ID as string)
                           )
                         }
                         variant="outline"
@@ -256,7 +256,7 @@ export default function SubscriptionSettings() {
                       <Button
                         onClick={() =>
                           dispatch(
-                            createCheckoutSession(import.meta.env.VITE_YEARLY_PLAN_ID as string)
+                            createCheckoutSession(process.env.NEXT_PUBLIC_YEARLY_PLAN_ID as string)
                           )
                         }
                         variant="outline"

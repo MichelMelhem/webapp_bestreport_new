@@ -2,7 +2,6 @@ import { Label } from "@/components/ui/label.tsx"
 import { Input } from "@/components/ui/input.tsx"
 import { reporter, ValidationMessage } from "@felte/reporter-react"
 import { Button } from "@/components/ui/button.tsx"
-import { Link, useNavigate } from "react-router-dom"
 import { useForm } from "@felte/react"
 import { validator } from "@felte/validator-zod"
 import { SignInFormValues, SignInSchema } from "@/pages/signin/lib/schema.ts"
@@ -15,12 +14,14 @@ import { auth } from "@/lib/firebase/firebaseConfig"
 import { toast } from "sonner"
 import { z } from "zod"
 import { useState } from "react"
+import { useRouter } from "next/router"
+import Link from "next/link"
 
 export default function SignInForm() {
   const dispatch = useAppDispatch()
   const error = useSelector((state: RootState) => state.auth.error)
   const [resetError, setResetError] = useState("")
-  const navigate = useNavigate()
+  const router = useRouter()
   const isLoading = useSelector((state: RootState) => state.auth.loading)
 
   const { form, isValid, isSubmitting, reset } = useForm({
@@ -47,7 +48,7 @@ export default function SignInForm() {
   async function handleSubmit(values: SignInFormValues) {
     const action = await dispatch(loginUser({ email: values.email, password: values.password }))
     if (loginUser.fulfilled.match(action)) {
-      navigate("/")
+      router.push("/")
     } else {
       toast.error(error != null ? error : "An error occurred. Please try again.")
       reset()
@@ -108,7 +109,7 @@ export default function SignInForm() {
             onClick={async () => {
               const action = dispatch(socialLogin(new OAuthProvider("apple.com")))
               if (socialLogin.fulfilled.match(action)) {
-                navigate("/")
+                router.push("/")
               }
             }}>
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
@@ -126,7 +127,7 @@ export default function SignInForm() {
             onClick={async () => {
               const action = await dispatch(socialLogin(new GoogleAuthProvider()))
               if (socialLogin.fulfilled.match(action)) {
-                navigate("/")
+                router.push("/")
               }
             }}>
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
@@ -140,7 +141,7 @@ export default function SignInForm() {
         </div>
         <div className="text-center text-sm">
           Don&apos;t have an account?{" "}
-          <Link to="/signup" className="underline underline-offset-4">
+          <Link href="/signup" className="underline underline-offset-4">
             {" "}
             Sign up
           </Link>

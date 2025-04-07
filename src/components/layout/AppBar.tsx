@@ -1,10 +1,7 @@
 import { useState, useEffect } from "react"
-import { Link } from "react-router-dom"
-import { HashLink } from "react-router-hash-link"
 import { Menu } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
-import Logo from "@/assets/icon.png"
 import { type RootState, useAppDispatch } from "@/lib/redux/store"
 import { useSelector } from "react-redux"
 import { logoutUser } from "@/lib/redux/auth.reducer"
@@ -14,6 +11,7 @@ import {
   NavigationMenuItem,
   NavigationMenuList
 } from "@/components/ui/navigation-menu"
+import Link from "next/link"
 
 interface AppBarProps {
   className?: string
@@ -80,7 +78,7 @@ const AppBar = ({ className = "" }: AppBarProps) => {
   return (
     <header
       className={cn(
-        "fixed top-0 left-0 w-full z-50 transition-all duration-300",
+        "fixed hrefp-0 left-0 w-full z-50 transition-all duration-300",
         !scrolled && !currentSection
           ? "bg-transparent border-transparent"
           : isDarkSection
@@ -90,8 +88,8 @@ const AppBar = ({ className = "" }: AppBarProps) => {
       )}>
       <div className="container flex h-16 items-center justify-between">
         {/* Logo */}
-        <Link to="/" className="flex items-center gap-2">
-          <img src={Logo || "/placeholder.svg"} alt="Logo" className="h-8 w-8 rounded-lg" />
+        <Link href="/" className="flex items-center gap-2">
+          <img src={"/assets/icon.png"} alt="Logo" className="h-8 w-8 rounded-lg" />
           <span
             className={cn(
               "text-lg font-semibold transition-colors",
@@ -101,14 +99,14 @@ const AppBar = ({ className = "" }: AppBarProps) => {
           </span>
         </Link>
 
-        {/* Desktop Navigation */}
+        {/* Deskhrefp Navigation */}
         <NavigationMenu className="hidden md:flex">
           <NavigationMenuList>
             {navLinks.map((link) => (
               <NavigationMenuItem key={link.name}>
-                <HashLink
-                  to={link.href}
-                  smooth
+                <Link
+                  href={link.href}
+                  scroll={true}
                   className={cn(
                     "py-2 px-4 text-sm font-medium transition-colors rounded-md",
                     isDarkSection
@@ -117,17 +115,17 @@ const AppBar = ({ className = "" }: AppBarProps) => {
                     currentSection === link.href.substring(2) && "text-primary"
                   )}>
                   {link.name}
-                </HashLink>
+                </Link>
               </NavigationMenuItem>
             ))}
           </NavigationMenuList>
         </NavigationMenu>
 
-        {/* Desktop Auth Buttons */}
+        {/* Deskhrefp Auth Buttons */}
         <div className="hidden md:flex items-center gap-4">
           {userEmail ? (
             <>
-              <Link to="/settings">
+              <Link href="/settings">
                 <Button>My account</Button>
               </Link>
               <Button
@@ -140,10 +138,10 @@ const AppBar = ({ className = "" }: AppBarProps) => {
             </>
           ) : (
             <>
-              <Link to="/signup">
+              <Link href="/signup">
                 <Button variant="outline">Sign up</Button>
               </Link>
-              <Link to="/signin">
+              <Link href="/signin">
                 <Button>Sign in</Button>
               </Link>
             </>
@@ -169,16 +167,20 @@ const AppBar = ({ className = "" }: AppBarProps) => {
               <div className="flex flex-col space-y-3">
                 {navLinks.map((link) => (
                   <SheetClose asChild key={link.name}>
-                    <HashLink
-                      to={link.href}
-                      smooth
+
+                    <Link
+                      href={link.href}
+                      scroll={true}
                       className={cn(
-                        "block py-2 text-base font-medium rounded-md transition-colors",
-                        isDarkSection ? "hover:bg-gray-800/30" : "hover:bg-gray-100/30",
-                        currentSection === link.href.substring(2) && "text-blue-500"
-                      )}>
+                        "py-2 px-4 text-sm font-medium transition-colors rounded-md",
+                        isDarkSection
+                          ? "text-white hover:text-gray-300"
+                          : "text-black hover:text-gray-900",
+                        currentSection === link.href.substring(2) && "text-primary"
+                      )}
+                    >
                       {link.name}
-                    </HashLink>
+                    </Link>
                   </SheetClose>
                 ))}
               </div>
@@ -187,7 +189,7 @@ const AppBar = ({ className = "" }: AppBarProps) => {
                 {userEmail ? (
                   <>
                     <SheetClose asChild>
-                      <Link to="/settings">
+                      <Link href="/settings">
                         <Button className="w-full" variant="default">
                           My account
                         </Button>
@@ -205,7 +207,7 @@ const AppBar = ({ className = "" }: AppBarProps) => {
                 ) : (
                   <>
                     <SheetClose asChild>
-                      <Link to="/signup">
+                      <Link href="/signup">
                         <Button
                           variant="outline"
                           className={cn("w-full", isDarkSection ? "bg-transparent" : "")}>
@@ -214,7 +216,7 @@ const AppBar = ({ className = "" }: AppBarProps) => {
                       </Link>
                     </SheetClose>
                     <SheetClose asChild>
-                      <Link to="/signin">
+                      <Link href="/signin">
                         <Button className="w-full">Sign in</Button>
                       </Link>
                     </SheetClose>
@@ -225,7 +227,7 @@ const AppBar = ({ className = "" }: AppBarProps) => {
           </SheetContent>
         </Sheet>
       </div>
-    </header>
+    </header >
   )
 }
 

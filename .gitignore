@@ -26,7 +26,7 @@ dist-ssr
 !node_modules/.vite
 
 package-lock.json
-
+.next/*
 core
 
 .github/
